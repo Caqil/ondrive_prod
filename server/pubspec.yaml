@@ -1,3 +1,5 @@
+publish_to: none
+
 name: ride_hailing_server
 description: Ride-hailing app server using Serverpod
 version: 1.0.0
@@ -19,6 +21,8 @@ dependencies:
   redis: ^4.0.0
   json_annotation: ^4.8.1
   http: ^1.1.0
+  ride_hailing_shared:
+    path: ../shared
 
 dev_dependencies:
   serverpod_cli: ^2.1.0

@@ -1,3 +1,4 @@
+import 'package:ride_hailing_shared/src/protocol/notifications/notification.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
@@ -260,7 +261,7 @@ class WebSocketMessage extends SerializableEntity {
   factory WebSocketMessage.notification({
     required String title,
     required String body,
-    NotificationType notificationType = NotificationType.info,
+    NotificationType notificationType = NotificationType.other,
     Map<String, dynamic>? additionalData,
     int? targetUserId,
     String? correlationId,
@@ -318,15 +319,6 @@ enum MessageType {
   system,
 }
 
-enum NotificationType {
-  info,
-  success,
-  warning,
-  error,
-  rideUpdate,
-  paymentUpdate,
-  systemMaintenance,
-}
 
 @JsonSerializable()
 class WebSocketConnectionInfo extends SerializableEntity {

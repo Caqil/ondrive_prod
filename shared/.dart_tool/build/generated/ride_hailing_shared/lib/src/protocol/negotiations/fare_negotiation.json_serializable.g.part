@@ -13,7 +13,7 @@ FareNegotiation _$FareNegotiationFromJson(Map<String, dynamic> json) =>
       driverCounter: (json['driverCounter'] as num?)?.toDouble(),
       finalFare: (json['finalFare'] as num?)?.toDouble(),
       suggestedFare: (json['suggestedFare'] as num?)?.toDouble(),
-      status: $enumDecode(_$NegotiationStatusEnumMap, json['status']),
+      statusId: json['statusId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       respondedAt: json['respondedAt'] == null
           ? null
@@ -32,6 +32,10 @@ FareNegotiation _$FareNegotiationFromJson(Map<String, dynamic> json) =>
           const [],
       maxCounters: (json['maxCounters'] as num?)?.toInt() ?? 3,
       currentCounters: (json['currentCounters'] as num?)?.toInt() ?? 0,
+      negotiationStatus: json['negotiationStatus'] == null
+          ? null
+          : NegotiationStatus.fromJson(
+              json['negotiationStatus'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FareNegotiationToJson(FareNegotiation instance) =>
@@ -45,7 +49,7 @@ Map<String, dynamic> _$FareNegotiationToJson(FareNegotiation instance) =>
       'driverCounter': instance.driverCounter,
       'finalFare': instance.finalFare,
       'suggestedFare': instance.suggestedFare,
-      'status': _$NegotiationStatusEnumMap[instance.status]!,
+      'statusId': instance.statusId,
       'createdAt': instance.createdAt.toIso8601String(),
       'respondedAt': instance.respondedAt?.toIso8601String(),
       'completedAt': instance.completedAt?.toIso8601String(),
@@ -55,59 +59,8 @@ Map<String, dynamic> _$FareNegotiationToJson(FareNegotiation instance) =>
       'offerHistory': instance.offerHistory,
       'maxCounters': instance.maxCounters,
       'currentCounters': instance.currentCounters,
+      'negotiationStatus': instance.negotiationStatus,
     };
-
-const _$NegotiationStatusEnumMap = {
-  NegotiationStatus.pending: 'pending',
-  NegotiationStatus.driverResponded: 'driverResponded',
-  NegotiationStatus.passengerResponded: 'passengerResponded',
-  NegotiationStatus.accepted: 'accepted',
-  NegotiationStatus.rejected: 'rejected',
-  NegotiationStatus.expired: 'expired',
-  NegotiationStatus.cancelled: 'cancelled',
-};
-
-FareOffer _$FareOfferFromJson(Map<String, dynamic> json) => FareOffer(
-      id: (json['id'] as num?)?.toInt(),
-      offerId: json['offerId'] as String,
-      negotiationId: json['negotiationId'] as String,
-      userId: (json['userId'] as num).toInt(),
-      userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
-      amount: (json['amount'] as num).toDouble(),
-      message: json['message'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      status: $enumDecode(_$OfferStatusEnumMap, json['status']),
-      expiresAt: json['expiresAt'] == null
-          ? null
-          : DateTime.parse(json['expiresAt'] as String),
-    );
-
-Map<String, dynamic> _$FareOfferToJson(FareOffer instance) => <String, dynamic>{
-      'id': instance.id,
-      'offerId': instance.offerId,
-      'negotiationId': instance.negotiationId,
-      'userId': instance.userId,
-      'userType': _$UserTypeEnumMap[instance.userType]!,
-      'amount': instance.amount,
-      'message': instance.message,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'status': _$OfferStatusEnumMap[instance.status]!,
-      'expiresAt': instance.expiresAt?.toIso8601String(),
-    };
-
-const _$UserTypeEnumMap = {
-  UserType.passenger: 'passenger',
-  UserType.driver: 'driver',
-  UserType.admin: 'admin',
-};
-
-const _$OfferStatusEnumMap = {
-  OfferStatus.active: 'active',
-  OfferStatus.countered: 'countered',
-  OfferStatus.accepted: 'accepted',
-  OfferStatus.rejected: 'rejected',
-  OfferStatus.expired: 'expired',
-};
 
 NegotiationRequest _$NegotiationRequestFromJson(Map<String, dynamic> json) =>
     NegotiationRequest(
@@ -148,37 +101,7 @@ Map<String, dynamic> _$NegotiationResponseToJson(
 
 const _$NegotiationActionEnumMap = {
   NegotiationAction.accept: 'accept',
-  NegotiationAction.counter: 'counter',
   NegotiationAction.reject: 'reject',
+  NegotiationAction.counter: 'counter',
+  NegotiationAction.withdraw: 'withdraw',
 };
-
-NegotiationHistory _$NegotiationHistoryFromJson(Map<String, dynamic> json) =>
-    NegotiationHistory(
-      id: (json['id'] as num?)?.toInt(),
-      negotiationId: json['negotiationId'] as String,
-      rideId: json['rideId'] as String,
-      offers: (json['offers'] as List<dynamic>?)
-              ?.map((e) => FareOffer.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      finalStatus: $enumDecode(_$NegotiationStatusEnumMap, json['finalStatus']),
-      agreedFare: (json['agreedFare'] as num?)?.toDouble(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      completedAt: json['completedAt'] == null
-          ? null
-          : DateTime.parse(json['completedAt'] as String),
-      completionReason: json['completionReason'] as String?,
-    );
-
-Map<String, dynamic> _$NegotiationHistoryToJson(NegotiationHistory instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'negotiationId': instance.negotiationId,
-      'rideId': instance.rideId,
-      'offers': instance.offers,
-      'finalStatus': _$NegotiationStatusEnumMap[instance.finalStatus]!,
-      'agreedFare': instance.agreedFare,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'completedAt': instance.completedAt?.toIso8601String(),
-      'completionReason': instance.completionReason,
-    };

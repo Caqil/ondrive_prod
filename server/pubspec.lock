@@ -816,6 +816,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
+  ride_hailing_shared:
+    dependency: "direct main"
+    description:
+      path: "../shared"
+      relative: true
+    source: path
+    version: "1.0.0"
   sasl_scram:
     dependency: transitive
     description:

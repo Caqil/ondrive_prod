@@ -1,6 +1,8 @@
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../tracking/location_update.dart';
+
 part 'earnings.g.dart';
 
 @JsonSerializable()
@@ -136,13 +138,6 @@ enum EarningsStatus {
   paid,
   failed,
   disputed,
-}
-
-enum LocationSource {
-  gps,
-  network,
-  passive,
-  manual,
 }
 
 enum AccountType {

@@ -1,6 +1,10 @@
+// shared/lib/src/protocol/negotiations/fare_negotiation.dart
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../auth/user.dart';
+import 'fare_offer.dart'; // Import the complete FareOffer
+import 'negotiation_status.dart'; // Import the complete NegotiationStatus class
+import 'negotiation_history.dart'; // Import the complete NegotiationHistory
 
 part 'fare_negotiation.g.dart';
 
@@ -17,16 +21,19 @@ class FareNegotiation extends SerializableEntity {
   double? driverCounter;
   double? finalFare;
   double? suggestedFare;
-  NegotiationStatus status;
+  String statusId; // Reference to NegotiationStatus by ID
   DateTime createdAt;
   DateTime? respondedAt;
   DateTime? completedAt;
   DateTime? expiresAt;
   String? passengerMessage;
   String? driverMessage;
-  List<FareOffer> offerHistory;
+  List<FareOffer> offerHistory; // Use the imported FareOffer
   int maxCounters;
   int currentCounters;
+
+  // Optional embedded status for convenience
+  NegotiationStatus? negotiationStatus;
 
   FareNegotiation({
     this.id,
@@ -38,7 +45,7 @@ class FareNegotiation extends SerializableEntity {
     this.driverCounter,
     this.finalFare,
     this.suggestedFare,
-    required this.status,
+    required this.statusId,
     required this.createdAt,
     this.respondedAt,
     this.completedAt,
@@ -48,52 +55,36 @@ class FareNegotiation extends SerializableEntity {
     this.offerHistory = const [],
     this.maxCounters = 3,
     this.currentCounters = 0,
+    this.negotiationStatus,
   });
 
   bool get isExpired => expiresAt != null && DateTime.now().isAfter(expiresAt!);
   bool get canCounter => currentCounters < maxCounters && !isExpired;
-  bool get isActive =>
-      status == NegotiationStatus.pending ||
-      status == NegotiationStatus.driverResponded;
+
+  // Use the rich NegotiationStatus for business logic
+  bool get isActive {
+    if (negotiationStatus != null) {
+      return negotiationStatus!.isActive;
+    }
+    // Fallback logic if status not loaded
+    return !isExpired && completedAt == null;
+  }
+
+  // Check if user can make actions based on full status
+  bool canUserAct(int userId) {
+    return negotiationStatus?.canUserAct(userId) ?? false;
+  }
+
+  // Get available actions for user
+  List<NegotiationAction>? getAvailableActions(int userId) {
+    final actions = negotiationStatus?.getAvailableActions(userId);
+    if (actions == null) return [];
+    return actions.whereType<NegotiationAction>().toList();
+  }
 
   factory FareNegotiation.fromJson(Map<String, dynamic> json) =>
       _$FareNegotiationFromJson(json);
   Map<String, dynamic> toJson() => _$FareNegotiationToJson(this);
-}
-
-@JsonSerializable()
-class FareOffer extends SerializableEntity {
-  @override
-  int? id;
-
-  String offerId;
-  String negotiationId;
-  int userId;
-  UserType userType;
-  double amount;
-  String? message;
-  DateTime createdAt;
-  OfferStatus status;
-  DateTime? expiresAt;
-
-  FareOffer({
-    this.id,
-    required this.offerId,
-    required this.negotiationId,
-    required this.userId,
-    required this.userType,
-    required this.amount,
-    this.message,
-    required this.createdAt,
-    required this.status,
-    this.expiresAt,
-  });
-
-  bool get isExpired => expiresAt != null && DateTime.now().isAfter(expiresAt!);
-
-  factory FareOffer.fromJson(Map<String, dynamic> json) =>
-      _$FareOfferFromJson(json);
-  Map<String, dynamic> toJson() => _$FareOfferToJson(this);
 }
 
 @JsonSerializable()
@@ -142,57 +133,11 @@ class NegotiationResponse extends SerializableEntity {
   Map<String, dynamic> toJson() => _$NegotiationResponseToJson(this);
 }
 
-@JsonSerializable()
-class NegotiationHistory extends SerializableEntity {
-  @override
-  int? id;
-
-  String negotiationId;
-  String rideId;
-  List<FareOffer> offers;
-  NegotiationStatus finalStatus;
-  double? agreedFare;
-  DateTime createdAt;
-  DateTime? completedAt;
-  String? completionReason;
-
-  NegotiationHistory({
-    this.id,
-    required this.negotiationId,
-    required this.rideId,
-    this.offers = const [],
-    required this.finalStatus,
-    this.agreedFare,
-    required this.createdAt,
-    this.completedAt,
-    this.completionReason,
-  });
-
-  factory NegotiationHistory.fromJson(Map<String, dynamic> json) =>
-      _$NegotiationHistoryFromJson(json);
-  Map<String, dynamic> toJson() => _$NegotiationHistoryToJson(this);
-}
-
-enum NegotiationStatus {
-  pending,
-  driverResponded,
-  passengerResponded,
-  accepted,
-  rejected,
-  expired,
-  cancelled,
-}
-
+// Keep only essential enums that don't conflict
 enum OfferStatus {
   active,
   countered,
   accepted,
   rejected,
   expired,
-}
-
-enum NegotiationAction {
-  accept,
-  counter,
-  reject,
 }

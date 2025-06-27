@@ -31,8 +31,8 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       exchangeRate: (json['exchangeRate'] as num?)?.toDouble(),
       originalCurrency: json['originalCurrency'] as String?,
       originalAmount: (json['originalAmount'] as num?)?.toDouble(),
-      paymentMethodType:
-          $enumDecodeNullable(_$PaymentTypeEnumMap, json['paymentMethodType']),
+      paymentMethodType: $enumDecodeNullable(
+          _$PaymentMethodTypeEnumMap, json['paymentMethodType']),
       paymentMethodLast4: json['paymentMethodLast4'] as String?,
       paymentMethodBrand: json['paymentMethodBrand'] as String?,
       externalTransactionId: json['externalTransactionId'] as String?,
@@ -77,7 +77,8 @@ Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
       'exchangeRate': instance.exchangeRate,
       'originalCurrency': instance.originalCurrency,
       'originalAmount': instance.originalAmount,
-      'paymentMethodType': _$PaymentTypeEnumMap[instance.paymentMethodType],
+      'paymentMethodType':
+          _$PaymentMethodTypeEnumMap[instance.paymentMethodType],
       'paymentMethodLast4': instance.paymentMethodLast4,
       'paymentMethodBrand': instance.paymentMethodBrand,
       'externalTransactionId': instance.externalTransactionId,
@@ -124,12 +125,12 @@ const _$TransactionStatusEnumMap = {
   TransactionStatus.cancelled: 'cancelled',
 };
 
-const _$PaymentTypeEnumMap = {
-  PaymentType.card: 'card',
-  PaymentType.bankAccount: 'bankAccount',
-  PaymentType.digitalWallet: 'digitalWallet',
-  PaymentType.cash: 'cash',
-  PaymentType.corporate: 'corporate',
+const _$PaymentMethodTypeEnumMap = {
+  PaymentMethodType.card: 'card',
+  PaymentMethodType.bankAccount: 'bankAccount',
+  PaymentMethodType.digitalWallet: 'digitalWallet',
+  PaymentMethodType.cash: 'cash',
+  PaymentMethodType.corporate: 'corporate',
 };
 
 const _$PaymentProcessorTypeEnumMap = {

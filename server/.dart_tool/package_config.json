@@ -620,6 +620,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "ride_hailing_shared",
+      "rootUri": "../../shared",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "sasl_scram",
       "rootUri": "file:///Users/cakra/.pub-cache/hosted/pub.dev/sasl_scram-0.1.1",
       "packageUri": "lib/",

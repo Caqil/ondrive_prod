@@ -2,6 +2,7 @@ import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'payment.dart';
+import 'payment_method.dart';
 import 'payment_status.dart';
 
 part 'transaction.g.dart';
@@ -39,7 +40,7 @@ class Transaction extends SerializableEntity {
   double? originalAmount;
 
   // Payment method information
-  PaymentType? paymentMethodType;
+  PaymentMethodType? paymentMethodType;
   String? paymentMethodLast4;
   String? paymentMethodBrand;
 

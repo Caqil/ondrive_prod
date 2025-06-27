@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:ride_hailing_shared/src/protocol/tracking/location_update.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../rides/location_point.dart';
@@ -249,78 +250,6 @@ class TripTracking extends SerializableEntity {
 }
 
 @JsonSerializable()
-class LocationUpdate extends SerializableEntity {
-  @override
-  int? id;
-
-  int userId;
-  String? rideId;
-  double latitude;
-  double longitude;
-  double? altitude;
-  double? accuracy; // meters
-  double? heading; // degrees
-  double? speed; // meters per second
-  DateTime timestamp;
-  LocationSource source;
-  Map<String, dynamic>? metadata;
-
-  // Battery and device info
-  int? batteryLevel; // 0-100
-  String? deviceId;
-  String? networkType;
-
-  LocationUpdate({
-    this.id,
-    required this.userId,
-    this.rideId,
-    required this.latitude,
-    required this.longitude,
-    this.altitude,
-    this.accuracy,
-    this.heading,
-    this.speed,
-    required this.timestamp,
-    this.source = LocationSource.gps,
-    this.metadata,
-    this.batteryLevel,
-    this.deviceId,
-    this.networkType,
-  });
-
-  // Distance calculation to another point
-  double distanceTo(LocationUpdate other) {
-    const double earthRadius = 6371000; // meters
-    double dLat = _toRadians(other.latitude - latitude);
-    double dLng = _toRadians(other.longitude - longitude);
-    double a = math.sin(dLat / 2) * math.sin(dLat / 2) +
-        math.cos(_toRadians(latitude)) *
-            math.cos(_toRadians(other.latitude)) *
-            math.sin(dLng / 2) *
-            math.sin(dLng / 2);
-    double c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
-    return earthRadius * c;
-  }
-
-  double _toRadians(double degrees) {
-    return degrees * (math.pi / 180);
-  }
-
-  // Location quality assessment
-  LocationQuality get quality {
-    if (accuracy == null) return LocationQuality.unknown;
-    if (accuracy! <= 5) return LocationQuality.high;
-    if (accuracy! <= 15) return LocationQuality.medium;
-    if (accuracy! <= 50) return LocationQuality.low;
-    return LocationQuality.poor;
-  }
-
-  factory LocationUpdate.fromJson(Map<String, dynamic> json) =>
-      _$LocationUpdateFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationUpdateToJson(this);
-}
-
-@JsonSerializable()
 class SpeedViolation extends SerializableEntity {
   @override
   int? id;
@@ -530,14 +459,6 @@ enum TrackingStatus {
   paused,
   completed,
   error,
-}
-
-enum LocationSource {
-  gps,
-  network,
-  passive,
-  fused,
-  manual,
 }
 
 enum LocationQuality {

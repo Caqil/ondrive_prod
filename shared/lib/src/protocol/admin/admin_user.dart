@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ride_hailing_shared/src/protocol/admin/report.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -43,151 +44,6 @@ class AdminUser extends SerializableEntity {
   Map<String, dynamic> toJson() => _$AdminUserToJson(this);
 }
 
-@JsonSerializable()
-class SystemConfig extends SerializableEntity {
-  @override
-  int? id;
-
-  String configKey;
-  String configValue;
-  ConfigType configType;
-  String? description;
-  bool isPublic;
-  DateTime updatedAt;
-  int? updatedBy;
-
-  SystemConfig({
-    this.id,
-    required this.configKey,
-    required this.configValue,
-    required this.configType,
-    this.description,
-    this.isPublic = false,
-    required this.updatedAt,
-    this.updatedBy,
-  });
-
-  T getValue<T>() {
-    switch (configType) {
-      case ConfigType.string:
-        return configValue as T;
-      case ConfigType.integer:
-        return int.parse(configValue) as T;
-      case ConfigType.double:
-        return double.parse(configValue) as T;
-      case ConfigType.boolean:
-        return (configValue.toLowerCase() == 'true') as T;
-      case ConfigType.json:
-        return jsonDecode(configValue) as T;
-    }
-  }
-
-  factory SystemConfig.fromJson(Map<String, dynamic> json) =>
-      _$SystemConfigFromJson(json);
-  Map<String, dynamic> toJson() => _$SystemConfigToJson(this);
-}
-
-@JsonSerializable()
-class AnalyticsData extends SerializableEntity {
-  @override
-  int? id;
-
-  String metricName;
-  double value;
-  String? unit;
-  DateTime timestamp;
-  String period; // 'hour', 'day', 'week', 'month'
-  Map<String, dynamic>? dimensions;
-  Map<String, dynamic>? metadata;
-
-  AnalyticsData({
-    this.id,
-    required this.metricName,
-    required this.value,
-    this.unit,
-    required this.timestamp,
-    required this.period,
-    this.dimensions,
-    this.metadata,
-  });
-
-  factory AnalyticsData.fromJson(Map<String, dynamic> json) =>
-      _$AnalyticsDataFromJson(json);
-  Map<String, dynamic> toJson() => _$AnalyticsDataToJson(this);
-}
-
-@JsonSerializable()
-class Report extends SerializableEntity {
-  @override
-  int? id;
-
-  String reportId;
-  String name;
-  ReportType reportType;
-  Map<String, dynamic> parameters;
-  Map<String, dynamic>? data;
-  ReportStatus status;
-  DateTime requestedAt;
-  DateTime? generatedAt;
-  int requestedBy;
-  String? fileUrl;
-  String? errorMessage;
-
-  Report({
-    this.id,
-    required this.reportId,
-    required this.name,
-    required this.reportType,
-    required this.parameters,
-    this.data,
-    this.status = ReportStatus.pending,
-    required this.requestedAt,
-    this.generatedAt,
-    required this.requestedBy,
-    this.fileUrl,
-    this.errorMessage,
-  });
-
-  factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
-  Map<String, dynamic> toJson() => _$ReportToJson(this);
-}
-
-@JsonSerializable()
-class AuditLog extends SerializableEntity {
-  @override
-  int? id;
-
-  String action;
-  int? userId;
-  String? userEmail;
-  String entityType;
-  String? entityId;
-  Map<String, dynamic>? oldValues;
-  Map<String, dynamic>? newValues;
-  String? ipAddress;
-  String? userAgent;
-  DateTime timestamp;
-  AuditSeverity severity;
-
-  AuditLog({
-    this.id,
-    required this.action,
-    this.userId,
-    this.userEmail,
-    required this.entityType,
-    this.entityId,
-    this.oldValues,
-    this.newValues,
-    this.ipAddress,
-    this.userAgent,
-    required this.timestamp,
-    this.severity = AuditSeverity.info,
-  });
-
-  factory AuditLog.fromJson(Map<String, dynamic> json) =>
-      _$AuditLogFromJson(json);
-  Map<String, dynamic> toJson() => _$AuditLogToJson(this);
-}
 
 @JsonSerializable()
 class DashboardStats extends SerializableEntity {
@@ -316,29 +172,6 @@ enum AdminPermission {
   auditLogs,
 }
 
-enum ConfigType {
-  string,
-  integer,
-  double,
-  boolean,
-  json,
-}
-
-enum ReportType {
-  userActivity,
-  driverPerformance,
-  rideAnalytics,
-  revenue,
-  disputes,
-  customQuery,
-}
-
-enum ReportStatus {
-  pending,
-  generating,
-  completed,
-  failed,
-}
 
 enum AuditSeverity {
   info,
