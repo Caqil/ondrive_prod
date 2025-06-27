@@ -1,5 +1,12 @@
+// server/lib/src/utils/error_codes.dart
+//
+// Comprehensive error code system for ride-hailing platform
+// Organized by categories with consistent numbering scheme
+
 class ErrorCodes {
-  // Authentication Errors (1000-1999)
+  // =============================================================================
+  // AUTHENTICATION ERRORS (1000-1999)
+  // =============================================================================
   static const String invalidCredentials = 'AUTH_1001';
   static const String userNotFound = 'AUTH_1002';
   static const String emailAlreadyExists = 'AUTH_1003';
@@ -20,8 +27,21 @@ class ErrorCodes {
   static const String insufficientPermissions = 'AUTH_1018';
   static const String deviceNotRecognized = 'AUTH_1019';
   static const String multipleActiveSession = 'AUTH_1020';
+  static const String authenticationRequired = 'AUTH_1021';
+  static const String accessDenied = 'AUTH_1022';
 
-  // User Management Errors (2000-2999)
+  // Password-specific errors
+  static const String passwordTooShort = 'AUTH_1025';
+  static const String passwordTooLong = 'AUTH_1026';
+  static const String passwordMissingUppercase = 'AUTH_1027';
+  static const String passwordMissingLowercase = 'AUTH_1028';
+  static const String passwordMissingNumber = 'AUTH_1029';
+  static const String passwordMissingSpecialChar = 'AUTH_1030';
+  static const String passwordTooCommon = 'AUTH_1031';
+
+  // =============================================================================
+  // USER MANAGEMENT ERRORS (2000-2999)
+  // =============================================================================
   static const String userValidationFailed = 'USER_2001';
   static const String profileIncomplete = 'USER_2002';
   static const String profileUpdateFailed = 'USER_2003';
@@ -43,7 +63,15 @@ class ErrorCodes {
   static const String referralCodeInvalid = 'USER_2019';
   static const String referralCodeExpired = 'USER_2020';
 
-  // Driver Management Errors (3000-3999)
+  // Field-specific validation errors
+  static const String invalidEmail = 'USER_2021';
+  static const String invalidPhone = 'USER_2022';
+  static const String invalidFirstName = 'USER_2023';
+  static const String invalidLastName = 'USER_2024';
+
+  // =============================================================================
+  // DRIVER MANAGEMENT ERRORS (3000-3999)
+  // =============================================================================
   static const String driverNotFound = 'DRIVER_3001';
   static const String driverNotAvailable = 'DRIVER_3002';
   static const String driverNotVerified = 'DRIVER_3003';
@@ -65,7 +93,9 @@ class ErrorCodes {
   static const String driverLocationStale = 'DRIVER_3019';
   static const String driverOutsideServiceArea = 'DRIVER_3020';
 
-  // Vehicle Management Errors (4000-4999)
+  // =============================================================================
+  // VEHICLE MANAGEMENT ERRORS (4000-4999)
+  // =============================================================================
   static const String vehicleNotFound = 'VEHICLE_4001';
   static const String vehicleNotApproved = 'VEHICLE_4002';
   static const String vehicleRegistrationRequired = 'VEHICLE_4003';
@@ -87,7 +117,9 @@ class ErrorCodes {
   static const String vinDuplicate = 'VEHICLE_4019';
   static const String vehicleColorRequired = 'VEHICLE_4020';
 
-  // Ride Management Errors (5000-5999)
+  // =============================================================================
+  // RIDE MANAGEMENT ERRORS (5000-5999)
+  // =============================================================================
   static const String rideNotFound = 'RIDE_5001';
   static const String rideAlreadyAssigned = 'RIDE_5002';
   static const String rideInvalidStatus = 'RIDE_5003';
@@ -109,7 +141,14 @@ class ErrorCodes {
   static const String noDriversAvailable = 'RIDE_5019';
   static const String rideRequestTimeout = 'RIDE_5020';
 
-  // Location Errors (6000-6999)
+  // Pickup and verification errors
+  static const String invalidPickupCode = 'RIDE_5021';
+  static const String pickupCodeExpired = 'RIDE_5022';
+  static const String pickupTimeoutExceeded = 'RIDE_5023';
+
+  // =============================================================================
+  // LOCATION ERRORS (6000-6999)
+  // =============================================================================
   static const String invalidLocation = 'LOCATION_6001';
   static const String locationRequired = 'LOCATION_6002';
   static const String pickupLocationInvalid = 'LOCATION_6003';
@@ -131,7 +170,15 @@ class ErrorCodes {
   static const String geofenceViolation = 'LOCATION_6019';
   static const String locationTrackingDisabled = 'LOCATION_6020';
 
-  // Payment Errors (7000-7999)
+  // ETA and tracking errors
+  static const String etaNotAvailable = 'LOCATION_6021';
+  static const String etaCalculationFailed = 'LOCATION_6022';
+  static const String trackingNotStarted = 'LOCATION_6023';
+  static const String trackingAlreadyActive = 'LOCATION_6024';
+
+  // =============================================================================
+  // PAYMENT ERRORS (7000-7999)
+  // =============================================================================
   static const String paymentFailed = 'PAYMENT_7001';
   static const String paymentMethodInvalid = 'PAYMENT_7002';
   static const String paymentMethodExpired = 'PAYMENT_7003';
@@ -150,10 +197,19 @@ class ErrorCodes {
   static const String cardInvalid = 'PAYMENT_7016';
   static const String cardNotSupported = 'PAYMENT_7017';
   static const String paymentCurrencyNotSupported = 'PAYMENT_7018';
-  static const String commissCalculationFailed = 'PAYMENT_7019';
+  static const String commissionCalculationFailed = 'PAYMENT_7019';
   static const String fareCalculationFailed = 'PAYMENT_7020';
 
-  // Fare and Negotiation Errors (8000-8999)
+  // Card-specific validation errors
+  static const String invalidCardNumber = 'PAYMENT_7021';
+  static const String invalidCardExpiry = 'PAYMENT_7022';
+  static const String invalidCvv = 'PAYMENT_7023';
+  static const String invalidCurrency = 'PAYMENT_7024';
+  static const String invalidPaymentAmount = 'PAYMENT_7025';
+
+  // =============================================================================
+  // FARE AND NEGOTIATION ERRORS (8000-8999)
+  // =============================================================================
   static const String fareInvalid = 'FARE_8001';
   static const String fareTooLow = 'FARE_8002';
   static const String fareTooHigh = 'FARE_8003';
@@ -175,7 +231,19 @@ class ErrorCodes {
   static const String couponInvalid = 'FARE_8019';
   static const String couponExpired = 'FARE_8020';
 
-  // File Upload Errors (9000-9999)
+  // InDrive-specific negotiation errors
+  static const String negotiationNotFound = 'NEGOTIATION_8021';
+  static const String negotiationClosed = 'NEGOTIATION_8022';
+  static const String negotiationExpired = 'NEGOTIATION_8023';
+  static const String offerNotFound = 'NEGOTIATION_8024';
+  static const String offerExpired = 'NEGOTIATION_8025';
+  static const String offerAlreadyExists = 'NEGOTIATION_8026';
+  static const String invalidFareAmount = 'NEGOTIATION_8027';
+  static const String negotiationLimitExceeded = 'NEGOTIATION_8028';
+
+  // =============================================================================
+  // FILE UPLOAD ERRORS (9000-9999)
+  // =============================================================================
   static const String fileUploadFailed = 'FILE_9001';
   static const String fileTooLarge = 'FILE_9002';
   static const String fileTypeNotAllowed = 'FILE_9003';
@@ -196,7 +264,9 @@ class ErrorCodes {
   static const String licensePhotoRequired = 'FILE_9019';
   static const String insuranceDocumentRequired = 'FILE_9020';
 
-  // Notification Errors (10000-10999)
+  // =============================================================================
+  // NOTIFICATION ERRORS (10000-10999)
+  // =============================================================================
   static const String notificationSendFailed = 'NOTIFICATION_10001';
   static const String notificationInvalidRecipient = 'NOTIFICATION_10002';
   static const String notificationTemplateNotFound = 'NOTIFICATION_10003';
@@ -218,107 +288,391 @@ class ErrorCodes {
   static const String notificationSchedulingFailed = 'NOTIFICATION_10019';
   static const String notificationChannelBlocked = 'NOTIFICATION_10020';
 
-  // System Errors (11000-11999)
-  static const String systemError = 'SYSTEM_11001';
-  static const String systemMaintenance = 'SYSTEM_11002';
-  static const String systemOverloaded = 'SYSTEM_11003';
-  static const String databaseError = 'SYSTEM_11004';
-  static const String databaseConnectionFailed = 'SYSTEM_11005';
-  static const String databaseQueryTimeout = 'SYSTEM_11006';
-  static const String cacheError = 'SYSTEM_11007';
-  static const String cacheConnectionFailed = 'SYSTEM_11008';
-  static const String externalServiceError = 'SYSTEM_11009';
-  static const String externalServiceTimeout = 'SYSTEM_11010';
-  static const String configurationError = 'SYSTEM_11011';
-  static const String featureNotAvailable = 'SYSTEM_11012';
-  static const String serviceTemporarilyUnavailable = 'SYSTEM_11013';
-  static const String rateLimitExceeded = 'SYSTEM_11014';
-  static const String resourceNotFound = 'SYSTEM_11015';
-  static const String resourceConflict = 'SYSTEM_11016';
-  static const String concurrencyError = 'SYSTEM_11017';
-  static const String lockAcquisitionFailed = 'SYSTEM_11018';
-  static const String dataCorruption = 'SYSTEM_11019';
-  static const String backupFailed = 'SYSTEM_11020';
+  // =============================================================================
+  // WEBSOCKET ERRORS (11000-11499)
+  // =============================================================================
+  static const String websocketConnectionFailed = 'WEBSOCKET_11001';
+  static const String websocketConnectionClosed = 'WEBSOCKET_11002';
+  static const String websocketMessageInvalid = 'WEBSOCKET_11003';
+  static const String websocketMessageTooLarge = 'WEBSOCKET_11004';
+  static const String websocketRoomFull = 'WEBSOCKET_11005';
+  static const String websocketRoomNotFound = 'WEBSOCKET_11006';
+  static const String websocketUserNotInRoom = 'WEBSOCKET_11007';
+  static const String websocketBroadcastFailed = 'WEBSOCKET_11008';
+  static const String websocketHandlerNotFound = 'WEBSOCKET_11009';
+  static const String websocketTimeout = 'WEBSOCKET_11010';
 
-  // Validation Errors (12000-12999)
-  static const String validationFailed = 'VALIDATION_12001';
-  static const String requiredFieldMissing = 'VALIDATION_12002';
-  static const String fieldTooShort = 'VALIDATION_12003';
-  static const String fieldTooLong = 'VALIDATION_12004';
-  static const String fieldInvalidFormat = 'VALIDATION_12005';
-  static const String fieldInvalidValue = 'VALIDATION_12006';
-  static const String fieldOutOfRange = 'VALIDATION_12007';
-  static const String emailInvalid = 'VALIDATION_12008';
-  static const String phoneInvalid = 'VALIDATION_12009';
-  static const String passwordInvalid = 'VALIDATION_12010';
-  static const String nameInvalid = 'VALIDATION_12011';
-  static const String dateInvalid = 'VALIDATION_12012';
-  static const String timeInvalid = 'VALIDATION_12013';
-  static const String urlInvalid = 'VALIDATION_12014';
-  static const String uuidInvalid = 'VALIDATION_12015';
-  static const String jsonInvalid = 'VALIDATION_12016';
-  static const String arrayTooShort = 'VALIDATION_12017';
-  static const String arrayTooLong = 'VALIDATION_12018';
-  static const String duplicateValue = 'VALIDATION_12019';
-  static const String businessRuleViolation = 'VALIDATION_12020';
+  // Chat-specific WebSocket errors
+  static const String chatMessageTooLong = 'CHAT_11011';
+  static const String chatMessageEmpty = 'CHAT_11012';
+  static const String chatHistoryNotAvailable = 'CHAT_11013';
+  static const String chatPermissionDenied = 'CHAT_11014';
 
-  // Get error message for code
+  // =============================================================================
+  // VALIDATION ERRORS (11500-11999)
+  // =============================================================================
+  static const String validationFailed = 'VALIDATION_11501';
+  static const String invalidRequestFormat = 'VALIDATION_11502';
+  static const String requiredFieldMissing = 'VALIDATION_11503';
+  static const String invalidFieldFormat = 'VALIDATION_11504';
+  static const String fieldTooLong = 'VALIDATION_11505';
+  static const String fieldTooShort = 'VALIDATION_11506';
+  static const String invalidEnumValue = 'VALIDATION_11507';
+  static const String invalidDateFormat = 'VALIDATION_11508';
+  static const String invalidTimeFormat = 'VALIDATION_11509';
+  static const String invalidUuidFormat = 'VALIDATION_11510';
+  static const String invalidJsonFormat = 'VALIDATION_11511';
+  static const String duplicateValue = 'VALIDATION_11512';
+  static const String valueOutOfRange = 'VALIDATION_11513';
+  static const String invalidRegexPattern = 'VALIDATION_11514';
+  static const String conflictingValues = 'VALIDATION_11515';
+
+  // =============================================================================
+  // SYSTEM ERRORS (12000-12999)
+  // =============================================================================
+  static const String systemError = 'SYSTEM_12001';
+  static const String systemMaintenance = 'SYSTEM_12002';
+  static const String systemOverloaded = 'SYSTEM_12003';
+  static const String databaseError = 'SYSTEM_12004';
+  static const String databaseConnectionFailed = 'SYSTEM_12005';
+  static const String databaseQueryTimeout = 'SYSTEM_12006';
+  static const String cacheError = 'SYSTEM_12007';
+  static const String cacheConnectionFailed = 'SYSTEM_12008';
+  static const String externalServiceError = 'SYSTEM_12009';
+  static const String externalServiceTimeout = 'SYSTEM_12010';
+  static const String configurationError = 'SYSTEM_12011';
+  static const String internalServerError = 'SYSTEM_12012';
+  static const String serviceUnavailable = 'SYSTEM_12013';
+  static const String rateLimitExceeded = 'SYSTEM_12014';
+  static const String resourceLimitExceeded = 'SYSTEM_12015';
+  static const String memoryLimitExceeded = 'SYSTEM_12016';
+  static const String diskSpaceFull = 'SYSTEM_12017';
+  static const String networkError = 'SYSTEM_12018';
+  static const String apiVersionNotSupported = 'SYSTEM_12019';
+  static const String featureNotAvailable = 'SYSTEM_12020';
+
+  // =============================================================================
+  // TRACKING ERRORS (13000-13999)
+  // =============================================================================
+  static const String trackingServiceError = 'TRACKING_13001';
+  static const String trackingDataCorrupted = 'TRACKING_13002';
+  static const String trackingSessionNotFound = 'TRACKING_13003';
+  static const String trackingSessionExpired = 'TRACKING_13004';
+  static const String trackingPermissionDenied = 'TRACKING_13005';
+  static const String trackingLocationStale = 'TRACKING_13006';
+  static const String trackingAccuracyTooLow = 'TRACKING_13007';
+  static const String trackingDeviceOffline = 'TRACKING_13008';
+  static const String trackingBatteryLow = 'TRACKING_13009';
+  static const String trackingSignalLost = 'TRACKING_13010';
+
+  // =============================================================================
+  // UTILITY METHODS
+  // =============================================================================
+
+  /// Get user-friendly error message for error code
   static String getMessage(String code) {
     switch (code) {
-      // Authentication messages
+      // Authentication errors
       case invalidCredentials:
-        return 'Invalid email or password';
+        return 'Invalid email/phone or password';
       case userNotFound:
-        return 'User not found';
+        return 'User account not found';
       case emailAlreadyExists:
-        return 'An account with this email already exists';
+        return 'Email address is already registered';
+      case phoneAlreadyExists:
+        return 'Phone number is already registered';
+      case authenticationRequired:
+        return 'Authentication is required';
+      case accessDenied:
+        return 'Access denied';
       case tokenExpired:
         return 'Session has expired. Please log in again';
-      case accountSuspended:
-        return 'Your account has been suspended';
 
-      // Ride messages
-      case noDriversAvailable:
-        return 'No drivers available in your area';
+      // Password errors
+      case passwordTooShort:
+        return 'Password must be at least 8 characters long';
+      case passwordTooLong:
+        return 'Password must be no more than 128 characters long';
+      case passwordMissingUppercase:
+        return 'Password must contain at least one uppercase letter';
+      case passwordMissingLowercase:
+        return 'Password must contain at least one lowercase letter';
+      case passwordMissingNumber:
+        return 'Password must contain at least one number';
+      case passwordMissingSpecialChar:
+        return 'Password must contain at least one special character';
+      case passwordTooCommon:
+        return 'Password is too common. Please choose a more secure password';
+
+      // User validation errors
+      case invalidEmail:
+        return 'Please enter a valid email address';
+      case invalidPhone:
+        return 'Please enter a valid phone number';
+      case invalidFirstName:
+        return 'Please enter a valid first name';
+      case invalidLastName:
+        return 'Please enter a valid last name';
+
+      // Ride errors
       case rideNotFound:
         return 'Ride not found';
-      case rideOutsideServiceArea:
-        return 'This location is outside our service area';
+      case rideCannotCancel:
+        return 'Ride cannot be cancelled at this time';
+      case noDriversAvailable:
+        return 'No drivers available in your area';
+      case rideScheduleTooSoon:
+        return 'Ride cannot be scheduled less than 15 minutes in advance';
+      case rideScheduleTooFar:
+        return 'Ride cannot be scheduled more than 30 days in advance';
+      case invalidPickupCode:
+        return 'Invalid pickup verification code';
 
-      // Payment messages
+      // Location errors
+      case invalidLocation:
+        return 'Invalid location coordinates';
+      case locationTooClose:
+        return 'Pickup and dropoff locations are too close';
+      case locationOutsideServiceArea:
+        return 'Location is outside our service area';
+      case etaNotAvailable:
+        return 'ETA calculation is not available';
+
+      // Payment errors
       case paymentFailed:
         return 'Payment processing failed';
       case insufficientFunds:
         return 'Insufficient funds';
-      case cardDeclined:
-        return 'Your card was declined';
+      case cardExpired:
+        return 'Credit card has expired';
+      case invalidCardNumber:
+        return 'Invalid credit card number';
+      case invalidCurrency:
+        return 'Currency not supported';
 
-      // System messages
-      case systemError:
-        return 'An unexpected error occurred';
+      // Negotiation errors
+      case negotiationNotFound:
+        return 'Negotiation not found';
+      case negotiationClosed:
+        return 'Negotiation has been closed';
+      case offerExpired:
+        return 'Offer has expired';
+      case invalidFareAmount:
+        return 'Invalid fare amount';
+
+      // WebSocket errors
+      case websocketConnectionFailed:
+        return 'Failed to establish real-time connection';
+      case chatMessageTooLong:
+        return 'Message is too long';
+      case chatMessageEmpty:
+        return 'Message cannot be empty';
+
+      // Validation errors
+      case validationFailed:
+        return 'Validation failed';
+      case invalidRequestFormat:
+        return 'Invalid request format';
+      case requiredFieldMissing:
+        return 'Required field is missing';
+
+      // System errors
+      case internalServerError:
+        return 'Internal server error. Please try again later';
       case systemMaintenance:
-        return 'System is currently under maintenance';
+        return 'System is under maintenance. Please try again later';
       case rateLimitExceeded:
         return 'Too many requests. Please try again later';
 
+      // Driver errors
+      case driverNotFound:
+        return 'Driver not found';
+      case driverNotAvailable:
+        return 'Driver is not available';
+
+      // Vehicle errors
+      case vehicleNotFound:
+        return 'Vehicle not found';
+      case licensePlateInvalid:
+        return 'Invalid license plate format';
+
+      // Tracking errors
+      case trackingSessionNotFound:
+        return 'Tracking session not found';
+      case trackingPermissionDenied:
+        return 'Location tracking permission denied';
+
       default:
-        return 'An error occurred';
+        return 'An error occurred. Please try again';
     }
   }
 
-  // Get HTTP status code for error code
+  /// Get HTTP status code for error code
   static int getHttpStatusCode(String code) {
-    if (code.startsWith('AUTH_')) return 401;
-    if (code.startsWith('USER_') && code.contains('NOT_FOUND')) return 404;
-    if (code.startsWith('DRIVER_') && code.contains('NOT_FOUND')) return 404;
-    if (code.startsWith('RIDE_') && code.contains('NOT_FOUND')) return 404;
+    // Authentication errors
+    if (code.startsWith('AUTH_')) {
+      if (code == authenticationRequired || code == tokenExpired) return 401;
+      if (code == accessDenied) return 403;
+      return 401;
+    }
+
+    // User errors
+    if (code.startsWith('USER_')) {
+      if (code == userNotFound) return 404;
+      if (code == emailAlreadyExists || code == phoneAlreadyExists) return 409;
+      return 400;
+    }
+
+    // Driver errors
+    if (code.startsWith('DRIVER_')) {
+      if (code == driverNotFound) return 404;
+      return 400;
+    }
+
+    // Vehicle errors
+    if (code.startsWith('VEHICLE_')) {
+      if (code == vehicleNotFound) return 404;
+      return 400;
+    }
+
+    // Ride errors
+    if (code.startsWith('RIDE_')) {
+      if (code == rideNotFound) return 404;
+      return 400;
+    }
+
+    // Location errors
+    if (code.startsWith('LOCATION_')) return 400;
+
+    // Payment errors
     if (code.startsWith('PAYMENT_')) return 402;
+
+    // Fare/negotiation errors
+    if (code.startsWith('FARE_') || code.startsWith('NEGOTIATION_')) {
+      if (code == negotiationNotFound || code == offerNotFound) return 404;
+      return 400;
+    }
+
+    // File errors
+    if (code.startsWith('FILE_')) {
+      if (code == fileNotFound) return 404;
+      if (code == fileAccessDenied) return 403;
+      return 400;
+    }
+
+    // Notification errors
+    if (code.startsWith('NOTIFICATION_')) return 500;
+
+    // WebSocket errors
+    if (code.startsWith('WEBSOCKET_') || code.startsWith('CHAT_')) return 400;
+
+    // Validation errors
     if (code.startsWith('VALIDATION_')) return 400;
-    if (code.startsWith('SYSTEM_') && code.contains('RATE_LIMIT')) return 429;
-    if (code.startsWith('SYSTEM_')) return 500;
-    if (code.contains('NOT_FOUND')) return 404;
-    if (code.contains('ALREADY_EXISTS')) return 409;
-    if (code.contains('INVALID')) return 400;
-    return 400; // Default to bad request
+
+    // System errors
+    if (code.startsWith('SYSTEM_')) {
+      if (code == rateLimitExceeded) return 429;
+      if (code == systemMaintenance || code == serviceUnavailable) return 503;
+      return 500;
+    }
+
+    // Tracking errors
+    if (code.startsWith('TRACKING_')) {
+      if (code == trackingSessionNotFound) return 404;
+      if (code == trackingPermissionDenied) return 403;
+      return 400;
+    }
+
+    // Default
+    return 400;
+  }
+
+  /// Get error category from error code
+  static String getCategory(String code) {
+    if (code.startsWith('AUTH_')) return 'Authentication';
+    if (code.startsWith('USER_')) return 'User Management';
+    if (code.startsWith('DRIVER_')) return 'Driver Management';
+    if (code.startsWith('VEHICLE_')) return 'Vehicle Management';
+    if (code.startsWith('RIDE_')) return 'Ride Management';
+    if (code.startsWith('LOCATION_')) return 'Location Services';
+    if (code.startsWith('PAYMENT_')) return 'Payment Processing';
+    if (code.startsWith('FARE_') || code.startsWith('NEGOTIATION_'))
+      return 'Fare Negotiation';
+    if (code.startsWith('FILE_')) return 'File Management';
+    if (code.startsWith('NOTIFICATION_')) return 'Notifications';
+    if (code.startsWith('WEBSOCKET_') || code.startsWith('CHAT_'))
+      return 'Real-time Communication';
+    if (code.startsWith('VALIDATION_')) return 'Data Validation';
+    if (code.startsWith('SYSTEM_')) return 'System';
+    if (code.startsWith('TRACKING_')) return 'Location Tracking';
+    return 'General';
+  }
+
+  /// Check if error code indicates a retryable error
+  static bool isRetryable(String code) {
+    const retryableCodes = [
+      systemError,
+      databaseConnectionFailed,
+      databaseQueryTimeout,
+      externalServiceTimeout,
+      networkError,
+      paymentTimeout,
+      notificationSendFailed,
+      websocketConnectionFailed,
+      trackingServiceError,
+    ];
+    return retryableCodes.contains(code);
+  }
+
+  /// Check if error code indicates a client error (4xx)
+  static bool isClientError(String code) {
+    final statusCode = getHttpStatusCode(code);
+    return statusCode >= 400 && statusCode < 500;
+  }
+
+  /// Check if error code indicates a server error (5xx)
+  static bool isServerError(String code) {
+    final statusCode = getHttpStatusCode(code);
+    return statusCode >= 500;
+  }
+
+  /// Get all error codes in a category
+  static List<String> getErrorCodesInCategory(String category) {
+    // This would return all error codes that belong to a specific category
+    // Implementation depends on your specific needs
+    final allCodes = <String>[];
+
+    switch (category.toLowerCase()) {
+      case 'authentication':
+        allCodes.addAll([
+          invalidCredentials,
+          userNotFound,
+          emailAlreadyExists,
+          phoneAlreadyExists,
+          invalidToken,
+          tokenExpired,
+          accountDeactivated,
+          accountSuspended,
+          emailNotVerified,
+          phoneNotVerified,
+          authenticationRequired,
+          accessDenied,
+        ]);
+        break;
+      case 'payment':
+        allCodes.addAll([
+          paymentFailed,
+          paymentMethodInvalid,
+          insufficientFunds,
+          cardExpired,
+          invalidCardNumber,
+          invalidCurrency,
+          paymentTimeout,
+        ]);
+        break;
+      // Add other categories as needed
+    }
+
+    return allCodes;
   }
 }
