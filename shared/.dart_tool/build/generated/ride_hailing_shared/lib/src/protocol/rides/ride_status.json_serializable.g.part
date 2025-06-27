@@ -1,0 +1,122 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RideStatus _$RideStatusFromJson(Map<String, dynamic> json) => RideStatus(
+      id: (json['id'] as num?)?.toInt(),
+      rideId: json['rideId'] as String,
+      currentState:
+          $enumDecodeNullable(_$RideStateEnumMap, json['currentState']) ??
+              RideState.requested,
+      lastUpdated: DateTime.parse(json['lastUpdated'] as String),
+      message: json['message'] as String?,
+      stateData: json['stateData'] as Map<String, dynamic>?,
+      requestedAt: json['requestedAt'] == null
+          ? null
+          : DateTime.parse(json['requestedAt'] as String),
+      driverAssignedAt: json['driverAssignedAt'] == null
+          ? null
+          : DateTime.parse(json['driverAssignedAt'] as String),
+      driverEnRouteAt: json['driverEnRouteAt'] == null
+          ? null
+          : DateTime.parse(json['driverEnRouteAt'] as String),
+      driverArrivedAt: json['driverArrivedAt'] == null
+          ? null
+          : DateTime.parse(json['driverArrivedAt'] as String),
+      rideStartedAt: json['rideStartedAt'] == null
+          ? null
+          : DateTime.parse(json['rideStartedAt'] as String),
+      rideCompletedAt: json['rideCompletedAt'] == null
+          ? null
+          : DateTime.parse(json['rideCompletedAt'] as String),
+      rideCancelledAt: json['rideCancelledAt'] == null
+          ? null
+          : DateTime.parse(json['rideCancelledAt'] as String),
+      passengerId: (json['passengerId'] as num).toInt(),
+      driverId: (json['driverId'] as num?)?.toInt(),
+      currentLocation: json['currentLocation'] == null
+          ? null
+          : LocationPoint.fromJson(
+              json['currentLocation'] as Map<String, dynamic>),
+      pickupLocation: json['pickupLocation'] == null
+          ? null
+          : LocationPoint.fromJson(
+              json['pickupLocation'] as Map<String, dynamic>),
+      dropoffLocation: json['dropoffLocation'] == null
+          ? null
+          : LocationPoint.fromJson(
+              json['dropoffLocation'] as Map<String, dynamic>),
+      progressPercentage: (json['progressPercentage'] as num?)?.toDouble(),
+      remainingDistance: (json['remainingDistance'] as num?)?.toDouble(),
+      remainingTime: (json['remainingTime'] as num?)?.toInt(),
+      statusHistory: (json['statusHistory'] as List<dynamic>?)
+              ?.map((e) => RideStatusEvent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$RideStatusToJson(RideStatus instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'rideId': instance.rideId,
+      'currentState': _$RideStateEnumMap[instance.currentState]!,
+      'lastUpdated': instance.lastUpdated.toIso8601String(),
+      'message': instance.message,
+      'stateData': instance.stateData,
+      'requestedAt': instance.requestedAt?.toIso8601String(),
+      'driverAssignedAt': instance.driverAssignedAt?.toIso8601String(),
+      'driverEnRouteAt': instance.driverEnRouteAt?.toIso8601String(),
+      'driverArrivedAt': instance.driverArrivedAt?.toIso8601String(),
+      'rideStartedAt': instance.rideStartedAt?.toIso8601String(),
+      'rideCompletedAt': instance.rideCompletedAt?.toIso8601String(),
+      'rideCancelledAt': instance.rideCancelledAt?.toIso8601String(),
+      'passengerId': instance.passengerId,
+      'driverId': instance.driverId,
+      'currentLocation': instance.currentLocation,
+      'pickupLocation': instance.pickupLocation,
+      'dropoffLocation': instance.dropoffLocation,
+      'progressPercentage': instance.progressPercentage,
+      'remainingDistance': instance.remainingDistance,
+      'remainingTime': instance.remainingTime,
+      'statusHistory': instance.statusHistory,
+      'metadata': instance.metadata,
+    };
+
+const _$RideStateEnumMap = {
+  RideState.requested: 'requested',
+  RideState.negotiating: 'negotiating',
+  RideState.driverAssigned: 'driverAssigned',
+  RideState.driverEnRoute: 'driverEnRoute',
+  RideState.arrived: 'arrived',
+  RideState.inProgress: 'inProgress',
+  RideState.completed: 'completed',
+  RideState.cancelled: 'cancelled',
+  RideState.noDriversAvailable: 'noDriversAvailable',
+};
+
+RideStatusEvent _$RideStatusEventFromJson(Map<String, dynamic> json) =>
+    RideStatusEvent(
+      id: (json['id'] as num?)?.toInt(),
+      eventId: json['eventId'] as String,
+      rideId: json['rideId'] as String,
+      previousState: $enumDecode(_$RideStateEnumMap, json['previousState']),
+      newState: $enumDecode(_$RideStateEnumMap, json['newState']),
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      message: json['message'] as String?,
+      stateData: json['stateData'] as Map<String, dynamic>?,
+      triggeredBy: (json['triggeredBy'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$RideStatusEventToJson(RideStatusEvent instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'eventId': instance.eventId,
+      'rideId': instance.rideId,
+      'previousState': _$RideStateEnumMap[instance.previousState]!,
+      'newState': _$RideStateEnumMap[instance.newState]!,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'message': instance.message,
+      'stateData': instance.stateData,
+      'triggeredBy': instance.triggeredBy,
+    };

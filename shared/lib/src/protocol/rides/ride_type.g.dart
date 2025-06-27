@@ -1,0 +1,126 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'ride_type.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RideTypeDefinition _$RideTypeDefinitionFromJson(Map<String, dynamic> json) =>
+    RideTypeDefinition(
+      id: (json['id'] as num?)?.toInt(),
+      rideType: $enumDecode(_$RideTypeEnumMap, json['rideType']),
+      displayName: json['displayName'] as String,
+      description: json['description'] as String,
+      iconName: json['iconName'] as String?,
+      isActive: json['isActive'] as bool? ?? true,
+      sortOrder: (json['sortOrder'] as num?)?.toInt() ?? 0,
+      baseFareMultiplier:
+          (json['baseFareMultiplier'] as num?)?.toDouble() ?? 1.0,
+      distanceMultiplier:
+          (json['distanceMultiplier'] as num?)?.toDouble() ?? 1.0,
+      timeMultiplier: (json['timeMultiplier'] as num?)?.toDouble() ?? 1.0,
+      minimumFare: (json['minimumFare'] as num?)?.toDouble() ?? 500,
+      maximumFare: (json['maximumFare'] as num?)?.toDouble() ?? 50000,
+      maxPassengers: (json['maxPassengers'] as num?)?.toInt() ?? 4,
+      maxLuggage: (json['maxLuggage'] as num?)?.toInt() ?? 2,
+      allowsPets: json['allowsPets'] as bool? ?? false,
+      allowsFood: json['allowsFood'] as bool? ?? false,
+      requiresChildSeat: json['requiresChildSeat'] as bool? ?? false,
+      isAccessible: json['isAccessible'] as bool? ?? false,
+      isShared: json['isShared'] as bool? ?? false,
+      isLuxury: json['isLuxury'] as bool? ?? false,
+      isEco: json['isEco'] as bool? ?? false,
+      allowedVehicleTypes: (json['allowedVehicleTypes'] as List<dynamic>?)
+              ?.map((e) => $enumDecode(_$VehicleTypeEnumMap, e))
+              .toList() ??
+          const [],
+      minVehicleYear: (json['minVehicleYear'] as num?)?.toInt(),
+      requiredFeatures: (json['requiredFeatures'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      availableRegions: (json['availableRegions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      timeAvailability:
+          (json['timeAvailability'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as bool),
+      ),
+      isAlwaysAvailable: json['isAlwaysAvailable'] as bool? ?? true,
+      maxDistance: (json['maxDistance'] as num?)?.toInt() ?? 100,
+      maxDuration: (json['maxDuration'] as num?)?.toInt() ?? 300,
+      requiresPreBooking: json['requiresPreBooking'] as bool? ?? false,
+      advanceBookingHours: (json['advanceBookingHours'] as num?)?.toInt(),
+      allowsCancellation: json['allowsCancellation'] as bool? ?? true,
+      cancellationGracePeriod:
+          (json['cancellationGracePeriod'] as num?)?.toInt() ?? 5,
+    );
+
+Map<String, dynamic> _$RideTypeDefinitionToJson(RideTypeDefinition instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'rideType': _$RideTypeEnumMap[instance.rideType]!,
+      'displayName': instance.displayName,
+      'description': instance.description,
+      'iconName': instance.iconName,
+      'isActive': instance.isActive,
+      'sortOrder': instance.sortOrder,
+      'baseFareMultiplier': instance.baseFareMultiplier,
+      'distanceMultiplier': instance.distanceMultiplier,
+      'timeMultiplier': instance.timeMultiplier,
+      'minimumFare': instance.minimumFare,
+      'maximumFare': instance.maximumFare,
+      'maxPassengers': instance.maxPassengers,
+      'maxLuggage': instance.maxLuggage,
+      'allowsPets': instance.allowsPets,
+      'allowsFood': instance.allowsFood,
+      'requiresChildSeat': instance.requiresChildSeat,
+      'isAccessible': instance.isAccessible,
+      'isShared': instance.isShared,
+      'isLuxury': instance.isLuxury,
+      'isEco': instance.isEco,
+      'allowedVehicleTypes': instance.allowedVehicleTypes
+          .map((e) => _$VehicleTypeEnumMap[e]!)
+          .toList(),
+      'minVehicleYear': instance.minVehicleYear,
+      'requiredFeatures': instance.requiredFeatures,
+      'availableRegions': instance.availableRegions,
+      'timeAvailability': instance.timeAvailability,
+      'isAlwaysAvailable': instance.isAlwaysAvailable,
+      'maxDistance': instance.maxDistance,
+      'maxDuration': instance.maxDuration,
+      'requiresPreBooking': instance.requiresPreBooking,
+      'advanceBookingHours': instance.advanceBookingHours,
+      'allowsCancellation': instance.allowsCancellation,
+      'cancellationGracePeriod': instance.cancellationGracePeriod,
+    };
+
+const _$RideTypeEnumMap = {
+  RideType.economy: 'economy',
+  RideType.standard: 'standard',
+  RideType.premium: 'premium',
+  RideType.luxury: 'luxury',
+  RideType.suv: 'suv',
+  RideType.van: 'van',
+  RideType.pool: 'pool',
+  RideType.intercity: 'intercity',
+  RideType.courier: 'courier',
+  RideType.wheelchair: 'wheelchair',
+  RideType.pet: 'pet',
+  RideType.eco: 'eco',
+  RideType.electric: 'electric',
+};
+
+const _$VehicleTypeEnumMap = {
+  VehicleType.economy: 'economy',
+  VehicleType.standard: 'standard',
+  VehicleType.premium: 'premium',
+  VehicleType.luxury: 'luxury',
+  VehicleType.suv: 'suv',
+  VehicleType.van: 'van',
+  VehicleType.motorcycle: 'motorcycle',
+  VehicleType.bicycle: 'bicycle',
+  VehicleType.wheelchair: 'wheelchair',
+  VehicleType.electric: 'electric',
+};

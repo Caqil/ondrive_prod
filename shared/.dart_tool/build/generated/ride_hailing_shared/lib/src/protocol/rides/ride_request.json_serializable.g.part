@@ -1,0 +1,162 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RideRequest _$RideRequestFromJson(Map<String, dynamic> json) => RideRequest(
+      id: (json['id'] as num?)?.toInt(),
+      pickupLocation: LocationPoint.fromJson(
+          json['pickupLocation'] as Map<String, dynamic>),
+      dropoffLocation: LocationPoint.fromJson(
+          json['dropoffLocation'] as Map<String, dynamic>),
+      waypoints: (json['waypoints'] as List<dynamic>?)
+          ?.map((e) => LocationPoint.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      rideType: $enumDecode(_$RideTypeEnumMap, json['rideType']),
+      scheduledAt: json['scheduledAt'] == null
+          ? null
+          : DateTime.parse(json['scheduledAt'] as String),
+      proposedFare: (json['proposedFare'] as num?)?.toDouble(),
+      preferences: json['preferences'] == null
+          ? null
+          : RidePreferences.fromJson(
+              json['preferences'] as Map<String, dynamic>),
+      specialRequests: json['specialRequests'] as String?,
+      notes: json['notes'] as String?,
+      isEmergency: json['isEmergency'] as bool? ?? false,
+      passengersCount: (json['passengersCount'] as num?)?.toInt() ?? 1,
+      preferredPaymentMethod: $enumDecodeNullable(
+              _$PaymentMethodTypeEnumMap, json['preferredPaymentMethod']) ??
+          PaymentMethodType.card,
+    );
+
+Map<String, dynamic> _$RideRequestToJson(RideRequest instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'pickupLocation': instance.pickupLocation,
+      'dropoffLocation': instance.dropoffLocation,
+      'waypoints': instance.waypoints,
+      'rideType': _$RideTypeEnumMap[instance.rideType]!,
+      'scheduledAt': instance.scheduledAt?.toIso8601String(),
+      'proposedFare': instance.proposedFare,
+      'preferences': instance.preferences,
+      'specialRequests': instance.specialRequests,
+      'notes': instance.notes,
+      'isEmergency': instance.isEmergency,
+      'passengersCount': instance.passengersCount,
+      'preferredPaymentMethod':
+          _$PaymentMethodTypeEnumMap[instance.preferredPaymentMethod]!,
+    };
+
+const _$RideTypeEnumMap = {
+  RideType.city: 'city',
+  RideType.intercity: 'intercity',
+  RideType.courier: 'courier',
+  RideType.pool: 'pool',
+  RideType.luxury: 'luxury',
+  RideType.eco: 'eco',
+};
+
+const _$PaymentMethodTypeEnumMap = {
+  PaymentMethodType.card: 'card',
+  PaymentMethodType.bankAccount: 'bankAccount',
+  PaymentMethodType.digitalWallet: 'digitalWallet',
+  PaymentMethodType.cash: 'cash',
+  PaymentMethodType.corporate: 'corporate',
+};
+
+RideResponse _$RideResponseFromJson(Map<String, dynamic> json) => RideResponse(
+      id: (json['id'] as num?)?.toInt(),
+      success: json['success'] as bool,
+      message: json['message'] as String,
+      ride: json['ride'] == null
+          ? null
+          : Ride.fromJson(json['ride'] as Map<String, dynamic>),
+      estimatedFare: (json['estimatedFare'] as num?)?.toDouble(),
+      estimatedDuration: (json['estimatedDuration'] as num?)?.toInt(),
+      estimatedDistance: (json['estimatedDistance'] as num?)?.toDouble(),
+      nearbyDrivers: (json['nearbyDrivers'] as List<dynamic>?)
+          ?.map((e) => DriverOffer.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      errorCode: json['errorCode'] as String?,
+    );
+
+Map<String, dynamic> _$RideResponseToJson(RideResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'success': instance.success,
+      'message': instance.message,
+      'ride': instance.ride,
+      'estimatedFare': instance.estimatedFare,
+      'estimatedDuration': instance.estimatedDuration,
+      'estimatedDistance': instance.estimatedDistance,
+      'nearbyDrivers': instance.nearbyDrivers,
+      'errorCode': instance.errorCode,
+    };
+
+DriverOffer _$DriverOfferFromJson(Map<String, dynamic> json) => DriverOffer(
+      id: (json['id'] as num?)?.toInt(),
+      driverId: (json['driverId'] as num).toInt(),
+      driverName: json['driverName'] as String,
+      driverPhoto: json['driverPhoto'] as String?,
+      rating: (json['rating'] as num).toDouble(),
+      totalRides: (json['totalRides'] as num).toInt(),
+      vehicle: VehicleInfo.fromJson(json['vehicle'] as Map<String, dynamic>),
+      proposedFare: (json['proposedFare'] as num).toDouble(),
+      estimatedArrivalTime: (json['estimatedArrivalTime'] as num).toInt(),
+      distanceFromPickup: (json['distanceFromPickup'] as num).toDouble(),
+      isOnline: json['isOnline'] as bool,
+      isAvailable: json['isAvailable'] as bool,
+    );
+
+Map<String, dynamic> _$DriverOfferToJson(DriverOffer instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'driverId': instance.driverId,
+      'driverName': instance.driverName,
+      'driverPhoto': instance.driverPhoto,
+      'rating': instance.rating,
+      'totalRides': instance.totalRides,
+      'vehicle': instance.vehicle,
+      'proposedFare': instance.proposedFare,
+      'estimatedArrivalTime': instance.estimatedArrivalTime,
+      'distanceFromPickup': instance.distanceFromPickup,
+      'isOnline': instance.isOnline,
+      'isAvailable': instance.isAvailable,
+    };
+
+VehicleInfo _$VehicleInfoFromJson(Map<String, dynamic> json) => VehicleInfo(
+      id: (json['id'] as num?)?.toInt(),
+      make: json['make'] as String,
+      model: json['model'] as String,
+      year: (json['year'] as num).toInt(),
+      color: json['color'] as String,
+      licensePlate: json['licensePlate'] as String,
+      vehicleType: $enumDecode(_$VehicleTypeEnumMap, json['vehicleType']),
+      features: (json['features'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$VehicleInfoToJson(VehicleInfo instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'make': instance.make,
+      'model': instance.model,
+      'year': instance.year,
+      'color': instance.color,
+      'licensePlate': instance.licensePlate,
+      'vehicleType': _$VehicleTypeEnumMap[instance.vehicleType]!,
+      'features': instance.features,
+    };
+
+const _$VehicleTypeEnumMap = {
+  VehicleType.economy: 'economy',
+  VehicleType.standard: 'standard',
+  VehicleType.premium: 'premium',
+  VehicleType.luxury: 'luxury',
+  VehicleType.suv: 'suv',
+  VehicleType.van: 'van',
+  VehicleType.motorcycle: 'motorcycle',
+  VehicleType.bicycle: 'bicycle',
+};

@@ -1,0 +1,180 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PaymentStatus _$PaymentStatusFromJson(Map<String, dynamic> json) =>
+    PaymentStatus(
+      id: (json['id'] as num?)?.toInt(),
+      paymentId: json['paymentId'] as String,
+      rideId: json['rideId'] as String,
+      userId: (json['userId'] as num).toInt(),
+      currentState:
+          $enumDecodeNullable(_$PaymentStateEnumMap, json['currentState']) ??
+              PaymentState.pending,
+      paymentMethodType:
+          $enumDecode(_$PaymentMethodTypeEnumMap, json['paymentMethodType']),
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      lastUpdatedAt: json['lastUpdatedAt'] == null
+          ? null
+          : DateTime.parse(json['lastUpdatedAt'] as String),
+      stateHistory: (json['stateHistory'] as List<dynamic>?)
+              ?.map((e) =>
+                  PaymentStateTransition.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      currentStateData: json['currentStateData'] as Map<String, dynamic>?,
+      processorTransactionId: json['processorTransactionId'] as String?,
+      processorReference: json['processorReference'] as String?,
+      processor:
+          $enumDecodeNullable(_$PaymentProcessorTypeEnumMap, json['processor']),
+      lastFailureCode: json['lastFailureCode'] as String?,
+      lastFailureMessage: json['lastFailureMessage'] as String?,
+      lastFailureAt: json['lastFailureAt'] == null
+          ? null
+          : DateTime.parse(json['lastFailureAt'] as String),
+      failureCount: (json['failureCount'] as num?)?.toInt() ?? 0,
+      canRetry: json['canRetry'] as bool? ?? true,
+      nextRetryAt: json['nextRetryAt'] == null
+          ? null
+          : DateTime.parse(json['nextRetryAt'] as String),
+      maxRetries: (json['maxRetries'] as num?)?.toInt() ?? 3,
+      currentRetries: (json['currentRetries'] as num?)?.toInt() ?? 0,
+      stripePaymentIntentId: json['stripePaymentIntentId'] as String?,
+      stripeChargeId: json['stripeChargeId'] as String?,
+      externalData: json['externalData'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$PaymentStatusToJson(PaymentStatus instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'paymentId': instance.paymentId,
+      'rideId': instance.rideId,
+      'userId': instance.userId,
+      'currentState': _$PaymentStateEnumMap[instance.currentState]!,
+      'paymentMethodType':
+          _$PaymentMethodTypeEnumMap[instance.paymentMethodType]!,
+      'amount': instance.amount,
+      'currency': instance.currency,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'lastUpdatedAt': instance.lastUpdatedAt?.toIso8601String(),
+      'stateHistory': instance.stateHistory,
+      'currentStateData': instance.currentStateData,
+      'processorTransactionId': instance.processorTransactionId,
+      'processorReference': instance.processorReference,
+      'processor': _$PaymentProcessorTypeEnumMap[instance.processor],
+      'lastFailureCode': instance.lastFailureCode,
+      'lastFailureMessage': instance.lastFailureMessage,
+      'lastFailureAt': instance.lastFailureAt?.toIso8601String(),
+      'failureCount': instance.failureCount,
+      'canRetry': instance.canRetry,
+      'nextRetryAt': instance.nextRetryAt?.toIso8601String(),
+      'maxRetries': instance.maxRetries,
+      'currentRetries': instance.currentRetries,
+      'stripePaymentIntentId': instance.stripePaymentIntentId,
+      'stripeChargeId': instance.stripeChargeId,
+      'externalData': instance.externalData,
+    };
+
+const _$PaymentStateEnumMap = {
+  PaymentState.pending: 'pending',
+  PaymentState.processing: 'processing',
+  PaymentState.authorizing: 'authorizing',
+  PaymentState.authorized: 'authorized',
+  PaymentState.capturing: 'capturing',
+  PaymentState.completed: 'completed',
+  PaymentState.failed: 'failed',
+  PaymentState.cancelled: 'cancelled',
+  PaymentState.refunded: 'refunded',
+  PaymentState.partiallyRefunded: 'partiallyRefunded',
+  PaymentState.disputed: 'disputed',
+};
+
+const _$PaymentMethodTypeEnumMap = {
+  PaymentMethodType.card: 'card',
+  PaymentMethodType.bankAccount: 'bankAccount',
+  PaymentMethodType.digitalWallet: 'digitalWallet',
+  PaymentMethodType.cash: 'cash',
+  PaymentMethodType.corporate: 'corporate',
+};
+
+const _$PaymentProcessorTypeEnumMap = {
+  PaymentProcessorType.stripe: 'stripe',
+  PaymentProcessorType.paypal: 'paypal',
+  PaymentProcessorType.square: 'square',
+  PaymentProcessorType.braintree: 'braintree',
+  PaymentProcessorType.other: 'other',
+};
+
+PaymentStateTransition _$PaymentStateTransitionFromJson(
+        Map<String, dynamic> json) =>
+    PaymentStateTransition(
+      id: (json['id'] as num?)?.toInt(),
+      fromState: $enumDecode(_$PaymentStateEnumMap, json['fromState']),
+      toState: $enumDecode(_$PaymentStateEnumMap, json['toState']),
+      transitionedAt: DateTime.parse(json['transitionedAt'] as String),
+      reason: json['reason'] as String?,
+      stateData: json['stateData'] as Map<String, dynamic>?,
+      triggeredBy: json['triggeredBy'] as String?,
+    );
+
+Map<String, dynamic> _$PaymentStateTransitionToJson(
+        PaymentStateTransition instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'fromState': _$PaymentStateEnumMap[instance.fromState]!,
+      'toState': _$PaymentStateEnumMap[instance.toState]!,
+      'transitionedAt': instance.transitionedAt.toIso8601String(),
+      'reason': instance.reason,
+      'stateData': instance.stateData,
+      'triggeredBy': instance.triggeredBy,
+    };
+
+PaymentWebhook _$PaymentWebhookFromJson(Map<String, dynamic> json) =>
+    PaymentWebhook(
+      id: (json['id'] as num?)?.toInt(),
+      webhookId: json['webhookId'] as String,
+      paymentId: json['paymentId'] as String,
+      source: $enumDecode(_$WebhookSourceEnumMap, json['source']),
+      eventType: json['eventType'] as String,
+      eventData: json['eventData'] as Map<String, dynamic>,
+      receivedAt: DateTime.parse(json['receivedAt'] as String),
+      processedAt: json['processedAt'] == null
+          ? null
+          : DateTime.parse(json['processedAt'] as String),
+      status: $enumDecodeNullable(_$WebhookStatusEnumMap, json['status']) ??
+          WebhookStatus.pending,
+      processingError: json['processingError'] as String?,
+      retryCount: (json['retryCount'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$PaymentWebhookToJson(PaymentWebhook instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'webhookId': instance.webhookId,
+      'paymentId': instance.paymentId,
+      'source': _$WebhookSourceEnumMap[instance.source]!,
+      'eventType': instance.eventType,
+      'eventData': instance.eventData,
+      'receivedAt': instance.receivedAt.toIso8601String(),
+      'processedAt': instance.processedAt?.toIso8601String(),
+      'status': _$WebhookStatusEnumMap[instance.status]!,
+      'processingError': instance.processingError,
+      'retryCount': instance.retryCount,
+    };
+
+const _$WebhookSourceEnumMap = {
+  WebhookSource.stripe: 'stripe',
+  WebhookSource.paypal: 'paypal',
+  WebhookSource.bank: 'bank',
+  WebhookSource.other: 'other',
+};
+
+const _$WebhookStatusEnumMap = {
+  WebhookStatus.pending: 'pending',
+  WebhookStatus.processing: 'processing',
+  WebhookStatus.processed: 'processed',
+  WebhookStatus.failed: 'failed',
+  WebhookStatus.ignored: 'ignored',
+};

@@ -1,0 +1,33 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'auth_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) => AuthResponse(
+      id: (json['id'] as num?)?.toInt(),
+      success: json['success'] as bool,
+      message: json['message'] as String,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      token: json['token'] == null
+          ? null
+          : JwtToken.fromJson(json['token'] as Map<String, dynamic>),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      errors:
+          (json['errors'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'success': instance.success,
+      'message': instance.message,
+      'user': instance.user,
+      'token': instance.token,
+      'metadata': instance.metadata,
+      'errors': instance.errors,
+    };

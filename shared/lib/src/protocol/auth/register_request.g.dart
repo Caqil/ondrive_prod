@@ -1,0 +1,49 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'register_request.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
+    RegisterRequest(
+      id: (json['id'] as num?)?.toInt(),
+      email: json['email'] as String,
+      phone: json['phone'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      password: json['password'] as String,
+      confirmPassword: json['confirmPassword'] as String,
+      userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
+      agreeToTerms: json['agreeToTerms'] as bool? ?? false,
+      agreeToPrivacyPolicy: json['agreeToPrivacyPolicy'] as bool? ?? false,
+      referralCode: json['referralCode'] as String?,
+      deviceId: json['deviceId'] as String?,
+      deviceType: json['deviceType'] as String?,
+      fcmToken: json['fcmToken'] as String?,
+    );
+
+Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'email': instance.email,
+      'phone': instance.phone,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'password': instance.password,
+      'confirmPassword': instance.confirmPassword,
+      'userType': _$UserTypeEnumMap[instance.userType]!,
+      'agreeToTerms': instance.agreeToTerms,
+      'agreeToPrivacyPolicy': instance.agreeToPrivacyPolicy,
+      'referralCode': instance.referralCode,
+      'deviceId': instance.deviceId,
+      'deviceType': instance.deviceType,
+      'fcmToken': instance.fcmToken,
+    };
+
+const _$UserTypeEnumMap = {
+  UserType.passenger: 'passenger',
+  UserType.driver: 'driver',
+  UserType.admin: 'admin',
+};

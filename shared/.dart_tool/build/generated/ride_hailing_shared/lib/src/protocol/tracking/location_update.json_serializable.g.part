@@ -1,0 +1,219 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+LocationUpdate _$LocationUpdateFromJson(Map<String, dynamic> json) =>
+    LocationUpdate(
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['userId'] as num).toInt(),
+      rideId: json['rideId'] as String?,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      altitude: (json['altitude'] as num?)?.toDouble(),
+      accuracy: (json['accuracy'] as num?)?.toDouble(),
+      heading: (json['heading'] as num?)?.toDouble(),
+      speed: (json['speed'] as num?)?.toDouble(),
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      source: $enumDecodeNullable(_$LocationSourceEnumMap, json['source']) ??
+          LocationSource.gps,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$LocationUpdateToJson(LocationUpdate instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'rideId': instance.rideId,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'altitude': instance.altitude,
+      'accuracy': instance.accuracy,
+      'heading': instance.heading,
+      'speed': instance.speed,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'source': _$LocationSourceEnumMap[instance.source]!,
+      'metadata': instance.metadata,
+    };
+
+const _$LocationSourceEnumMap = {
+  LocationSource.gps: 'gps',
+  LocationSource.network: 'network',
+  LocationSource.passive: 'passive',
+  LocationSource.manual: 'manual',
+};
+
+TripTracking _$TripTrackingFromJson(Map<String, dynamic> json) => TripTracking(
+      id: (json['id'] as num?)?.toInt(),
+      rideId: json['rideId'] as String,
+      route: (json['route'] as List<dynamic>?)
+              ?.map((e) => LocationUpdate.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      totalDistance: (json['totalDistance'] as num?)?.toDouble() ?? 0.0,
+      totalDuration: (json['totalDuration'] as num?)?.toInt() ?? 0,
+      startTime: json['startTime'] == null
+          ? null
+          : DateTime.parse(json['startTime'] as String),
+      endTime: json['endTime'] == null
+          ? null
+          : DateTime.parse(json['endTime'] as String),
+      status: $enumDecodeNullable(_$TrackingStatusEnumMap, json['status']) ??
+          TrackingStatus.idle,
+      analytics: json['analytics'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$TripTrackingToJson(TripTracking instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'rideId': instance.rideId,
+      'route': instance.route,
+      'totalDistance': instance.totalDistance,
+      'totalDuration': instance.totalDuration,
+      'startTime': instance.startTime?.toIso8601String(),
+      'endTime': instance.endTime?.toIso8601String(),
+      'status': _$TrackingStatusEnumMap[instance.status]!,
+      'analytics': instance.analytics,
+    };
+
+const _$TrackingStatusEnumMap = {
+  TrackingStatus.idle: 'idle',
+  TrackingStatus.tracking: 'tracking',
+  TrackingStatus.paused: 'paused',
+  TrackingStatus.completed: 'completed',
+  TrackingStatus.error: 'error',
+};
+
+EtaUpdate _$EtaUpdateFromJson(Map<String, dynamic> json) => EtaUpdate(
+      id: (json['id'] as num?)?.toInt(),
+      rideId: json['rideId'] as String,
+      etaSeconds: (json['etaSeconds'] as num).toInt(),
+      distanceMeters: (json['distanceMeters'] as num).toDouble(),
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      etaType: $enumDecode(_$EtaTypeEnumMap, json['etaType']),
+      trafficCondition: json['trafficCondition'] as String?,
+    );
+
+Map<String, dynamic> _$EtaUpdateToJson(EtaUpdate instance) => <String, dynamic>{
+      'id': instance.id,
+      'rideId': instance.rideId,
+      'etaSeconds': instance.etaSeconds,
+      'distanceMeters': instance.distanceMeters,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'etaType': _$EtaTypeEnumMap[instance.etaType]!,
+      'trafficCondition': instance.trafficCondition,
+    };
+
+const _$EtaTypeEnumMap = {
+  EtaType.pickup: 'pickup',
+  EtaType.dropoff: 'dropoff',
+  EtaType.waypoint: 'waypoint',
+};
+
+RouteInfo _$RouteInfoFromJson(Map<String, dynamic> json) => RouteInfo(
+      id: (json['id'] as num?)?.toInt(),
+      rideId: json['rideId'] as String,
+      waypoints: (json['waypoints'] as List<dynamic>?)
+              ?.map((e) => LocationPoint.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      totalDistance: (json['totalDistance'] as num).toDouble(),
+      estimatedDuration: (json['estimatedDuration'] as num).toInt(),
+      encodedPolyline: json['encodedPolyline'] as String?,
+      steps: (json['steps'] as List<dynamic>?)
+          ?.map((e) => RouteStep.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      trafficInfo: json['trafficInfo'] == null
+          ? null
+          : TrafficInfo.fromJson(json['trafficInfo'] as Map<String, dynamic>),
+      calculatedAt: DateTime.parse(json['calculatedAt'] as String),
+    );
+
+Map<String, dynamic> _$RouteInfoToJson(RouteInfo instance) => <String, dynamic>{
+      'id': instance.id,
+      'rideId': instance.rideId,
+      'waypoints': instance.waypoints,
+      'totalDistance': instance.totalDistance,
+      'estimatedDuration': instance.estimatedDuration,
+      'encodedPolyline': instance.encodedPolyline,
+      'steps': instance.steps,
+      'trafficInfo': instance.trafficInfo,
+      'calculatedAt': instance.calculatedAt.toIso8601String(),
+    };
+
+RouteStep _$RouteStepFromJson(Map<String, dynamic> json) => RouteStep(
+      id: (json['id'] as num?)?.toInt(),
+      instruction: json['instruction'] as String,
+      distance: (json['distance'] as num).toDouble(),
+      duration: (json['duration'] as num).toInt(),
+      startLocation:
+          LocationPoint.fromJson(json['startLocation'] as Map<String, dynamic>),
+      endLocation:
+          LocationPoint.fromJson(json['endLocation'] as Map<String, dynamic>),
+      maneuver: json['maneuver'] as String?,
+    );
+
+Map<String, dynamic> _$RouteStepToJson(RouteStep instance) => <String, dynamic>{
+      'id': instance.id,
+      'instruction': instance.instruction,
+      'distance': instance.distance,
+      'duration': instance.duration,
+      'startLocation': instance.startLocation,
+      'endLocation': instance.endLocation,
+      'maneuver': instance.maneuver,
+    };
+
+TrafficInfo _$TrafficInfoFromJson(Map<String, dynamic> json) => TrafficInfo(
+      id: (json['id'] as num?)?.toInt(),
+      condition: $enumDecode(_$TrafficConditionEnumMap, json['condition']),
+      delaySeconds: (json['delaySeconds'] as num?)?.toInt() ?? 0,
+      description: json['description'] as String,
+      incidents: (json['incidents'] as List<dynamic>?)
+          ?.map((e) => TrafficIncident.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$TrafficInfoToJson(TrafficInfo instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'condition': _$TrafficConditionEnumMap[instance.condition]!,
+      'delaySeconds': instance.delaySeconds,
+      'description': instance.description,
+      'incidents': instance.incidents,
+    };
+
+const _$TrafficConditionEnumMap = {
+  TrafficCondition.light: 'light',
+  TrafficCondition.moderate: 'moderate',
+  TrafficCondition.heavy: 'heavy',
+  TrafficCondition.severe: 'severe',
+  TrafficCondition.unknown: 'unknown',
+};
+
+TrafficIncident _$TrafficIncidentFromJson(Map<String, dynamic> json) =>
+    TrafficIncident(
+      id: (json['id'] as num?)?.toInt(),
+      description: json['description'] as String,
+      type: $enumDecode(_$IncidentTypeEnumMap, json['type']),
+      location:
+          LocationPoint.fromJson(json['location'] as Map<String, dynamic>),
+      severityLevel: (json['severityLevel'] as num).toInt(),
+      estimatedClearanceTime: (json['estimatedClearanceTime'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$TrafficIncidentToJson(TrafficIncident instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'description': instance.description,
+      'type': _$IncidentTypeEnumMap[instance.type]!,
+      'location': instance.location,
+      'severityLevel': instance.severityLevel,
+      'estimatedClearanceTime': instance.estimatedClearanceTime,
+    };
+
+const _$IncidentTypeEnumMap = {
+  IncidentType.accident: 'accident',
+  IncidentType.construction: 'construction',
+  IncidentType.roadClosure: 'roadClosure',
+  IncidentType.weatherCondition: 'weatherCondition',
+  IncidentType.other: 'other',
+};

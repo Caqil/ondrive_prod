@@ -1,0 +1,66 @@
+# Development configuration
+runmode: development
+
+apiServer:
+  port: 8080
+  publicHost: localhost
+  publicPort: 8080
+  publicScheme: http
+
+insightsServer:
+  port: 8081
+  publicHost: localhost
+  publicPort: 8081
+  publicScheme: http
+
+webServer:
+  port: 8082
+  publicHost: localhost
+  publicPort: 8082
+  publicScheme: http
+
+database:
+  host: localhost
+  port: 5432
+  name: ride_hailing_dev
+  username: postgres
+  password: password
+  requireSsl: false
+
+mongodb:
+  host: localhost
+  port: 27017
+  database: ride_hailing_dev
+  username: null
+  password: null
+
+redis:
+  enabled: true
+  host: localhost
+  port: 6379
+  password: null
+
+aws:
+  region: us-east-1
+  accessKeyId: ${AWS_ACCESS_KEY_ID}
+  secretAccessKey: ${AWS_SECRET_ACCESS_KEY}
+  s3Bucket: ride-hailing-dev-bucket
+
+stripe:
+  secretKey: ${STRIPE_SECRET_KEY}
+  publishableKey: ${STRIPE_PUBLISHABLE_KEY}
+  webhookSecret: ${STRIPE_WEBHOOK_SECRET}
+
+sendgrid:
+  apiKey: ${SENDGRID_API_KEY}
+  fromEmail: noreply@ridehailing.com
+  fromName: RideHailing App
+
+maps:
+  googleMapsApiKey: ${GOOGLE_MAPS_API_KEY}
+  mapboxAccessToken: ${MAPBOX_ACCESS_TOKEN}
+
+jwt:
+  secretKey: ${JWT_SECRET_KEY}
+  expiresIn: 86400 # 24 hours
+  refreshExpiresIn: 604800 # 7 days

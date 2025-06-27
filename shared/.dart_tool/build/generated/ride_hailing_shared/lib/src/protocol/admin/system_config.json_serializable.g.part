@@ -1,0 +1,200 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+SystemConfig _$SystemConfigFromJson(Map<String, dynamic> json) => SystemConfig(
+      id: (json['id'] as num?)?.toInt(),
+      configKey: json['configKey'] as String,
+      configValue: json['configValue'] as String,
+      configType: $enumDecode(_$ConfigTypeEnumMap, json['configType']),
+      description: json['description'] as String?,
+      category: json['category'] as String?,
+      isPublic: json['isPublic'] as bool? ?? false,
+      isEditable: json['isEditable'] as bool? ?? true,
+      requiresRestart: json['requiresRestart'] as bool? ?? false,
+      validation: json['validation'] as Map<String, dynamic>?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      updatedBy: (json['updatedBy'] as num?)?.toInt(),
+      environment: json['environment'] as String?,
+    );
+
+Map<String, dynamic> _$SystemConfigToJson(SystemConfig instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'configKey': instance.configKey,
+      'configValue': instance.configValue,
+      'configType': _$ConfigTypeEnumMap[instance.configType]!,
+      'description': instance.description,
+      'category': instance.category,
+      'isPublic': instance.isPublic,
+      'isEditable': instance.isEditable,
+      'requiresRestart': instance.requiresRestart,
+      'validation': instance.validation,
+      'metadata': instance.metadata,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      'updatedBy': instance.updatedBy,
+      'environment': instance.environment,
+    };
+
+const _$ConfigTypeEnumMap = {
+  ConfigType.string: 'string',
+  ConfigType.integer: 'integer',
+  ConfigType.double: 'double',
+  ConfigType.boolean: 'boolean',
+  ConfigType.json: 'json',
+  ConfigType.array: 'array',
+  ConfigType.object: 'object',
+};
+
+ConfigCategory _$ConfigCategoryFromJson(Map<String, dynamic> json) =>
+    ConfigCategory(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      displayName: json['displayName'] as String,
+      description: json['description'] as String?,
+      icon: json['icon'] as String?,
+      sortOrder: (json['sortOrder'] as num?)?.toInt() ?? 0,
+      isActive: json['isActive'] as bool? ?? true,
+      configs: (json['configs'] as List<dynamic>?)
+          ?.map((e) => SystemConfig.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ConfigCategoryToJson(ConfigCategory instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'displayName': instance.displayName,
+      'description': instance.description,
+      'icon': instance.icon,
+      'sortOrder': instance.sortOrder,
+      'isActive': instance.isActive,
+      'configs': instance.configs,
+    };
+
+ConfigHistory _$ConfigHistoryFromJson(Map<String, dynamic> json) =>
+    ConfigHistory(
+      id: (json['id'] as num?)?.toInt(),
+      configKey: json['configKey'] as String,
+      oldValue: json['oldValue'] as String,
+      newValue: json['newValue'] as String,
+      changedBy: (json['changedBy'] as num).toInt(),
+      changedAt: DateTime.parse(json['changedAt'] as String),
+      reason: json['reason'] as String?,
+      ipAddress: json['ipAddress'] as String?,
+    );
+
+Map<String, dynamic> _$ConfigHistoryToJson(ConfigHistory instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'configKey': instance.configKey,
+      'oldValue': instance.oldValue,
+      'newValue': instance.newValue,
+      'changedBy': instance.changedBy,
+      'changedAt': instance.changedAt.toIso8601String(),
+      'reason': instance.reason,
+      'ipAddress': instance.ipAddress,
+    };
+
+FeatureFlag _$FeatureFlagFromJson(Map<String, dynamic> json) => FeatureFlag(
+      id: (json['id'] as num?)?.toInt(),
+      flagKey: json['flagKey'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      isEnabled: json['isEnabled'] as bool? ?? false,
+      rolloutPercentage: (json['rolloutPercentage'] as num?)?.toDouble() ?? 0.0,
+      conditions: json['conditions'] as Map<String, dynamic>?,
+      targetUserIds: (json['targetUserIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      targetUserTypes: (json['targetUserTypes'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      createdBy: (json['createdBy'] as num).toInt(),
+      expiresAt: json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
+      environment: json['environment'] as String?,
+    );
+
+Map<String, dynamic> _$FeatureFlagToJson(FeatureFlag instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'flagKey': instance.flagKey,
+      'name': instance.name,
+      'description': instance.description,
+      'isEnabled': instance.isEnabled,
+      'rolloutPercentage': instance.rolloutPercentage,
+      'conditions': instance.conditions,
+      'targetUserIds': instance.targetUserIds,
+      'targetUserTypes': instance.targetUserTypes,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdBy': instance.createdBy,
+      'expiresAt': instance.expiresAt?.toIso8601String(),
+      'environment': instance.environment,
+    };
+
+SystemHealth _$SystemHealthFromJson(Map<String, dynamic> json) => SystemHealth(
+      id: (json['id'] as num?)?.toInt(),
+      overallStatus: $enumDecode(_$HealthStatusEnumMap, json['overallStatus']),
+      services: (json['services'] as Map<String, dynamic>?)?.map(
+            (k, e) =>
+                MapEntry(k, ServiceHealth.fromJson(e as Map<String, dynamic>)),
+          ) ??
+          const {},
+      metrics: (json['metrics'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toDouble()),
+          ) ??
+          const {},
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      version: json['version'] as String?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$SystemHealthToJson(SystemHealth instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'overallStatus': _$HealthStatusEnumMap[instance.overallStatus]!,
+      'services': instance.services,
+      'metrics': instance.metrics,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'version': instance.version,
+      'metadata': instance.metadata,
+    };
+
+const _$HealthStatusEnumMap = {
+  HealthStatus.healthy: 'healthy',
+  HealthStatus.degraded: 'degraded',
+  HealthStatus.unhealthy: 'unhealthy',
+  HealthStatus.unknown: 'unknown',
+};
+
+ServiceHealth _$ServiceHealthFromJson(Map<String, dynamic> json) =>
+    ServiceHealth(
+      id: (json['id'] as num?)?.toInt(),
+      serviceName: json['serviceName'] as String,
+      status: $enumDecode(_$HealthStatusEnumMap, json['status']),
+      message: json['message'] as String?,
+      responseTime: (json['responseTime'] as num?)?.toDouble(),
+      lastChecked: DateTime.parse(json['lastChecked'] as String),
+      details: json['details'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$ServiceHealthToJson(ServiceHealth instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'serviceName': instance.serviceName,
+      'status': _$HealthStatusEnumMap[instance.status]!,
+      'message': instance.message,
+      'responseTime': instance.responseTime,
+      'lastChecked': instance.lastChecked.toIso8601String(),
+      'details': instance.details,
+    };

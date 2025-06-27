@@ -1,0 +1,275 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Notification _$NotificationFromJson(Map<String, dynamic> json) => Notification(
+      id: (json['id'] as num?)?.toInt(),
+      notificationId: json['notificationId'] as String,
+      userId: (json['userId'] as num).toInt(),
+      type: $enumDecode(_$NotificationTypeEnumMap, json['type']),
+      title: json['title'] as String,
+      body: json['body'] as String,
+      data: json['data'] as Map<String, dynamic>?,
+      priority: $enumDecodeNullable(
+              _$NotificationPriorityEnumMap, json['priority']) ??
+          NotificationPriority.normal,
+      isRead: json['isRead'] as bool? ?? false,
+      isActionable: json['isActionable'] as bool? ?? false,
+      actions: (json['actions'] as List<dynamic>?)
+          ?.map((e) => NotificationAction.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      readAt: json['readAt'] == null
+          ? null
+          : DateTime.parse(json['readAt'] as String),
+      expiresAt: json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
+      imageUrl: json['imageUrl'] as String?,
+      deepLink: json['deepLink'] as String?,
+    );
+
+Map<String, dynamic> _$NotificationToJson(Notification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'notificationId': instance.notificationId,
+      'userId': instance.userId,
+      'type': _$NotificationTypeEnumMap[instance.type]!,
+      'title': instance.title,
+      'body': instance.body,
+      'data': instance.data,
+      'priority': _$NotificationPriorityEnumMap[instance.priority]!,
+      'isRead': instance.isRead,
+      'isActionable': instance.isActionable,
+      'actions': instance.actions,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'readAt': instance.readAt?.toIso8601String(),
+      'expiresAt': instance.expiresAt?.toIso8601String(),
+      'imageUrl': instance.imageUrl,
+      'deepLink': instance.deepLink,
+    };
+
+const _$NotificationTypeEnumMap = {
+  NotificationType.rideRequested: 'rideRequested',
+  NotificationType.rideAccepted: 'rideAccepted',
+  NotificationType.rideStarted: 'rideStarted',
+  NotificationType.rideCompleted: 'rideCompleted',
+  NotificationType.rideCancelled: 'rideCancelled',
+  NotificationType.driverArrived: 'driverArrived',
+  NotificationType.fareNegotiation: 'fareNegotiation',
+  NotificationType.paymentProcessed: 'paymentProcessed',
+  NotificationType.paymentFailed: 'paymentFailed',
+  NotificationType.refundProcessed: 'refundProcessed',
+  NotificationType.documentExpiring: 'documentExpiring',
+  NotificationType.documentRejected: 'documentRejected',
+  NotificationType.promoCode: 'promoCode',
+  NotificationType.systemMaintenance: 'systemMaintenance',
+  NotificationType.securityAlert: 'securityAlert',
+  NotificationType.accountUpdate: 'accountUpdate',
+  NotificationType.other: 'other',
+};
+
+const _$NotificationPriorityEnumMap = {
+  NotificationPriority.low: 'low',
+  NotificationPriority.normal: 'normal',
+  NotificationPriority.high: 'high',
+  NotificationPriority.urgent: 'urgent',
+};
+
+NotificationAction _$NotificationActionFromJson(Map<String, dynamic> json) =>
+    NotificationAction(
+      id: (json['id'] as num?)?.toInt(),
+      actionId: json['actionId'] as String,
+      label: json['label'] as String,
+      type: $enumDecode(_$ActionTypeEnumMap, json['type']),
+      deepLink: json['deepLink'] as String?,
+      data: json['data'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$NotificationActionToJson(NotificationAction instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'actionId': instance.actionId,
+      'label': instance.label,
+      'type': _$ActionTypeEnumMap[instance.type]!,
+      'deepLink': instance.deepLink,
+      'data': instance.data,
+    };
+
+const _$ActionTypeEnumMap = {
+  ActionType.dismiss: 'dismiss',
+  ActionType.viewRide: 'viewRide',
+  ActionType.acceptRide: 'acceptRide',
+  ActionType.declineRide: 'declineRide',
+  ActionType.navigate: 'navigate',
+  ActionType.contact: 'contact',
+  ActionType.retry: 'retry',
+  ActionType.other: 'other',
+};
+
+PushNotification _$PushNotificationFromJson(Map<String, dynamic> json) =>
+    PushNotification(
+      id: (json['id'] as num?)?.toInt(),
+      notificationId: json['notificationId'] as String,
+      targetUserIds: (json['targetUserIds'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
+      targetDeviceTokens: (json['targetDeviceTokens'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      title: json['title'] as String,
+      body: json['body'] as String,
+      data: json['data'] as Map<String, dynamic>?,
+      priority: $enumDecodeNullable(
+              _$PushNotificationPriorityEnumMap, json['priority']) ??
+          PushNotificationPriority.normal,
+      scheduledAt: DateTime.parse(json['scheduledAt'] as String),
+      sentAt: json['sentAt'] == null
+          ? null
+          : DateTime.parse(json['sentAt'] as String),
+      status: $enumDecodeNullable(
+              _$PushNotificationStatusEnumMap, json['status']) ??
+          PushNotificationStatus.pending,
+      imageUrl: json['imageUrl'] as String?,
+      actions: (json['actions'] as List<dynamic>?)
+          ?.map(
+              (e) => PushNotificationAction.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$PushNotificationToJson(PushNotification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'notificationId': instance.notificationId,
+      'targetUserIds': instance.targetUserIds,
+      'targetDeviceTokens': instance.targetDeviceTokens,
+      'title': instance.title,
+      'body': instance.body,
+      'data': instance.data,
+      'priority': _$PushNotificationPriorityEnumMap[instance.priority]!,
+      'scheduledAt': instance.scheduledAt.toIso8601String(),
+      'sentAt': instance.sentAt?.toIso8601String(),
+      'status': _$PushNotificationStatusEnumMap[instance.status]!,
+      'imageUrl': instance.imageUrl,
+      'actions': instance.actions,
+    };
+
+const _$PushNotificationPriorityEnumMap = {
+  PushNotificationPriority.min: 'min',
+  PushNotificationPriority.low: 'low',
+  PushNotificationPriority.normal: 'normal',
+  PushNotificationPriority.high: 'high',
+  PushNotificationPriority.max: 'max',
+};
+
+const _$PushNotificationStatusEnumMap = {
+  PushNotificationStatus.pending: 'pending',
+  PushNotificationStatus.sent: 'sent',
+  PushNotificationStatus.delivered: 'delivered',
+  PushNotificationStatus.failed: 'failed',
+  PushNotificationStatus.cancelled: 'cancelled',
+};
+
+PushNotificationAction _$PushNotificationActionFromJson(
+        Map<String, dynamic> json) =>
+    PushNotificationAction(
+      id: (json['id'] as num?)?.toInt(),
+      actionId: json['actionId'] as String,
+      title: json['title'] as String,
+      icon: json['icon'] as String?,
+      deepLink: json['deepLink'] as String?,
+    );
+
+Map<String, dynamic> _$PushNotificationActionToJson(
+        PushNotificationAction instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'actionId': instance.actionId,
+      'title': instance.title,
+      'icon': instance.icon,
+      'deepLink': instance.deepLink,
+    };
+
+EmailTemplate _$EmailTemplateFromJson(Map<String, dynamic> json) =>
+    EmailTemplate(
+      id: (json['id'] as num?)?.toInt(),
+      templateId: json['templateId'] as String,
+      name: json['name'] as String,
+      subject: json['subject'] as String,
+      htmlContent: json['htmlContent'] as String,
+      textContent: json['textContent'] as String?,
+      emailType: $enumDecode(_$EmailTypeEnumMap, json['emailType']),
+      defaultVariables: json['defaultVariables'] as Map<String, dynamic>?,
+      isActive: json['isActive'] as bool? ?? true,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$EmailTemplateToJson(EmailTemplate instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'templateId': instance.templateId,
+      'name': instance.name,
+      'subject': instance.subject,
+      'htmlContent': instance.htmlContent,
+      'textContent': instance.textContent,
+      'emailType': _$EmailTypeEnumMap[instance.emailType]!,
+      'defaultVariables': instance.defaultVariables,
+      'isActive': instance.isActive,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };
+
+const _$EmailTypeEnumMap = {
+  EmailType.verification: 'verification',
+  EmailType.passwordReset: 'passwordReset',
+  EmailType.rideReceipt: 'rideReceipt',
+  EmailType.welcome: 'welcome',
+  EmailType.promotional: 'promotional',
+  EmailType.notification: 'notification',
+  EmailType.support: 'support',
+  EmailType.other: 'other',
+};
+
+NotificationPreference _$NotificationPreferenceFromJson(
+        Map<String, dynamic> json) =>
+    NotificationPreference(
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['userId'] as num).toInt(),
+      pushNotificationsEnabled:
+          json['pushNotificationsEnabled'] as bool? ?? true,
+      emailNotificationsEnabled:
+          json['emailNotificationsEnabled'] as bool? ?? true,
+      smsNotificationsEnabled:
+          json['smsNotificationsEnabled'] as bool? ?? false,
+      typePreferences: (json['typePreferences'] as Map<String, dynamic>?)?.map(
+            (k, e) =>
+                MapEntry($enumDecode(_$NotificationTypeEnumMap, k), e as bool),
+          ) ??
+          const {},
+      mutedHours: (json['mutedHours'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      weekendNotifications: json['weekendNotifications'] as bool? ?? true,
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$NotificationPreferenceToJson(
+        NotificationPreference instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'pushNotificationsEnabled': instance.pushNotificationsEnabled,
+      'emailNotificationsEnabled': instance.emailNotificationsEnabled,
+      'smsNotificationsEnabled': instance.smsNotificationsEnabled,
+      'typePreferences': instance.typePreferences
+          .map((k, e) => MapEntry(_$NotificationTypeEnumMap[k]!, e)),
+      'mutedHours': instance.mutedHours,
+      'weekendNotifications': instance.weekendNotifications,
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };

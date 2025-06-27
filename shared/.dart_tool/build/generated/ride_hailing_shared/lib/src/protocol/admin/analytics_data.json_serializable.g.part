@@ -1,0 +1,250 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+AnalyticsData _$AnalyticsDataFromJson(Map<String, dynamic> json) =>
+    AnalyticsData(
+      id: (json['id'] as num?)?.toInt(),
+      metricName: json['metricName'] as String,
+      value: (json['value'] as num).toDouble(),
+      unit: json['unit'] as String?,
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      period: $enumDecode(_$AnalyticsPeriodEnumMap, json['period']),
+      dimensions: json['dimensions'] as Map<String, dynamic>?,
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      source: json['source'] as String?,
+      category: $enumDecode(_$AnalyticsCategoryEnumMap, json['category']),
+    );
+
+Map<String, dynamic> _$AnalyticsDataToJson(AnalyticsData instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'metricName': instance.metricName,
+      'value': instance.value,
+      'unit': instance.unit,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'period': _$AnalyticsPeriodEnumMap[instance.period]!,
+      'dimensions': instance.dimensions,
+      'metadata': instance.metadata,
+      'source': instance.source,
+      'category': _$AnalyticsCategoryEnumMap[instance.category]!,
+    };
+
+const _$AnalyticsPeriodEnumMap = {
+  AnalyticsPeriod.realTime: 'realTime',
+  AnalyticsPeriod.minute: 'minute',
+  AnalyticsPeriod.hour: 'hour',
+  AnalyticsPeriod.day: 'day',
+  AnalyticsPeriod.week: 'week',
+  AnalyticsPeriod.month: 'month',
+  AnalyticsPeriod.quarter: 'quarter',
+  AnalyticsPeriod.year: 'year',
+};
+
+const _$AnalyticsCategoryEnumMap = {
+  AnalyticsCategory.rides: 'rides',
+  AnalyticsCategory.users: 'users',
+  AnalyticsCategory.drivers: 'drivers',
+  AnalyticsCategory.revenue: 'revenue',
+  AnalyticsCategory.performance: 'performance',
+  AnalyticsCategory.system: 'system',
+  AnalyticsCategory.marketing: 'marketing',
+  AnalyticsCategory.support: 'support',
+};
+
+AnalyticsMetric _$AnalyticsMetricFromJson(Map<String, dynamic> json) =>
+    AnalyticsMetric(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      displayName: json['displayName'] as String,
+      description: json['description'] as String?,
+      category: $enumDecode(_$AnalyticsCategoryEnumMap, json['category']),
+      type: $enumDecode(_$MetricTypeEnumMap, json['type']),
+      unit: json['unit'] as String?,
+      configuration: json['configuration'] as Map<String, dynamic>?,
+      isActive: json['isActive'] as bool? ?? true,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$AnalyticsMetricToJson(AnalyticsMetric instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'displayName': instance.displayName,
+      'description': instance.description,
+      'category': _$AnalyticsCategoryEnumMap[instance.category]!,
+      'type': _$MetricTypeEnumMap[instance.type]!,
+      'unit': instance.unit,
+      'configuration': instance.configuration,
+      'isActive': instance.isActive,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };
+
+const _$MetricTypeEnumMap = {
+  MetricType.counter: 'counter',
+  MetricType.gauge: 'gauge',
+  MetricType.histogram: 'histogram',
+  MetricType.summary: 'summary',
+  MetricType.rate: 'rate',
+  MetricType.percentage: 'percentage',
+};
+
+AnalyticsDashboard _$AnalyticsDashboardFromJson(Map<String, dynamic> json) =>
+    AnalyticsDashboard(
+      id: (json['id'] as num?)?.toInt(),
+      dashboardId: json['dashboardId'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      widgets: (json['widgets'] as List<dynamic>?)
+              ?.map((e) => DashboardWidget.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      layout: json['layout'] as Map<String, dynamic>?,
+      isPublic: json['isPublic'] as bool? ?? false,
+      createdBy: (json['createdBy'] as num).toInt(),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$AnalyticsDashboardToJson(AnalyticsDashboard instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'dashboardId': instance.dashboardId,
+      'name': instance.name,
+      'description': instance.description,
+      'widgets': instance.widgets,
+      'layout': instance.layout,
+      'isPublic': instance.isPublic,
+      'createdBy': instance.createdBy,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'tags': instance.tags,
+    };
+
+DashboardWidget _$DashboardWidgetFromJson(Map<String, dynamic> json) =>
+    DashboardWidget(
+      id: (json['id'] as num?)?.toInt(),
+      widgetId: json['widgetId'] as String,
+      title: json['title'] as String,
+      type: $enumDecode(_$WidgetTypeEnumMap, json['type']),
+      metricName: json['metricName'] as String,
+      configuration: json['configuration'] as Map<String, dynamic>? ?? const {},
+      filters: json['filters'] as Map<String, dynamic>?,
+      refreshInterval: (json['refreshInterval'] as num?)?.toInt(),
+      positionX: (json['positionX'] as num).toInt(),
+      positionY: (json['positionY'] as num).toInt(),
+      width: (json['width'] as num).toInt(),
+      height: (json['height'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$DashboardWidgetToJson(DashboardWidget instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'widgetId': instance.widgetId,
+      'title': instance.title,
+      'type': _$WidgetTypeEnumMap[instance.type]!,
+      'metricName': instance.metricName,
+      'configuration': instance.configuration,
+      'filters': instance.filters,
+      'refreshInterval': instance.refreshInterval,
+      'positionX': instance.positionX,
+      'positionY': instance.positionY,
+      'width': instance.width,
+      'height': instance.height,
+    };
+
+const _$WidgetTypeEnumMap = {
+  WidgetType.chart: 'chart',
+  WidgetType.table: 'table',
+  WidgetType.metric: 'metric',
+  WidgetType.map: 'map',
+  WidgetType.funnel: 'funnel',
+  WidgetType.heatmap: 'heatmap',
+  WidgetType.gauge: 'gauge',
+  WidgetType.progress: 'progress',
+};
+
+AnalyticsQuery _$AnalyticsQueryFromJson(Map<String, dynamic> json) =>
+    AnalyticsQuery(
+      id: (json['id'] as num?)?.toInt(),
+      queryId: json['queryId'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      query: json['query'] as String,
+      queryType: $enumDecode(_$QueryTypeEnumMap, json['queryType']),
+      parameters: json['parameters'] as Map<String, dynamic>?,
+      requiredPermissions: (json['requiredPermissions'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      isCached: json['isCached'] as bool? ?? true,
+      cacheTimeoutSeconds:
+          (json['cacheTimeoutSeconds'] as num?)?.toInt() ?? 300,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdBy: (json['createdBy'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$AnalyticsQueryToJson(AnalyticsQuery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'queryId': instance.queryId,
+      'name': instance.name,
+      'description': instance.description,
+      'query': instance.query,
+      'queryType': _$QueryTypeEnumMap[instance.queryType]!,
+      'parameters': instance.parameters,
+      'requiredPermissions': instance.requiredPermissions,
+      'isCached': instance.isCached,
+      'cacheTimeoutSeconds': instance.cacheTimeoutSeconds,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'createdBy': instance.createdBy,
+    };
+
+const _$QueryTypeEnumMap = {
+  QueryType.sql: 'sql',
+  QueryType.mongodb: 'mongodb',
+  QueryType.aggregation: 'aggregation',
+  QueryType.custom: 'custom',
+};
+
+KpiMetric _$KpiMetricFromJson(Map<String, dynamic> json) => KpiMetric(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      currentValue: (json['currentValue'] as num).toDouble(),
+      previousValue: (json['previousValue'] as num?)?.toDouble(),
+      targetValue: (json['targetValue'] as num?)?.toDouble(),
+      unit: json['unit'] as String?,
+      trend: $enumDecode(_$KpiTrendEnumMap, json['trend']),
+      changePercentage: (json['changePercentage'] as num?)?.toDouble(),
+      calculatedAt: DateTime.parse(json['calculatedAt'] as String),
+      period: $enumDecode(_$AnalyticsPeriodEnumMap, json['period']),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$KpiMetricToJson(KpiMetric instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'currentValue': instance.currentValue,
+      'previousValue': instance.previousValue,
+      'targetValue': instance.targetValue,
+      'unit': instance.unit,
+      'trend': _$KpiTrendEnumMap[instance.trend]!,
+      'changePercentage': instance.changePercentage,
+      'calculatedAt': instance.calculatedAt.toIso8601String(),
+      'period': _$AnalyticsPeriodEnumMap[instance.period]!,
+      'metadata': instance.metadata,
+    };
+
+const _$KpiTrendEnumMap = {
+  KpiTrend.up: 'up',
+  KpiTrend.down: 'down',
+  KpiTrend.stable: 'stable',
+  KpiTrend.unknown: 'unknown',
+};

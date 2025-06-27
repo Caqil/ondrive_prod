@@ -1,0 +1,116 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+DriverDocument _$DriverDocumentFromJson(Map<String, dynamic> json) =>
+    DriverDocument(
+      id: (json['id'] as num?)?.toInt(),
+      driverId: (json['driverId'] as num).toInt(),
+      documentType: $enumDecode(_$DocumentTypeEnumMap, json['documentType']),
+      documentNumber: json['documentNumber'] as String,
+      expiryDate: json['expiryDate'] == null
+          ? null
+          : DateTime.parse(json['expiryDate'] as String),
+      issuingAuthority: json['issuingAuthority'] as String?,
+      status: $enumDecodeNullable(_$DocumentStatusEnumMap, json['status']) ??
+          DocumentStatus.pending,
+      fileUrl: json['fileUrl'] as String?,
+      fileName: json['fileName'] as String?,
+      uploadedAt: DateTime.parse(json['uploadedAt'] as String),
+      verifiedAt: json['verifiedAt'] == null
+          ? null
+          : DateTime.parse(json['verifiedAt'] as String),
+      verifiedBy: (json['verifiedBy'] as num?)?.toInt(),
+      rejectionReason: json['rejectionReason'] as String?,
+      notes:
+          (json['notes'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$DriverDocumentToJson(DriverDocument instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'driverId': instance.driverId,
+      'documentType': _$DocumentTypeEnumMap[instance.documentType]!,
+      'documentNumber': instance.documentNumber,
+      'expiryDate': instance.expiryDate?.toIso8601String(),
+      'issuingAuthority': instance.issuingAuthority,
+      'status': _$DocumentStatusEnumMap[instance.status]!,
+      'fileUrl': instance.fileUrl,
+      'fileName': instance.fileName,
+      'uploadedAt': instance.uploadedAt.toIso8601String(),
+      'verifiedAt': instance.verifiedAt?.toIso8601String(),
+      'verifiedBy': instance.verifiedBy,
+      'rejectionReason': instance.rejectionReason,
+      'notes': instance.notes,
+    };
+
+const _$DocumentTypeEnumMap = {
+  DocumentType.drivingLicense: 'drivingLicense',
+  DocumentType.nationalId: 'nationalId',
+  DocumentType.passport: 'passport',
+  DocumentType.proofOfAddress: 'proofOfAddress',
+  DocumentType.backgroundCheck: 'backgroundCheck',
+  DocumentType.medicalCertificate: 'medicalCertificate',
+  DocumentType.photo: 'photo',
+};
+
+const _$DocumentStatusEnumMap = {
+  DocumentStatus.pending: 'pending',
+  DocumentStatus.submitted: 'submitted',
+  DocumentStatus.underReview: 'underReview',
+  DocumentStatus.approved: 'approved',
+  DocumentStatus.rejected: 'rejected',
+  DocumentStatus.expired: 'expired',
+  DocumentStatus.requiresUpdate: 'requiresUpdate',
+};
+
+VehicleDocument _$VehicleDocumentFromJson(Map<String, dynamic> json) =>
+    VehicleDocument(
+      id: (json['id'] as num?)?.toInt(),
+      vehicleId: (json['vehicleId'] as num).toInt(),
+      documentType:
+          $enumDecode(_$VehicleDocumentTypeEnumMap, json['documentType']),
+      documentNumber: json['documentNumber'] as String,
+      expiryDate: json['expiryDate'] == null
+          ? null
+          : DateTime.parse(json['expiryDate'] as String),
+      issuingAuthority: json['issuingAuthority'] as String?,
+      status: $enumDecodeNullable(_$DocumentStatusEnumMap, json['status']) ??
+          DocumentStatus.pending,
+      fileUrl: json['fileUrl'] as String?,
+      fileName: json['fileName'] as String?,
+      uploadedAt: DateTime.parse(json['uploadedAt'] as String),
+      verifiedAt: json['verifiedAt'] == null
+          ? null
+          : DateTime.parse(json['verifiedAt'] as String),
+      verifiedBy: (json['verifiedBy'] as num?)?.toInt(),
+      rejectionReason: json['rejectionReason'] as String?,
+      notes:
+          (json['notes'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    );
+
+Map<String, dynamic> _$VehicleDocumentToJson(VehicleDocument instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'vehicleId': instance.vehicleId,
+      'documentType': _$VehicleDocumentTypeEnumMap[instance.documentType]!,
+      'documentNumber': instance.documentNumber,
+      'expiryDate': instance.expiryDate?.toIso8601String(),
+      'issuingAuthority': instance.issuingAuthority,
+      'status': _$DocumentStatusEnumMap[instance.status]!,
+      'fileUrl': instance.fileUrl,
+      'fileName': instance.fileName,
+      'uploadedAt': instance.uploadedAt.toIso8601String(),
+      'verifiedAt': instance.verifiedAt?.toIso8601String(),
+      'verifiedBy': instance.verifiedBy,
+      'rejectionReason': instance.rejectionReason,
+      'notes': instance.notes,
+    };
+
+const _$VehicleDocumentTypeEnumMap = {
+  VehicleDocumentType.registration: 'registration',
+  VehicleDocumentType.insurance: 'insurance',
+  VehicleDocumentType.inspection: 'inspection',
+  VehicleDocumentType.permit: 'permit',
+  VehicleDocumentType.photo: 'photo',
+};

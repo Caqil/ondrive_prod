@@ -1,0 +1,163 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Waypoint _$WaypointFromJson(Map<String, dynamic> json) => Waypoint(
+      id: (json['id'] as num?)?.toInt(),
+      waypointId: json['waypointId'] as String,
+      location:
+          LocationPoint.fromJson(json['location'] as Map<String, dynamic>),
+      type: $enumDecode(_$WaypointTypeEnumMap, json['type']),
+      sequenceOrder: (json['sequenceOrder'] as num).toInt(),
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      instructions: json['instructions'] as String?,
+      scheduledTime: json['scheduledTime'] == null
+          ? null
+          : DateTime.parse(json['scheduledTime'] as String),
+      actualTime: json['actualTime'] == null
+          ? null
+          : DateTime.parse(json['actualTime'] as String),
+      estimatedDuration: (json['estimatedDuration'] as num?)?.toInt(),
+      actualDuration: (json['actualDuration'] as num?)?.toInt(),
+      passengers: (json['passengers'] as List<dynamic>?)
+          ?.map((e) => WaypointPassenger.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      contactInfo: json['contactInfo'] as String?,
+      accessCode: json['accessCode'] as String?,
+      status: $enumDecodeNullable(_$WaypointStatusEnumMap, json['status']) ??
+          WaypointStatus.pending,
+      arrivedAt: json['arrivedAt'] == null
+          ? null
+          : DateTime.parse(json['arrivedAt'] as String),
+      completedAt: json['completedAt'] == null
+          ? null
+          : DateTime.parse(json['completedAt'] as String),
+      notes: json['notes'] as String?,
+      isRequired: json['isRequired'] as bool? ?? true,
+      allowsSkip: json['allowsSkip'] as bool? ?? false,
+      maxWaitTime: (json['maxWaitTime'] as num?)?.toInt(),
+      additionalFee: (json['additionalFee'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$WaypointToJson(Waypoint instance) => <String, dynamic>{
+      'id': instance.id,
+      'waypointId': instance.waypointId,
+      'location': instance.location,
+      'type': _$WaypointTypeEnumMap[instance.type]!,
+      'sequenceOrder': instance.sequenceOrder,
+      'name': instance.name,
+      'description': instance.description,
+      'instructions': instance.instructions,
+      'scheduledTime': instance.scheduledTime?.toIso8601String(),
+      'actualTime': instance.actualTime?.toIso8601String(),
+      'estimatedDuration': instance.estimatedDuration,
+      'actualDuration': instance.actualDuration,
+      'passengers': instance.passengers,
+      'contactInfo': instance.contactInfo,
+      'accessCode': instance.accessCode,
+      'status': _$WaypointStatusEnumMap[instance.status]!,
+      'arrivedAt': instance.arrivedAt?.toIso8601String(),
+      'completedAt': instance.completedAt?.toIso8601String(),
+      'notes': instance.notes,
+      'isRequired': instance.isRequired,
+      'allowsSkip': instance.allowsSkip,
+      'maxWaitTime': instance.maxWaitTime,
+      'additionalFee': instance.additionalFee,
+    };
+
+const _$WaypointTypeEnumMap = {
+  WaypointType.pickup: 'pickup',
+  WaypointType.dropoff: 'dropoff',
+  WaypointType.stop: 'stop',
+  WaypointType.waypoint: 'waypoint',
+  WaypointType.checkpoint: 'checkpoint',
+};
+
+const _$WaypointStatusEnumMap = {
+  WaypointStatus.pending: 'pending',
+  WaypointStatus.inProgress: 'inProgress',
+  WaypointStatus.completed: 'completed',
+  WaypointStatus.skipped: 'skipped',
+  WaypointStatus.failed: 'failed',
+};
+
+WaypointPassenger _$WaypointPassengerFromJson(Map<String, dynamic> json) =>
+    WaypointPassenger(
+      id: (json['id'] as num?)?.toInt(),
+      passengerId: (json['passengerId'] as num?)?.toInt(),
+      name: json['name'] as String,
+      phone: json['phone'] as String?,
+      action: $enumDecode(_$PassengerActionEnumMap, json['action']),
+      notes: json['notes'] as String?,
+      isPresent: json['isPresent'] as bool? ?? false,
+      confirmedAt: json['confirmedAt'] == null
+          ? null
+          : DateTime.parse(json['confirmedAt'] as String),
+    );
+
+Map<String, dynamic> _$WaypointPassengerToJson(WaypointPassenger instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'passengerId': instance.passengerId,
+      'name': instance.name,
+      'phone': instance.phone,
+      'action': _$PassengerActionEnumMap[instance.action]!,
+      'notes': instance.notes,
+      'isPresent': instance.isPresent,
+      'confirmedAt': instance.confirmedAt?.toIso8601String(),
+    };
+
+const _$PassengerActionEnumMap = {
+  PassengerAction.pickup: 'pickup',
+  PassengerAction.dropoff: 'dropoff',
+};
+
+RouteOptimization _$RouteOptimizationFromJson(Map<String, dynamic> json) =>
+    RouteOptimization(
+      id: (json['id'] as num?)?.toInt(),
+      routeId: json['routeId'] as String,
+      originalWaypoints: (json['originalWaypoints'] as List<dynamic>)
+          .map((e) => Waypoint.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      optimizedWaypoints: (json['optimizedWaypoints'] as List<dynamic>)
+          .map((e) => Waypoint.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      goal: $enumDecode(_$OptimizationGoalEnumMap, json['goal']),
+      originalDistance: (json['originalDistance'] as num).toDouble(),
+      optimizedDistance: (json['optimizedDistance'] as num).toDouble(),
+      originalDuration: (json['originalDuration'] as num).toInt(),
+      optimizedDuration: (json['optimizedDuration'] as num).toInt(),
+      distanceSaved: (json['distanceSaved'] as num).toDouble(),
+      timeSaved: (json['timeSaved'] as num).toInt(),
+      fuelSaved: (json['fuelSaved'] as num?)?.toDouble() ?? 0.0,
+      algorithm: json['algorithm'] as String,
+      optimizedAt: DateTime.parse(json['optimizedAt'] as String),
+      optimizationData: json['optimizationData'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$RouteOptimizationToJson(RouteOptimization instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'routeId': instance.routeId,
+      'originalWaypoints': instance.originalWaypoints,
+      'optimizedWaypoints': instance.optimizedWaypoints,
+      'goal': _$OptimizationGoalEnumMap[instance.goal]!,
+      'originalDistance': instance.originalDistance,
+      'optimizedDistance': instance.optimizedDistance,
+      'originalDuration': instance.originalDuration,
+      'optimizedDuration': instance.optimizedDuration,
+      'distanceSaved': instance.distanceSaved,
+      'timeSaved': instance.timeSaved,
+      'fuelSaved': instance.fuelSaved,
+      'algorithm': instance.algorithm,
+      'optimizedAt': instance.optimizedAt.toIso8601String(),
+      'optimizationData': instance.optimizationData,
+    };
+
+const _$OptimizationGoalEnumMap = {
+  OptimizationGoal.shortestDistance: 'shortestDistance',
+  OptimizationGoal.shortestTime: 'shortestTime',
+  OptimizationGoal.leastFuel: 'leastFuel',
+  OptimizationGoal.balanced: 'balanced',
+};

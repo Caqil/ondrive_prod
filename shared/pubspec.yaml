@@ -1,0 +1,55 @@
+name: ride_hailing_shared
+description: Shared protocol definitions and models for the ride-hailing application
+version: 1.0.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  # Core Serverpod dependencies
+  serverpod: ^2.1.0
+  serverpod_serialization: ^2.1.0
+
+  # JSON serialization
+  json_annotation: ^4.8.1
+
+  # Utility packages
+  meta: ^1.9.1
+  collection: ^1.18.0
+
+dev_dependencies:
+  # Build tools
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+
+  # Testing
+  test: ^1.24.0
+  mockito: ^5.4.2
+
+  # Linting
+  lints: ^3.0.0
+
+# Configuration for build_runner
+builders:
+  json_serializable:
+    options:
+      # Generate both fromJson and toJson methods
+      explicit_to_json: true
+      # Include fields with null values in JSON
+      include_if_null: false
+      # Use snake_case for JSON keys
+      field_rename: none
+      # Generate constructors with named parameters
+      constructor_name: ""
+      # Check for required parameters
+      checked: true
+      # Create a reference for nested objects
+      create_factory: true
+      # Disallow unrecognized keys
+      disallow_unrecognized_keys: false
+      # Any field annotation
+      any_map: false
+      # Generic argument factories
+      generic_argument_factories: true
+      # Include JSON key annotations
+      create_field_map: true

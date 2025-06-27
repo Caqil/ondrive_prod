@@ -1,0 +1,334 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'payment.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
+      id: (json['id'] as num?)?.toInt(),
+      paymentId: json['paymentId'] as String,
+      rideId: json['rideId'] as String,
+      passengerId: (json['passengerId'] as num).toInt(),
+      driverId: (json['driverId'] as num?)?.toInt(),
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      paymentMethod:
+          PaymentMethod.fromJson(json['paymentMethod'] as Map<String, dynamic>),
+      status: $enumDecodeNullable(_$PaymentStatusEnumMap, json['status']) ??
+          PaymentStatus.pending,
+      stripePaymentIntentId: json['stripePaymentIntentId'] as String?,
+      stripeChargeId: json['stripeChargeId'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      processedAt: json['processedAt'] == null
+          ? null
+          : DateTime.parse(json['processedAt'] as String),
+      completedAt: json['completedAt'] == null
+          ? null
+          : DateTime.parse(json['completedAt'] as String),
+      failureReason: json['failureReason'] as String?,
+      fareBreakdown: json['fareBreakdown'] == null
+          ? null
+          : FareBreakdown.fromJson(
+              json['fareBreakdown'] as Map<String, dynamic>),
+      refunds: (json['refunds'] as List<dynamic>?)
+          ?.map((e) => PaymentRefund.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
+      'id': instance.id,
+      'paymentId': instance.paymentId,
+      'rideId': instance.rideId,
+      'passengerId': instance.passengerId,
+      'driverId': instance.driverId,
+      'amount': instance.amount,
+      'currency': instance.currency,
+      'paymentMethod': instance.paymentMethod,
+      'status': _$PaymentStatusEnumMap[instance.status]!,
+      'stripePaymentIntentId': instance.stripePaymentIntentId,
+      'stripeChargeId': instance.stripeChargeId,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'processedAt': instance.processedAt?.toIso8601String(),
+      'completedAt': instance.completedAt?.toIso8601String(),
+      'failureReason': instance.failureReason,
+      'fareBreakdown': instance.fareBreakdown,
+      'refunds': instance.refunds,
+      'metadata': instance.metadata,
+    };
+
+const _$PaymentStatusEnumMap = {
+  PaymentStatus.pending: 'pending',
+  PaymentStatus.processing: 'processing',
+  PaymentStatus.completed: 'completed',
+  PaymentStatus.failed: 'failed',
+  PaymentStatus.cancelled: 'cancelled',
+  PaymentStatus.refunded: 'refunded',
+  PaymentStatus.partiallyRefunded: 'partiallyRefunded',
+};
+
+PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
+    PaymentMethod(
+      id: (json['id'] as num?)?.toInt(),
+      paymentMethodId: json['paymentMethodId'] as String,
+      userId: (json['userId'] as num).toInt(),
+      type: $enumDecode(_$PaymentTypeEnumMap, json['type']),
+      isDefault: json['isDefault'] as bool? ?? false,
+      isActive: json['isActive'] as bool? ?? true,
+      addedAt: DateTime.parse(json['addedAt'] as String),
+      lastUsedAt: json['lastUsedAt'] == null
+          ? null
+          : DateTime.parse(json['lastUsedAt'] as String),
+      last4: json['last4'] as String?,
+      brand: json['brand'] as String?,
+      expMonth: (json['expMonth'] as num?)?.toInt(),
+      expYear: (json['expYear'] as num?)?.toInt(),
+      fingerprint: json['fingerprint'] as String?,
+      bankName: json['bankName'] as String?,
+      accountLast4: json['accountLast4'] as String?,
+      routingNumber: json['routingNumber'] as String?,
+      walletProvider: json['walletProvider'] as String?,
+      walletEmail: json['walletEmail'] as String?,
+    );
+
+Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'paymentMethodId': instance.paymentMethodId,
+      'userId': instance.userId,
+      'type': _$PaymentTypeEnumMap[instance.type]!,
+      'isDefault': instance.isDefault,
+      'isActive': instance.isActive,
+      'addedAt': instance.addedAt.toIso8601String(),
+      'lastUsedAt': instance.lastUsedAt?.toIso8601String(),
+      'last4': instance.last4,
+      'brand': instance.brand,
+      'expMonth': instance.expMonth,
+      'expYear': instance.expYear,
+      'fingerprint': instance.fingerprint,
+      'bankName': instance.bankName,
+      'accountLast4': instance.accountLast4,
+      'routingNumber': instance.routingNumber,
+      'walletProvider': instance.walletProvider,
+      'walletEmail': instance.walletEmail,
+    };
+
+const _$PaymentTypeEnumMap = {
+  PaymentType.card: 'card',
+  PaymentType.bankAccount: 'bankAccount',
+  PaymentType.digitalWallet: 'digitalWallet',
+  PaymentType.cash: 'cash',
+  PaymentType.corporate: 'corporate',
+};
+
+FareBreakdown _$FareBreakdownFromJson(Map<String, dynamic> json) =>
+    FareBreakdown(
+      id: (json['id'] as num?)?.toInt(),
+      baseFare: (json['baseFare'] as num).toDouble(),
+      distanceFare: (json['distanceFare'] as num).toDouble(),
+      timeFare: (json['timeFare'] as num).toDouble(),
+      surgeFare: (json['surgeFare'] as num?)?.toDouble() ?? 0.0,
+      tips: (json['tips'] as num?)?.toDouble() ?? 0.0,
+      tolls: (json['tolls'] as num?)?.toDouble() ?? 0.0,
+      taxes: (json['taxes'] as num?)?.toDouble() ?? 0.0,
+      discounts: (json['discounts'] as num?)?.toDouble() ?? 0.0,
+      promoDiscount: (json['promoDiscount'] as num?)?.toDouble() ?? 0.0,
+      loyaltyDiscount: (json['loyaltyDiscount'] as num?)?.toDouble() ?? 0.0,
+      subtotal: (json['subtotal'] as num).toDouble(),
+      totalFare: (json['totalFare'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      surgeMultiplier: (json['surgeMultiplier'] as num?)?.toDouble(),
+      additionalComponents: (json['additionalComponents'] as List<dynamic>?)
+          ?.map((e) => FareComponent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$FareBreakdownToJson(FareBreakdown instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'baseFare': instance.baseFare,
+      'distanceFare': instance.distanceFare,
+      'timeFare': instance.timeFare,
+      'surgeFare': instance.surgeFare,
+      'tips': instance.tips,
+      'tolls': instance.tolls,
+      'taxes': instance.taxes,
+      'discounts': instance.discounts,
+      'promoDiscount': instance.promoDiscount,
+      'loyaltyDiscount': instance.loyaltyDiscount,
+      'subtotal': instance.subtotal,
+      'totalFare': instance.totalFare,
+      'currency': instance.currency,
+      'surgeMultiplier': instance.surgeMultiplier,
+      'additionalComponents': instance.additionalComponents,
+    };
+
+FareComponent _$FareComponentFromJson(Map<String, dynamic> json) =>
+    FareComponent(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      description: json['description'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      type: $enumDecode(_$ComponentTypeEnumMap, json['type']),
+    );
+
+Map<String, dynamic> _$FareComponentToJson(FareComponent instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'amount': instance.amount,
+      'type': _$ComponentTypeEnumMap[instance.type]!,
+    };
+
+const _$ComponentTypeEnumMap = {
+  ComponentType.fee: 'fee',
+  ComponentType.discount: 'discount',
+  ComponentType.tax: 'tax',
+  ComponentType.tip: 'tip',
+  ComponentType.other: 'other',
+};
+
+PaymentRefund _$PaymentRefundFromJson(Map<String, dynamic> json) =>
+    PaymentRefund(
+      id: (json['id'] as num?)?.toInt(),
+      refundId: json['refundId'] as String,
+      paymentId: json['paymentId'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      reason: $enumDecode(_$RefundReasonEnumMap, json['reason']),
+      status: $enumDecodeNullable(_$RefundStatusEnumMap, json['status']) ??
+          RefundStatus.pending,
+      requestedAt: DateTime.parse(json['requestedAt'] as String),
+      processedAt: json['processedAt'] == null
+          ? null
+          : DateTime.parse(json['processedAt'] as String),
+      stripeRefundId: json['stripeRefundId'] as String?,
+      notes: json['notes'] as String?,
+      processedBy: (json['processedBy'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$PaymentRefundToJson(PaymentRefund instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'refundId': instance.refundId,
+      'paymentId': instance.paymentId,
+      'amount': instance.amount,
+      'currency': instance.currency,
+      'reason': _$RefundReasonEnumMap[instance.reason]!,
+      'status': _$RefundStatusEnumMap[instance.status]!,
+      'requestedAt': instance.requestedAt.toIso8601String(),
+      'processedAt': instance.processedAt?.toIso8601String(),
+      'stripeRefundId': instance.stripeRefundId,
+      'notes': instance.notes,
+      'processedBy': instance.processedBy,
+    };
+
+const _$RefundReasonEnumMap = {
+  RefundReason.userRequested: 'userRequested',
+  RefundReason.rideCancelled: 'rideCancelled',
+  RefundReason.driverCancelled: 'driverCancelled',
+  RefundReason.systemError: 'systemError',
+  RefundReason.disputeResolution: 'disputeResolution',
+  RefundReason.other: 'other',
+};
+
+const _$RefundStatusEnumMap = {
+  RefundStatus.pending: 'pending',
+  RefundStatus.processing: 'processing',
+  RefundStatus.completed: 'completed',
+  RefundStatus.failed: 'failed',
+  RefundStatus.cancelled: 'cancelled',
+};
+
+Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
+      id: (json['id'] as num?)?.toInt(),
+      transactionId: json['transactionId'] as String,
+      userId: (json['userId'] as num).toInt(),
+      type: $enumDecode(_$TransactionTypeEnumMap, json['type']),
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      status: $enumDecodeNullable(_$TransactionStatusEnumMap, json['status']) ??
+          TransactionStatus.pending,
+      description: json['description'] as String?,
+      referenceId: json['referenceId'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      processedAt: json['processedAt'] == null
+          ? null
+          : DateTime.parse(json['processedAt'] as String),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'transactionId': instance.transactionId,
+      'userId': instance.userId,
+      'type': _$TransactionTypeEnumMap[instance.type]!,
+      'amount': instance.amount,
+      'currency': instance.currency,
+      'status': _$TransactionStatusEnumMap[instance.status]!,
+      'description': instance.description,
+      'referenceId': instance.referenceId,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'processedAt': instance.processedAt?.toIso8601String(),
+      'metadata': instance.metadata,
+    };
+
+const _$TransactionTypeEnumMap = {
+  TransactionType.ridePayment: 'ridePayment',
+  TransactionType.refund: 'refund',
+  TransactionType.tip: 'tip',
+  TransactionType.bonus: 'bonus',
+  TransactionType.commission: 'commission',
+  TransactionType.withdrawal: 'withdrawal',
+  TransactionType.topUp: 'topUp',
+  TransactionType.other: 'other',
+};
+
+const _$TransactionStatusEnumMap = {
+  TransactionStatus.pending: 'pending',
+  TransactionStatus.processing: 'processing',
+  TransactionStatus.completed: 'completed',
+  TransactionStatus.failed: 'failed',
+  TransactionStatus.cancelled: 'cancelled',
+};
+
+Commission _$CommissionFromJson(Map<String, dynamic> json) => Commission(
+      id: (json['id'] as num?)?.toInt(),
+      rideId: json['rideId'] as String,
+      driverId: (json['driverId'] as num).toInt(),
+      rideAmount: (json['rideAmount'] as num).toDouble(),
+      commissionRate: (json['commissionRate'] as num).toDouble(),
+      commissionAmount: (json['commissionAmount'] as num).toDouble(),
+      driverEarnings: (json['driverEarnings'] as num).toDouble(),
+      status: $enumDecodeNullable(_$CommissionStatusEnumMap, json['status']) ??
+          CommissionStatus.pending,
+      calculatedAt: DateTime.parse(json['calculatedAt'] as String),
+      paidAt: json['paidAt'] == null
+          ? null
+          : DateTime.parse(json['paidAt'] as String),
+    );
+
+Map<String, dynamic> _$CommissionToJson(Commission instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'rideId': instance.rideId,
+      'driverId': instance.driverId,
+      'rideAmount': instance.rideAmount,
+      'commissionRate': instance.commissionRate,
+      'commissionAmount': instance.commissionAmount,
+      'driverEarnings': instance.driverEarnings,
+      'status': _$CommissionStatusEnumMap[instance.status]!,
+      'calculatedAt': instance.calculatedAt.toIso8601String(),
+      'paidAt': instance.paidAt?.toIso8601String(),
+    };
+
+const _$CommissionStatusEnumMap = {
+  CommissionStatus.pending: 'pending',
+  CommissionStatus.calculated: 'calculated',
+  CommissionStatus.paid: 'paid',
+  CommissionStatus.disputed: 'disputed',
+};

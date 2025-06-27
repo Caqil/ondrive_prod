@@ -1,0 +1,174 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'fare_offer.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+FareOffer _$FareOfferFromJson(Map<String, dynamic> json) => FareOffer(
+      id: (json['id'] as num?)?.toInt(),
+      offerId: json['offerId'] as String,
+      negotiationId: json['negotiationId'] as String,
+      rideId: json['rideId'] as String?,
+      userId: (json['userId'] as num).toInt(),
+      userType: $enumDecode(_$UserTypeEnumMap, json['userType']),
+      amount: (json['amount'] as num).toDouble(),
+      message: json['message'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      expiresAt: json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
+      status: $enumDecodeNullable(_$FareOfferStatusEnumMap, json['status']) ??
+          FareOfferStatus.active,
+      rejectionReason: json['rejectionReason'] as String?,
+      respondedAt: json['respondedAt'] == null
+          ? null
+          : DateTime.parse(json['respondedAt'] as String),
+      respondedBy: (json['respondedBy'] as num?)?.toInt(),
+      offerType:
+          $enumDecodeNullable(_$FareOfferTypeEnumMap, json['offerType']) ??
+              FareOfferType.standard,
+      previousAmount: (json['previousAmount'] as num?)?.toDouble(),
+      isInitialOffer: json['isInitialOffer'] as bool? ?? false,
+      isCounterOffer: json['isCounterOffer'] as bool? ?? false,
+      isFinalOffer: json['isFinalOffer'] as bool? ?? false,
+      offerSequence: (json['offerSequence'] as num?)?.toInt() ?? 1,
+      isSystemGenerated: json['isSystemGenerated'] as bool? ?? false,
+      confidenceScore: (json['confidenceScore'] as num?)?.toDouble(),
+      aiContext: json['aiContext'] as Map<String, dynamic>?,
+      minimumAcceptableAmount:
+          (json['minimumAcceptableAmount'] as num?)?.toDouble(),
+      maximumAcceptableAmount:
+          (json['maximumAcceptableAmount'] as num?)?.toDouble(),
+      offerReasons: (json['offerReasons'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$FareOfferToJson(FareOffer instance) => <String, dynamic>{
+      'id': instance.id,
+      'offerId': instance.offerId,
+      'negotiationId': instance.negotiationId,
+      'rideId': instance.rideId,
+      'userId': instance.userId,
+      'userType': _$UserTypeEnumMap[instance.userType]!,
+      'amount': instance.amount,
+      'message': instance.message,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'expiresAt': instance.expiresAt?.toIso8601String(),
+      'status': _$FareOfferStatusEnumMap[instance.status]!,
+      'rejectionReason': instance.rejectionReason,
+      'respondedAt': instance.respondedAt?.toIso8601String(),
+      'respondedBy': instance.respondedBy,
+      'offerType': _$FareOfferTypeEnumMap[instance.offerType]!,
+      'previousAmount': instance.previousAmount,
+      'isInitialOffer': instance.isInitialOffer,
+      'isCounterOffer': instance.isCounterOffer,
+      'isFinalOffer': instance.isFinalOffer,
+      'offerSequence': instance.offerSequence,
+      'isSystemGenerated': instance.isSystemGenerated,
+      'confidenceScore': instance.confidenceScore,
+      'aiContext': instance.aiContext,
+      'minimumAcceptableAmount': instance.minimumAcceptableAmount,
+      'maximumAcceptableAmount': instance.maximumAcceptableAmount,
+      'offerReasons': instance.offerReasons,
+      'metadata': instance.metadata,
+    };
+
+const _$UserTypeEnumMap = {
+  UserType.passenger: 'passenger',
+  UserType.driver: 'driver',
+  UserType.admin: 'admin',
+};
+
+const _$FareOfferStatusEnumMap = {
+  FareOfferStatus.active: 'active',
+  FareOfferStatus.accepted: 'accepted',
+  FareOfferStatus.rejected: 'rejected',
+  FareOfferStatus.countered: 'countered',
+  FareOfferStatus.expired: 'expired',
+  FareOfferStatus.withdrawn: 'withdrawn',
+};
+
+const _$FareOfferTypeEnumMap = {
+  FareOfferType.standard: 'standard',
+  FareOfferType.premium: 'premium',
+  FareOfferType.discount: 'discount',
+  FareOfferType.surge: 'surge',
+  FareOfferType.promotional: 'promotional',
+};
+
+FareOfferResponse _$FareOfferResponseFromJson(Map<String, dynamic> json) =>
+    FareOfferResponse(
+      id: (json['id'] as num?)?.toInt(),
+      offerId: json['offerId'] as String,
+      action: $enumDecode(_$FareOfferActionEnumMap, json['action']),
+      counterAmount: (json['counterAmount'] as num?)?.toDouble(),
+      message: json['message'] as String?,
+      rejectionReason: json['rejectionReason'] as String?,
+      respondedAt: DateTime.parse(json['respondedAt'] as String),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$FareOfferResponseToJson(FareOfferResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'offerId': instance.offerId,
+      'action': _$FareOfferActionEnumMap[instance.action]!,
+      'counterAmount': instance.counterAmount,
+      'message': instance.message,
+      'rejectionReason': instance.rejectionReason,
+      'respondedAt': instance.respondedAt.toIso8601String(),
+      'metadata': instance.metadata,
+    };
+
+const _$FareOfferActionEnumMap = {
+  FareOfferAction.accept: 'accept',
+  FareOfferAction.reject: 'reject',
+  FareOfferAction.counter: 'counter',
+  FareOfferAction.withdraw: 'withdraw',
+};
+
+FareOfferAnalytics _$FareOfferAnalyticsFromJson(Map<String, dynamic> json) =>
+    FareOfferAnalytics(
+      id: (json['id'] as num?)?.toInt(),
+      negotiationId: json['negotiationId'] as String,
+      totalOffers: (json['totalOffers'] as num?)?.toInt() ?? 0,
+      acceptedOffers: (json['acceptedOffers'] as num?)?.toInt() ?? 0,
+      rejectedOffers: (json['rejectedOffers'] as num?)?.toInt() ?? 0,
+      expiredOffers: (json['expiredOffers'] as num?)?.toInt() ?? 0,
+      averageOfferAmount:
+          (json['averageOfferAmount'] as num?)?.toDouble() ?? 0.0,
+      finalAgreedAmount: (json['finalAgreedAmount'] as num?)?.toDouble() ?? 0.0,
+      negotiationDuration:
+          Duration(microseconds: (json['negotiationDuration'] as num).toInt()),
+      offerRounds: (json['offerRounds'] as num?)?.toInt() ?? 0,
+      wasSuccessful: json['wasSuccessful'] as bool? ?? false,
+      failureReason: json['failureReason'] as String?,
+      offerAmountHistory:
+          (json['offerAmountHistory'] as Map<String, dynamic>?)?.map(
+                (k, e) => MapEntry(k, (e as num).toDouble()),
+              ) ??
+              const {},
+      insights: json['insights'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$FareOfferAnalyticsToJson(FareOfferAnalytics instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'negotiationId': instance.negotiationId,
+      'totalOffers': instance.totalOffers,
+      'acceptedOffers': instance.acceptedOffers,
+      'rejectedOffers': instance.rejectedOffers,
+      'expiredOffers': instance.expiredOffers,
+      'averageOfferAmount': instance.averageOfferAmount,
+      'finalAgreedAmount': instance.finalAgreedAmount,
+      'negotiationDuration': instance.negotiationDuration.inMicroseconds,
+      'offerRounds': instance.offerRounds,
+      'wasSuccessful': instance.wasSuccessful,
+      'failureReason': instance.failureReason,
+      'offerAmountHistory': instance.offerAmountHistory,
+      'insights': instance.insights,
+    };

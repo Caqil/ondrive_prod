@@ -1,0 +1,75 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'api_response.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ApiResponse<T> _$ApiResponseFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    ApiResponse<T>(
+      id: (json['id'] as num?)?.toInt(),
+      success: json['success'] as bool,
+      message: json['message'] as String,
+      data: _$nullableGenericFromJson(json['data'], fromJsonT),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      requestId: json['requestId'] as String?,
+      statusCode: (json['statusCode'] as num?)?.toInt(),
+      pagination: json['pagination'] == null
+          ? null
+          : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
+      validationErrors: (json['validationErrors'] as List<dynamic>?)
+          ?.map((e) => ValidationError.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ApiResponseToJson<T>(
+  ApiResponse<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'success': instance.success,
+      'message': instance.message,
+      'data': _$nullableGenericToJson(instance.data, toJsonT),
+      'metadata': instance.metadata,
+      'timestamp': instance.timestamp.toIso8601String(),
+      'requestId': instance.requestId,
+      'statusCode': instance.statusCode,
+      'pagination': instance.pagination,
+      'validationErrors': instance.validationErrors,
+    };
+
+T? _$nullableGenericFromJson<T>(
+  Object? input,
+  T Function(Object? json) fromJson,
+) =>
+    input == null ? null : fromJson(input);
+
+Object? _$nullableGenericToJson<T>(
+  T? input,
+  Object? Function(T value) toJson,
+) =>
+    input == null ? null : toJson(input);
+
+ValidationError _$ValidationErrorFromJson(Map<String, dynamic> json) =>
+    ValidationError(
+      id: (json['id'] as num?)?.toInt(),
+      field: json['field'] as String,
+      message: json['message'] as String,
+      value: json['value'],
+      code: json['code'] as String?,
+    );
+
+Map<String, dynamic> _$ValidationErrorToJson(ValidationError instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'field': instance.field,
+      'message': instance.message,
+      'value': instance.value,
+      'code': instance.code,
+    };

@@ -1,0 +1,195 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'driver_profile.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+DriverProfile _$DriverProfileFromJson(Map<String, dynamic> json) =>
+    DriverProfile(
+      id: (json['id'] as num?)?.toInt(),
+      userId: (json['userId'] as num).toInt(),
+      licenseNumber: json['licenseNumber'] as String,
+      licenseExpiryDate: DateTime.parse(json['licenseExpiryDate'] as String),
+      licenseIssuingCountry: json['licenseIssuingCountry'] as String,
+      licenseIssuingState: json['licenseIssuingState'] as String,
+      status: $enumDecodeNullable(_$DriverStatusEnumMap, json['status']) ??
+          DriverStatus.pending,
+      verificationStatus: $enumDecodeNullable(
+              _$DriverVerificationStatusEnumMap, json['verificationStatus']) ??
+          DriverVerificationStatus.pending,
+      rating: (json['rating'] as num?)?.toDouble(),
+      totalRides: (json['totalRides'] as num?)?.toInt() ?? 0,
+      totalEarnings: (json['totalEarnings'] as num?)?.toInt() ?? 0,
+      onboardingCompletedAt: json['onboardingCompletedAt'] == null
+          ? null
+          : DateTime.parse(json['onboardingCompletedAt'] as String),
+      lastActiveAt: json['lastActiveAt'] == null
+          ? null
+          : DateTime.parse(json['lastActiveAt'] as String),
+      isAvailable: json['isAvailable'] as bool? ?? false,
+      isOnline: json['isOnline'] as bool? ?? false,
+      serviceTypes: (json['serviceTypes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      operatingCities: (json['operatingCities'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      preferences: DriverPreferences.fromJson(
+          json['preferences'] as Map<String, dynamic>),
+      documents: (json['documents'] as List<dynamic>?)
+              ?.map((e) => DriverDocument.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      vehicles: (json['vehicles'] as List<dynamic>?)
+              ?.map((e) => Vehicle.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      bankingInfo: json['bankingInfo'] == null
+          ? null
+          : BankingInfo.fromJson(json['bankingInfo'] as Map<String, dynamic>),
+      statistics: json['statistics'] == null
+          ? null
+          : DriverStatistics.fromJson(
+              json['statistics'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DriverProfileToJson(DriverProfile instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'licenseNumber': instance.licenseNumber,
+      'licenseExpiryDate': instance.licenseExpiryDate.toIso8601String(),
+      'licenseIssuingCountry': instance.licenseIssuingCountry,
+      'licenseIssuingState': instance.licenseIssuingState,
+      'status': _$DriverStatusEnumMap[instance.status]!,
+      'verificationStatus':
+          _$DriverVerificationStatusEnumMap[instance.verificationStatus]!,
+      'rating': instance.rating,
+      'totalRides': instance.totalRides,
+      'totalEarnings': instance.totalEarnings,
+      'onboardingCompletedAt':
+          instance.onboardingCompletedAt?.toIso8601String(),
+      'lastActiveAt': instance.lastActiveAt?.toIso8601String(),
+      'isAvailable': instance.isAvailable,
+      'isOnline': instance.isOnline,
+      'serviceTypes': instance.serviceTypes,
+      'operatingCities': instance.operatingCities,
+      'preferences': instance.preferences,
+      'documents': instance.documents,
+      'vehicles': instance.vehicles,
+      'bankingInfo': instance.bankingInfo,
+      'statistics': instance.statistics,
+    };
+
+const _$DriverStatusEnumMap = {
+  DriverStatus.pending: 'pending',
+  DriverStatus.active: 'active',
+  DriverStatus.inactive: 'inactive',
+  DriverStatus.suspended: 'suspended',
+  DriverStatus.blocked: 'blocked',
+  DriverStatus.onboarding: 'onboarding',
+};
+
+const _$DriverVerificationStatusEnumMap = {
+  DriverVerificationStatus.pending: 'pending',
+  DriverVerificationStatus.documentsSubmitted: 'documentsSubmitted',
+  DriverVerificationStatus.underReview: 'underReview',
+  DriverVerificationStatus.approved: 'approved',
+  DriverVerificationStatus.rejected: 'rejected',
+  DriverVerificationStatus.requiresUpdate: 'requiresUpdate',
+};
+
+DriverPreferences _$DriverPreferencesFromJson(Map<String, dynamic> json) =>
+    DriverPreferences(
+      id: (json['id'] as num?)?.toInt(),
+      autoAcceptRides: json['autoAcceptRides'] as bool? ?? false,
+      maxRideDistance: (json['maxRideDistance'] as num?)?.toInt() ?? 50,
+      maxRideDuration: (json['maxRideDuration'] as num?)?.toInt() ?? 120,
+      acceptLongRides: json['acceptLongRides'] as bool? ?? true,
+      acceptPoolRides: json['acceptPoolRides'] as bool? ?? true,
+      acceptPetRides: json['acceptPetRides'] as bool? ?? false,
+      acceptLuggageRides: json['acceptLuggageRides'] as bool? ?? true,
+      preferredRideTypes: (json['preferredRideTypes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      workingHours: json['workingHours'] as Map<String, dynamic>? ?? const {},
+      workWeekends: json['workWeekends'] as bool? ?? true,
+      maxDailyRides: (json['maxDailyRides'] as num?)?.toInt() ?? 20,
+      minimumFareAmount: (json['minimumFareAmount'] as num?)?.toDouble() ?? 5.0,
+    );
+
+Map<String, dynamic> _$DriverPreferencesToJson(DriverPreferences instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'autoAcceptRides': instance.autoAcceptRides,
+      'maxRideDistance': instance.maxRideDistance,
+      'maxRideDuration': instance.maxRideDuration,
+      'acceptLongRides': instance.acceptLongRides,
+      'acceptPoolRides': instance.acceptPoolRides,
+      'acceptPetRides': instance.acceptPetRides,
+      'acceptLuggageRides': instance.acceptLuggageRides,
+      'preferredRideTypes': instance.preferredRideTypes,
+      'workingHours': instance.workingHours,
+      'workWeekends': instance.workWeekends,
+      'maxDailyRides': instance.maxDailyRides,
+      'minimumFareAmount': instance.minimumFareAmount,
+    };
+
+DriverStatistics _$DriverStatisticsFromJson(Map<String, dynamic> json) =>
+    DriverStatistics(
+      id: (json['id'] as num?)?.toInt(),
+      driverId: (json['driverId'] as num).toInt(),
+      totalRidesCompleted: (json['totalRidesCompleted'] as num?)?.toInt() ?? 0,
+      totalRidesCancelled: (json['totalRidesCancelled'] as num?)?.toInt() ?? 0,
+      totalRidesDeclined: (json['totalRidesDeclined'] as num?)?.toInt() ?? 0,
+      totalDistanceDriven:
+          (json['totalDistanceDriven'] as num?)?.toDouble() ?? 0.0,
+      totalDrivingTime: (json['totalDrivingTime'] as num?)?.toInt() ?? 0,
+      totalEarnings: (json['totalEarnings'] as num?)?.toDouble() ?? 0.0,
+      averageRating: (json['averageRating'] as num?)?.toDouble() ?? 0.0,
+      totalRatings: (json['totalRatings'] as num?)?.toInt() ?? 0,
+      fiveStarRatings: (json['fiveStarRatings'] as num?)?.toInt() ?? 0,
+      fourStarRatings: (json['fourStarRatings'] as num?)?.toInt() ?? 0,
+      threeStarRatings: (json['threeStarRatings'] as num?)?.toInt() ?? 0,
+      twoStarRatings: (json['twoStarRatings'] as num?)?.toInt() ?? 0,
+      oneStarRatings: (json['oneStarRatings'] as num?)?.toInt() ?? 0,
+      acceptanceRate: (json['acceptanceRate'] as num?)?.toDouble() ?? 0.0,
+      cancellationRate: (json['cancellationRate'] as num?)?.toDouble() ?? 0.0,
+      averageResponseTime:
+          (json['averageResponseTime'] as num?)?.toDouble() ?? 0.0,
+      lastUpdated: json['lastUpdated'] == null
+          ? null
+          : DateTime.parse(json['lastUpdated'] as String),
+      monthlyStats: json['monthlyStats'] as Map<String, dynamic>? ?? const {},
+      weeklyStats: json['weeklyStats'] as Map<String, dynamic>? ?? const {},
+    );
+
+Map<String, dynamic> _$DriverStatisticsToJson(DriverStatistics instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'driverId': instance.driverId,
+      'totalRidesCompleted': instance.totalRidesCompleted,
+      'totalRidesCancelled': instance.totalRidesCancelled,
+      'totalRidesDeclined': instance.totalRidesDeclined,
+      'totalDistanceDriven': instance.totalDistanceDriven,
+      'totalDrivingTime': instance.totalDrivingTime,
+      'totalEarnings': instance.totalEarnings,
+      'averageRating': instance.averageRating,
+      'totalRatings': instance.totalRatings,
+      'fiveStarRatings': instance.fiveStarRatings,
+      'fourStarRatings': instance.fourStarRatings,
+      'threeStarRatings': instance.threeStarRatings,
+      'twoStarRatings': instance.twoStarRatings,
+      'oneStarRatings': instance.oneStarRatings,
+      'acceptanceRate': instance.acceptanceRate,
+      'cancellationRate': instance.cancellationRate,
+      'averageResponseTime': instance.averageResponseTime,
+      'lastUpdated': instance.lastUpdated?.toIso8601String(),
+      'monthlyStats': instance.monthlyStats,
+      'weeklyStats': instance.weeklyStats,
+    };

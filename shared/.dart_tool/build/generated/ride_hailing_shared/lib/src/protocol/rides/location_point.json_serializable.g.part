@@ -1,0 +1,52 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+LocationPoint _$LocationPointFromJson(Map<String, dynamic> json) =>
+    LocationPoint(
+      id: (json['id'] as num?)?.toInt(),
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      address: json['address'] as String?,
+      name: json['name'] as String?,
+      placeId: json['placeId'] as String?,
+      city: json['city'] as String?,
+      state: json['state'] as String?,
+      country: json['country'] as String?,
+      postalCode: json['postalCode'] as String?,
+      timestamp: json['timestamp'] == null
+          ? null
+          : DateTime.parse(json['timestamp'] as String),
+      locationType:
+          $enumDecodeNullable(_$LocationTypeEnumMap, json['locationType']),
+      metadata: json['metadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$LocationPointToJson(LocationPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'address': instance.address,
+      'name': instance.name,
+      'placeId': instance.placeId,
+      'city': instance.city,
+      'state': instance.state,
+      'country': instance.country,
+      'postalCode': instance.postalCode,
+      'timestamp': instance.timestamp?.toIso8601String(),
+      'locationType': _$LocationTypeEnumMap[instance.locationType],
+      'metadata': instance.metadata,
+    };
+
+const _$LocationTypeEnumMap = {
+  LocationType.home: 'home',
+  LocationType.work: 'work',
+  LocationType.airport: 'airport',
+  LocationType.hotel: 'hotel',
+  LocationType.restaurant: 'restaurant',
+  LocationType.hospital: 'hospital',
+  LocationType.school: 'school',
+  LocationType.mall: 'mall',
+  LocationType.other: 'other',
+};

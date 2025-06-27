@@ -1,0 +1,185 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'driver_status.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+DriverStatus _$DriverStatusFromJson(Map<String, dynamic> json) => DriverStatus(
+      id: (json['id'] as num?)?.toInt(),
+      driverId: (json['driverId'] as num).toInt(),
+      availabilityStatus: $enumDecodeNullable(
+              _$DriverAvailabilityStatusEnumMap, json['availabilityStatus']) ??
+          DriverAvailabilityStatus.unavailable,
+      onlineStatus: $enumDecodeNullable(
+              _$DriverOnlineStatusEnumMap, json['onlineStatus']) ??
+          DriverOnlineStatus.offline,
+      verificationStatus: $enumDecodeNullable(
+              _$DriverVerificationStatusEnumMap, json['verificationStatus']) ??
+          DriverVerificationStatus.pending,
+      activityStatus: $enumDecodeNullable(
+              _$DriverActivityStatusEnumMap, json['activityStatus']) ??
+          DriverActivityStatus.idle,
+      lastStatusChange: DateTime.parse(json['lastStatusChange'] as String),
+      lastActiveAt: json['lastActiveAt'] == null
+          ? null
+          : DateTime.parse(json['lastActiveAt'] as String),
+      currentRideId: json['currentRideId'] as String?,
+      statusMetadata: json['statusMetadata'] as Map<String, dynamic>?,
+      workSessionStarted: json['workSessionStarted'] == null
+          ? null
+          : DateTime.parse(json['workSessionStarted'] as String),
+      workSessionDuration: json['workSessionDuration'] == null
+          ? null
+          : Duration(
+              microseconds: (json['workSessionDuration'] as num).toInt()),
+      ridesCompletedToday: (json['ridesCompletedToday'] as num?)?.toInt() ?? 0,
+      earningsToday: (json['earningsToday'] as num?)?.toDouble() ?? 0.0,
+      currentVehicleId: json['currentVehicleId'] as String?,
+      vehicleStatus:
+          $enumDecodeNullable(_$VehicleStatusEnumMap, json['vehicleStatus']),
+      currentCity: json['currentCity'] as String?,
+      currentArea: json['currentArea'] as String?,
+      isInServiceArea: json['isInServiceArea'] as bool? ?? true,
+    );
+
+Map<String, dynamic> _$DriverStatusToJson(DriverStatus instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'driverId': instance.driverId,
+      'availabilityStatus':
+          _$DriverAvailabilityStatusEnumMap[instance.availabilityStatus]!,
+      'onlineStatus': _$DriverOnlineStatusEnumMap[instance.onlineStatus]!,
+      'verificationStatus':
+          _$DriverVerificationStatusEnumMap[instance.verificationStatus]!,
+      'activityStatus': _$DriverActivityStatusEnumMap[instance.activityStatus]!,
+      'lastStatusChange': instance.lastStatusChange.toIso8601String(),
+      'lastActiveAt': instance.lastActiveAt?.toIso8601String(),
+      'currentRideId': instance.currentRideId,
+      'statusMetadata': instance.statusMetadata,
+      'workSessionStarted': instance.workSessionStarted?.toIso8601String(),
+      'workSessionDuration': instance.workSessionDuration?.inMicroseconds,
+      'ridesCompletedToday': instance.ridesCompletedToday,
+      'earningsToday': instance.earningsToday,
+      'currentVehicleId': instance.currentVehicleId,
+      'vehicleStatus': _$VehicleStatusEnumMap[instance.vehicleStatus],
+      'currentCity': instance.currentCity,
+      'currentArea': instance.currentArea,
+      'isInServiceArea': instance.isInServiceArea,
+    };
+
+const _$DriverAvailabilityStatusEnumMap = {
+  DriverAvailabilityStatus.available: 'available',
+  DriverAvailabilityStatus.unavailable: 'unavailable',
+  DriverAvailabilityStatus.busy: 'busy',
+  DriverAvailabilityStatus.onTrip: 'onTrip',
+  DriverAvailabilityStatus.breakTime: 'breakTime',
+  DriverAvailabilityStatus.maintenance: 'maintenance',
+};
+
+const _$DriverOnlineStatusEnumMap = {
+  DriverOnlineStatus.online: 'online',
+  DriverOnlineStatus.offline: 'offline',
+  DriverOnlineStatus.away: 'away',
+  DriverOnlineStatus.doNotDisturb: 'doNotDisturb',
+};
+
+const _$DriverVerificationStatusEnumMap = {
+  DriverVerificationStatus.pending: 'pending',
+  DriverVerificationStatus.documentsSubmitted: 'documentsSubmitted',
+  DriverVerificationStatus.underReview: 'underReview',
+  DriverVerificationStatus.approved: 'approved',
+  DriverVerificationStatus.rejected: 'rejected',
+  DriverVerificationStatus.requiresUpdate: 'requiresUpdate',
+  DriverVerificationStatus.suspended: 'suspended',
+};
+
+const _$DriverActivityStatusEnumMap = {
+  DriverActivityStatus.idle: 'idle',
+  DriverActivityStatus.driving: 'driving',
+  DriverActivityStatus.pickingUp: 'pickingUp',
+  DriverActivityStatus.onTrip: 'onTrip',
+  DriverActivityStatus.waiting: 'waiting',
+  DriverActivityStatus.refueling: 'refueling',
+  DriverActivityStatus.maintenance: 'maintenance',
+};
+
+const _$VehicleStatusEnumMap = {
+  VehicleStatus.operational: 'operational',
+  VehicleStatus.maintenance: 'maintenance',
+  VehicleStatus.refueling: 'refueling',
+  VehicleStatus.inspection: 'inspection',
+  VehicleStatus.outOfService: 'outOfService',
+};
+
+DriverStatusHistory _$DriverStatusHistoryFromJson(Map<String, dynamic> json) =>
+    DriverStatusHistory(
+      id: (json['id'] as num?)?.toInt(),
+      driverId: (json['driverId'] as num).toInt(),
+      previousStatus: $enumDecode(
+          _$DriverAvailabilityStatusEnumMap, json['previousStatus']),
+      newStatus:
+          $enumDecode(_$DriverAvailabilityStatusEnumMap, json['newStatus']),
+      changedAt: DateTime.parse(json['changedAt'] as String),
+      reason: json['reason'] as String?,
+      changedBy: json['changedBy'] as String?,
+      context: json['context'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$DriverStatusHistoryToJson(
+        DriverStatusHistory instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'driverId': instance.driverId,
+      'previousStatus':
+          _$DriverAvailabilityStatusEnumMap[instance.previousStatus]!,
+      'newStatus': _$DriverAvailabilityStatusEnumMap[instance.newStatus]!,
+      'changedAt': instance.changedAt.toIso8601String(),
+      'reason': instance.reason,
+      'changedBy': instance.changedBy,
+      'context': instance.context,
+    };
+
+WorkSession _$WorkSessionFromJson(Map<String, dynamic> json) => WorkSession(
+      id: (json['id'] as num?)?.toInt(),
+      sessionId: json['sessionId'] as String,
+      driverId: (json['driverId'] as num).toInt(),
+      startTime: DateTime.parse(json['startTime'] as String),
+      endTime: json['endTime'] == null
+          ? null
+          : DateTime.parse(json['endTime'] as String),
+      totalDuration: json['totalDuration'] == null
+          ? null
+          : Duration(microseconds: (json['totalDuration'] as num).toInt()),
+      ridesCompleted: (json['ridesCompleted'] as num?)?.toInt() ?? 0,
+      totalEarnings: (json['totalEarnings'] as num?)?.toDouble() ?? 0.0,
+      totalDistance: (json['totalDistance'] as num?)?.toDouble() ?? 0.0,
+      status: $enumDecodeNullable(_$WorkSessionStatusEnumMap, json['status']) ??
+          WorkSessionStatus.active,
+      endReason: json['endReason'] as String?,
+      analytics: json['analytics'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$WorkSessionToJson(WorkSession instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'sessionId': instance.sessionId,
+      'driverId': instance.driverId,
+      'startTime': instance.startTime.toIso8601String(),
+      'endTime': instance.endTime?.toIso8601String(),
+      'totalDuration': instance.totalDuration?.inMicroseconds,
+      'ridesCompleted': instance.ridesCompleted,
+      'totalEarnings': instance.totalEarnings,
+      'totalDistance': instance.totalDistance,
+      'status': _$WorkSessionStatusEnumMap[instance.status]!,
+      'endReason': instance.endReason,
+      'analytics': instance.analytics,
+    };
+
+const _$WorkSessionStatusEnumMap = {
+  WorkSessionStatus.active: 'active',
+  WorkSessionStatus.completed: 'completed',
+  WorkSessionStatus.terminated: 'terminated',
+  WorkSessionStatus.suspended: 'suspended',
+};

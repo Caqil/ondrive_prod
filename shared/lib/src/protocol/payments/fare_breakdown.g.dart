@@ -1,0 +1,222 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'fare_breakdown.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+FareBreakdown _$FareBreakdownFromJson(Map<String, dynamic> json) =>
+    FareBreakdown(
+      id: (json['id'] as num?)?.toInt(),
+      rideId: json['rideId'] as String,
+      baseFare: (json['baseFare'] as num).toDouble(),
+      distanceFare: (json['distanceFare'] as num).toDouble(),
+      timeFare: (json['timeFare'] as num).toDouble(),
+      waitingTimeFare: (json['waitingTimeFare'] as num?)?.toDouble() ?? 0.0,
+      surgeFare: (json['surgeFare'] as num?)?.toDouble() ?? 0.0,
+      surgeMultiplier: (json['surgeMultiplier'] as num?)?.toDouble(),
+      surgeReason: json['surgeReason'] as String?,
+      tolls: (json['tolls'] as num?)?.toDouble() ?? 0.0,
+      airportFee: (json['airportFee'] as num?)?.toDouble() ?? 0.0,
+      cleaningFee: (json['cleaningFee'] as num?)?.toDouble() ?? 0.0,
+      cancellationFee: (json['cancellationFee'] as num?)?.toDouble() ?? 0.0,
+      tips: (json['tips'] as num?)?.toDouble() ?? 0.0,
+      taxes: (json['taxes'] as num?)?.toDouble() ?? 0.0,
+      serviceFee: (json['serviceFee'] as num?)?.toDouble() ?? 0.0,
+      processingFee: (json['processingFee'] as num?)?.toDouble() ?? 0.0,
+      regulatoryFee: (json['regulatoryFee'] as num?)?.toDouble() ?? 0.0,
+      discounts: (json['discounts'] as num?)?.toDouble() ?? 0.0,
+      promoDiscount: (json['promoDiscount'] as num?)?.toDouble() ?? 0.0,
+      loyaltyDiscount: (json['loyaltyDiscount'] as num?)?.toDouble() ?? 0.0,
+      couponDiscount: (json['couponDiscount'] as num?)?.toDouble() ?? 0.0,
+      referralDiscount: (json['referralDiscount'] as num?)?.toDouble() ?? 0.0,
+      subtotal: (json['subtotal'] as num).toDouble(),
+      totalFare: (json['totalFare'] as num).toDouble(),
+      totalDiscount: (json['totalDiscount'] as num).toDouble(),
+      totalTax: (json['totalTax'] as num).toDouble(),
+      totalFees: (json['totalFees'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      calculatedAt: DateTime.parse(json['calculatedAt'] as String),
+      calculationVersion: json['calculationVersion'] as String?,
+      calculationMetadata: json['calculationMetadata'] as Map<String, dynamic>?,
+      additionalComponents: (json['additionalComponents'] as List<dynamic>?)
+          ?.map((e) => FareComponent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$FareBreakdownToJson(FareBreakdown instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'rideId': instance.rideId,
+      'baseFare': instance.baseFare,
+      'distanceFare': instance.distanceFare,
+      'timeFare': instance.timeFare,
+      'waitingTimeFare': instance.waitingTimeFare,
+      'surgeFare': instance.surgeFare,
+      'surgeMultiplier': instance.surgeMultiplier,
+      'surgeReason': instance.surgeReason,
+      'tolls': instance.tolls,
+      'airportFee': instance.airportFee,
+      'cleaningFee': instance.cleaningFee,
+      'cancellationFee': instance.cancellationFee,
+      'tips': instance.tips,
+      'taxes': instance.taxes,
+      'serviceFee': instance.serviceFee,
+      'processingFee': instance.processingFee,
+      'regulatoryFee': instance.regulatoryFee,
+      'discounts': instance.discounts,
+      'promoDiscount': instance.promoDiscount,
+      'loyaltyDiscount': instance.loyaltyDiscount,
+      'couponDiscount': instance.couponDiscount,
+      'referralDiscount': instance.referralDiscount,
+      'subtotal': instance.subtotal,
+      'totalFare': instance.totalFare,
+      'totalDiscount': instance.totalDiscount,
+      'totalTax': instance.totalTax,
+      'totalFees': instance.totalFees,
+      'currency': instance.currency,
+      'calculatedAt': instance.calculatedAt.toIso8601String(),
+      'calculationVersion': instance.calculationVersion,
+      'calculationMetadata': instance.calculationMetadata,
+      'additionalComponents': instance.additionalComponents,
+    };
+
+FareComponent _$FareComponentFromJson(Map<String, dynamic> json) =>
+    FareComponent(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      description: json['description'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      type: $enumDecode(_$ComponentTypeEnumMap, json['type']),
+      isRefundable: json['isRefundable'] as bool? ?? true,
+      componentMetadata: json['componentMetadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$FareComponentToJson(FareComponent instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'amount': instance.amount,
+      'type': _$ComponentTypeEnumMap[instance.type]!,
+      'isRefundable': instance.isRefundable,
+      'componentMetadata': instance.componentMetadata,
+    };
+
+const _$ComponentTypeEnumMap = {
+  ComponentType.fee: 'fee',
+  ComponentType.discount: 'discount',
+  ComponentType.tax: 'tax',
+  ComponentType.tip: 'tip',
+  ComponentType.surge: 'surge',
+  ComponentType.other: 'other',
+};
+
+FareLineItem _$FareLineItemFromJson(Map<String, dynamic> json) => FareLineItem(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      type: $enumDecode(_$FareLineItemTypeEnumMap, json['type']),
+      description: json['description'] as String?,
+      itemMetadata: json['itemMetadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$FareLineItemToJson(FareLineItem instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'amount': instance.amount,
+      'type': _$FareLineItemTypeEnumMap[instance.type]!,
+      'description': instance.description,
+      'itemMetadata': instance.itemMetadata,
+    };
+
+const _$FareLineItemTypeEnumMap = {
+  FareLineItemType.baseFare: 'baseFare',
+  FareLineItemType.distance: 'distance',
+  FareLineItemType.time: 'time',
+  FareLineItemType.waitingTime: 'waitingTime',
+  FareLineItemType.surge: 'surge',
+  FareLineItemType.tolls: 'tolls',
+  FareLineItemType.airportFee: 'airportFee',
+  FareLineItemType.tax: 'tax',
+  FareLineItemType.serviceFee: 'serviceFee',
+  FareLineItemType.discount: 'discount',
+  FareLineItemType.tip: 'tip',
+  FareLineItemType.fee: 'fee',
+  FareLineItemType.other: 'other',
+};
+
+FareCalculationRule _$FareCalculationRuleFromJson(Map<String, dynamic> json) =>
+    FareCalculationRule(
+      id: (json['id'] as num?)?.toInt(),
+      ruleId: json['ruleId'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String?,
+      applicableRideType:
+          $enumDecode(_$RideTypeEnumMap, json['applicableRideType']),
+      applicableRegion: json['applicableRegion'] as String?,
+      baseAmount: (json['baseAmount'] as num).toDouble(),
+      perKmRate: (json['perKmRate'] as num).toDouble(),
+      perMinuteRate: (json['perMinuteRate'] as num).toDouble(),
+      perKmMinimum: (json['perKmMinimum'] as num?)?.toDouble() ?? 0.0,
+      perMinuteMinimum: (json['perMinuteMinimum'] as num?)?.toDouble() ?? 0.0,
+      surgePricingEnabled: json['surgePricingEnabled'] as bool? ?? true,
+      maxSurgeMultiplier:
+          (json['maxSurgeMultiplier'] as num?)?.toDouble() ?? 3.0,
+      surgeTimeRules: (json['surgeTimeRules'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
+      cancellationFeeAmount:
+          (json['cancellationFeeAmount'] as num?)?.toDouble() ?? 0.0,
+      cancellationFeeGracePeriod:
+          (json['cancellationFeeGracePeriod'] as num?)?.toInt() ?? 5,
+      airportFeeAmount: (json['airportFeeAmount'] as num?)?.toDouble() ?? 0.0,
+      tollPassthroughRate:
+          (json['tollPassthroughRate'] as num?)?.toDouble() ?? 100.0,
+      taxRate: (json['taxRate'] as num?)?.toDouble() ?? 0.0,
+      taxIncluded: json['taxIncluded'] as bool? ?? false,
+      isActive: json['isActive'] as bool? ?? true,
+      effectiveFrom: DateTime.parse(json['effectiveFrom'] as String),
+      effectiveUntil: json['effectiveUntil'] == null
+          ? null
+          : DateTime.parse(json['effectiveUntil'] as String),
+    );
+
+Map<String, dynamic> _$FareCalculationRuleToJson(
+        FareCalculationRule instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'ruleId': instance.ruleId,
+      'name': instance.name,
+      'description': instance.description,
+      'applicableRideType': _$RideTypeEnumMap[instance.applicableRideType]!,
+      'applicableRegion': instance.applicableRegion,
+      'baseAmount': instance.baseAmount,
+      'perKmRate': instance.perKmRate,
+      'perMinuteRate': instance.perMinuteRate,
+      'perKmMinimum': instance.perKmMinimum,
+      'perMinuteMinimum': instance.perMinuteMinimum,
+      'surgePricingEnabled': instance.surgePricingEnabled,
+      'maxSurgeMultiplier': instance.maxSurgeMultiplier,
+      'surgeTimeRules': instance.surgeTimeRules,
+      'cancellationFeeAmount': instance.cancellationFeeAmount,
+      'cancellationFeeGracePeriod': instance.cancellationFeeGracePeriod,
+      'airportFeeAmount': instance.airportFeeAmount,
+      'tollPassthroughRate': instance.tollPassthroughRate,
+      'taxRate': instance.taxRate,
+      'taxIncluded': instance.taxIncluded,
+      'isActive': instance.isActive,
+      'effectiveFrom': instance.effectiveFrom.toIso8601String(),
+      'effectiveUntil': instance.effectiveUntil?.toIso8601String(),
+    };
+
+const _$RideTypeEnumMap = {
+  RideType.city: 'city',
+  RideType.intercity: 'intercity',
+  RideType.courier: 'courier',
+  RideType.pool: 'pool',
+  RideType.luxury: 'luxury',
+  RideType.eco: 'eco',
+};

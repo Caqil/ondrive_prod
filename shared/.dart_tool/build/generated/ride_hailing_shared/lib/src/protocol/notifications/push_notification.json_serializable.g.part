@@ -1,0 +1,271 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PushNotification _$PushNotificationFromJson(Map<String, dynamic> json) =>
+    PushNotification(
+      id: (json['id'] as num?)?.toInt(),
+      notificationId: json['notificationId'] as String,
+      targetUserIds: (json['targetUserIds'] as List<dynamic>)
+          .map((e) => (e as num).toInt())
+          .toList(),
+      targetDeviceTokens: (json['targetDeviceTokens'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      targetTopics: (json['targetTopics'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      title: json['title'] as String,
+      body: json['body'] as String,
+      data: json['data'] as Map<String, dynamic>?,
+      priority: $enumDecodeNullable(
+              _$PushNotificationPriorityEnumMap, json['priority']) ??
+          PushNotificationPriority.normal,
+      scheduledAt: DateTime.parse(json['scheduledAt'] as String),
+      sentAt: json['sentAt'] == null
+          ? null
+          : DateTime.parse(json['sentAt'] as String),
+      deliveredAt: json['deliveredAt'] == null
+          ? null
+          : DateTime.parse(json['deliveredAt'] as String),
+      status: $enumDecodeNullable(
+              _$PushNotificationStatusEnumMap, json['status']) ??
+          PushNotificationStatus.pending,
+      imageUrl: json['imageUrl'] as String?,
+      actions: (json['actions'] as List<dynamic>?)
+          ?.map(
+              (e) => PushNotificationAction.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      androidConfig: json['androidConfig'] == null
+          ? null
+          : AndroidNotificationConfig.fromJson(
+              json['androidConfig'] as Map<String, dynamic>),
+      iosConfig: json['iosConfig'] == null
+          ? null
+          : IosNotificationConfig.fromJson(
+              json['iosConfig'] as Map<String, dynamic>),
+      webConfig: json['webConfig'] == null
+          ? null
+          : WebNotificationConfig.fromJson(
+              json['webConfig'] as Map<String, dynamic>),
+      targetCount: (json['targetCount'] as num?)?.toInt() ?? 0,
+      sentCount: (json['sentCount'] as num?)?.toInt() ?? 0,
+      deliveredCount: (json['deliveredCount'] as num?)?.toInt() ?? 0,
+      failedCount: (json['failedCount'] as num?)?.toInt() ?? 0,
+      deliveryMetrics: json['deliveryMetrics'] as Map<String, dynamic>?,
+      campaignId: json['campaignId'] as String?,
+      segmentId: json['segmentId'] as String?,
+      campaignMetadata: json['campaignMetadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$PushNotificationToJson(PushNotification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'notificationId': instance.notificationId,
+      'targetUserIds': instance.targetUserIds,
+      'targetDeviceTokens': instance.targetDeviceTokens,
+      'targetTopics': instance.targetTopics,
+      'title': instance.title,
+      'body': instance.body,
+      'data': instance.data,
+      'priority': _$PushNotificationPriorityEnumMap[instance.priority]!,
+      'scheduledAt': instance.scheduledAt.toIso8601String(),
+      'sentAt': instance.sentAt?.toIso8601String(),
+      'deliveredAt': instance.deliveredAt?.toIso8601String(),
+      'status': _$PushNotificationStatusEnumMap[instance.status]!,
+      'imageUrl': instance.imageUrl,
+      'actions': instance.actions,
+      'androidConfig': instance.androidConfig,
+      'iosConfig': instance.iosConfig,
+      'webConfig': instance.webConfig,
+      'targetCount': instance.targetCount,
+      'sentCount': instance.sentCount,
+      'deliveredCount': instance.deliveredCount,
+      'failedCount': instance.failedCount,
+      'deliveryMetrics': instance.deliveryMetrics,
+      'campaignId': instance.campaignId,
+      'segmentId': instance.segmentId,
+      'campaignMetadata': instance.campaignMetadata,
+    };
+
+const _$PushNotificationPriorityEnumMap = {
+  PushNotificationPriority.min: 'min',
+  PushNotificationPriority.low: 'low',
+  PushNotificationPriority.normal: 'normal',
+  PushNotificationPriority.high: 'high',
+  PushNotificationPriority.max: 'max',
+};
+
+const _$PushNotificationStatusEnumMap = {
+  PushNotificationStatus.pending: 'pending',
+  PushNotificationStatus.sending: 'sending',
+  PushNotificationStatus.sent: 'sent',
+  PushNotificationStatus.delivered: 'delivered',
+  PushNotificationStatus.failed: 'failed',
+  PushNotificationStatus.cancelled: 'cancelled',
+};
+
+PushNotificationAction _$PushNotificationActionFromJson(
+        Map<String, dynamic> json) =>
+    PushNotificationAction(
+      id: (json['id'] as num?)?.toInt(),
+      actionId: json['actionId'] as String,
+      title: json['title'] as String,
+      icon: json['icon'] as String?,
+      deepLink: json['deepLink'] as String?,
+      bringAppToForeground: json['bringAppToForeground'] as bool? ?? true,
+      actionData: json['actionData'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$PushNotificationActionToJson(
+        PushNotificationAction instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'actionId': instance.actionId,
+      'title': instance.title,
+      'icon': instance.icon,
+      'deepLink': instance.deepLink,
+      'bringAppToForeground': instance.bringAppToForeground,
+      'actionData': instance.actionData,
+    };
+
+AndroidNotificationConfig _$AndroidNotificationConfigFromJson(
+        Map<String, dynamic> json) =>
+    AndroidNotificationConfig(
+      id: (json['id'] as num?)?.toInt(),
+      channelId: json['channelId'] as String?,
+      sound: json['sound'] as String?,
+      icon: json['icon'] as String?,
+      color: json['color'] as String?,
+      tag: json['tag'] as String?,
+      sticky: json['sticky'] as bool?,
+      priority: $enumDecodeNullable(_$AndroidPriorityEnumMap, json['priority']),
+      visibility:
+          $enumDecodeNullable(_$AndroidVisibilityEnumMap, json['visibility']),
+      badgeCount: (json['badgeCount'] as num?)?.toInt(),
+      customData: json['customData'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$AndroidNotificationConfigToJson(
+        AndroidNotificationConfig instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'channelId': instance.channelId,
+      'sound': instance.sound,
+      'icon': instance.icon,
+      'color': instance.color,
+      'tag': instance.tag,
+      'sticky': instance.sticky,
+      'priority': _$AndroidPriorityEnumMap[instance.priority],
+      'visibility': _$AndroidVisibilityEnumMap[instance.visibility],
+      'badgeCount': instance.badgeCount,
+      'customData': instance.customData,
+    };
+
+const _$AndroidPriorityEnumMap = {
+  AndroidPriority.min: 'min',
+  AndroidPriority.low: 'low',
+  AndroidPriority.normal: 'normal',
+  AndroidPriority.high: 'high',
+  AndroidPriority.max: 'max',
+};
+
+const _$AndroidVisibilityEnumMap = {
+  AndroidVisibility.public: 'public',
+  AndroidVisibility.private: 'private',
+  AndroidVisibility.secret: 'secret',
+};
+
+IosNotificationConfig _$IosNotificationConfigFromJson(
+        Map<String, dynamic> json) =>
+    IosNotificationConfig(
+      id: (json['id'] as num?)?.toInt(),
+      sound: json['sound'] as String?,
+      badge: (json['badge'] as num?)?.toInt(),
+      contentAvailable: json['contentAvailable'] as bool?,
+      mutableContent: json['mutableContent'] as bool?,
+      category: json['category'] as String?,
+      threadId: json['threadId'] as String?,
+      customData: json['customData'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$IosNotificationConfigToJson(
+        IosNotificationConfig instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'sound': instance.sound,
+      'badge': instance.badge,
+      'contentAvailable': instance.contentAvailable,
+      'mutableContent': instance.mutableContent,
+      'category': instance.category,
+      'threadId': instance.threadId,
+      'customData': instance.customData,
+    };
+
+WebNotificationConfig _$WebNotificationConfigFromJson(
+        Map<String, dynamic> json) =>
+    WebNotificationConfig(
+      id: (json['id'] as num?)?.toInt(),
+      icon: json['icon'] as String?,
+      badge: json['badge'] as String?,
+      image: json['image'] as String?,
+      tag: json['tag'] as String?,
+      requireInteraction: json['requireInteraction'] as bool?,
+      silent: json['silent'] as bool?,
+      ttl: (json['ttl'] as num?)?.toInt(),
+      customData: json['customData'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$WebNotificationConfigToJson(
+        WebNotificationConfig instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'icon': instance.icon,
+      'badge': instance.badge,
+      'image': instance.image,
+      'tag': instance.tag,
+      'requireInteraction': instance.requireInteraction,
+      'silent': instance.silent,
+      'ttl': instance.ttl,
+      'customData': instance.customData,
+    };
+
+NotificationDeliveryResult _$NotificationDeliveryResultFromJson(
+        Map<String, dynamic> json) =>
+    NotificationDeliveryResult(
+      id: (json['id'] as num?)?.toInt(),
+      notificationId: json['notificationId'] as String,
+      deviceToken: json['deviceToken'] as String,
+      userId: (json['userId'] as num?)?.toInt(),
+      status: $enumDecode(_$DeliveryStatusEnumMap, json['status']),
+      attemptedAt: DateTime.parse(json['attemptedAt'] as String),
+      deliveredAt: json['deliveredAt'] == null
+          ? null
+          : DateTime.parse(json['deliveredAt'] as String),
+      failureReason: json['failureReason'] as String?,
+      externalMessageId: json['externalMessageId'] as String?,
+      platformResponse: json['platformResponse'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$NotificationDeliveryResultToJson(
+        NotificationDeliveryResult instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'notificationId': instance.notificationId,
+      'deviceToken': instance.deviceToken,
+      'userId': instance.userId,
+      'status': _$DeliveryStatusEnumMap[instance.status]!,
+      'attemptedAt': instance.attemptedAt.toIso8601String(),
+      'deliveredAt': instance.deliveredAt?.toIso8601String(),
+      'failureReason': instance.failureReason,
+      'externalMessageId': instance.externalMessageId,
+      'platformResponse': instance.platformResponse,
+    };
+
+const _$DeliveryStatusEnumMap = {
+  DeliveryStatus.pending: 'pending',
+  DeliveryStatus.sent: 'sent',
+  DeliveryStatus.delivered: 'delivered',
+  DeliveryStatus.failed: 'failed',
+  DeliveryStatus.bounced: 'bounced',
+};

@@ -1,0 +1,201 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+EmailTemplate _$EmailTemplateFromJson(Map<String, dynamic> json) =>
+    EmailTemplate(
+      id: (json['id'] as num?)?.toInt(),
+      templateId: json['templateId'] as String,
+      name: json['name'] as String,
+      subject: json['subject'] as String,
+      htmlContent: json['htmlContent'] as String,
+      textContent: json['textContent'] as String?,
+      emailType: $enumDecode(_$EmailTypeEnumMap, json['emailType']),
+      category: $enumDecodeNullable(_$EmailCategoryEnumMap, json['category']) ??
+          EmailCategory.transactional,
+      defaultVariables: json['defaultVariables'] as Map<String, dynamic>?,
+      requiredVariables:
+          (json['requiredVariables'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, TemplateVariable.fromJson(e as Map<String, dynamic>)),
+      ),
+      isActive: json['isActive'] as bool? ?? true,
+      description: json['description'] as String?,
+      previewText: json['previewText'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      createdBy: (json['createdBy'] as num).toInt(),
+      version: json['version'] as String? ?? '1.0',
+      sendGridTemplateId: json['sendGridTemplateId'] as String?,
+      sendGridConfig: json['sendGridConfig'] as Map<String, dynamic>?,
+      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      locale: json['locale'] as String? ?? 'en',
+      localizedSubjects:
+          (json['localizedSubjects'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+      localizedHtmlContent:
+          (json['localizedHtmlContent'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
+    );
+
+Map<String, dynamic> _$EmailTemplateToJson(EmailTemplate instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'templateId': instance.templateId,
+      'name': instance.name,
+      'subject': instance.subject,
+      'htmlContent': instance.htmlContent,
+      'textContent': instance.textContent,
+      'emailType': _$EmailTypeEnumMap[instance.emailType]!,
+      'category': _$EmailCategoryEnumMap[instance.category]!,
+      'defaultVariables': instance.defaultVariables,
+      'requiredVariables': instance.requiredVariables,
+      'isActive': instance.isActive,
+      'description': instance.description,
+      'previewText': instance.previewText,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdBy': instance.createdBy,
+      'version': instance.version,
+      'sendGridTemplateId': instance.sendGridTemplateId,
+      'sendGridConfig': instance.sendGridConfig,
+      'tags': instance.tags,
+      'locale': instance.locale,
+      'localizedSubjects': instance.localizedSubjects,
+      'localizedHtmlContent': instance.localizedHtmlContent,
+    };
+
+const _$EmailTypeEnumMap = {
+  EmailType.verification: 'verification',
+  EmailType.passwordReset: 'passwordReset',
+  EmailType.rideReceipt: 'rideReceipt',
+  EmailType.rideConfirmation: 'rideConfirmation',
+  EmailType.rideReminder: 'rideReminder',
+  EmailType.rideCancellation: 'rideCancellation',
+  EmailType.driverAssigned: 'driverAssigned',
+  EmailType.paymentReceipt: 'paymentReceipt',
+  EmailType.paymentFailed: 'paymentFailed',
+  EmailType.welcome: 'welcome',
+  EmailType.promotional: 'promotional',
+  EmailType.newsletter: 'newsletter',
+  EmailType.notification: 'notification',
+  EmailType.support: 'support',
+  EmailType.dispute: 'dispute',
+  EmailType.documentExpiry: 'documentExpiry',
+  EmailType.systemMaintenance: 'systemMaintenance',
+  EmailType.other: 'other',
+};
+
+const _$EmailCategoryEnumMap = {
+  EmailCategory.transactional: 'transactional',
+  EmailCategory.promotional: 'promotional',
+  EmailCategory.system: 'system',
+  EmailCategory.marketing: 'marketing',
+};
+
+TemplateVariable _$TemplateVariableFromJson(Map<String, dynamic> json) =>
+    TemplateVariable(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String,
+      displayName: json['displayName'] as String,
+      description: json['description'] as String?,
+      type: $enumDecode(_$VariableTypeEnumMap, json['type']),
+      isRequired: json['isRequired'] as bool? ?? false,
+      defaultValue: json['defaultValue'] as String?,
+      validation: json['validation'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$TemplateVariableToJson(TemplateVariable instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'displayName': instance.displayName,
+      'description': instance.description,
+      'type': _$VariableTypeEnumMap[instance.type]!,
+      'isRequired': instance.isRequired,
+      'defaultValue': instance.defaultValue,
+      'validation': instance.validation,
+    };
+
+const _$VariableTypeEnumMap = {
+  VariableType.string: 'string',
+  VariableType.number: 'number',
+  VariableType.boolean: 'boolean',
+  VariableType.date: 'date',
+  VariableType.url: 'url',
+  VariableType.email: 'email',
+  VariableType.currency: 'currency',
+};
+
+EmailDelivery _$EmailDeliveryFromJson(Map<String, dynamic> json) =>
+    EmailDelivery(
+      id: (json['id'] as num?)?.toInt(),
+      deliveryId: json['deliveryId'] as String,
+      templateId: json['templateId'] as String,
+      recipientEmail: json['recipientEmail'] as String,
+      recipientName: json['recipientName'] as String?,
+      userId: (json['userId'] as num?)?.toInt(),
+      renderedSubject: json['renderedSubject'] as String,
+      renderedHtmlContent: json['renderedHtmlContent'] as String,
+      renderedTextContent: json['renderedTextContent'] as String?,
+      variables: json['variables'] as Map<String, dynamic>? ?? const {},
+      status:
+          $enumDecodeNullable(_$EmailDeliveryStatusEnumMap, json['status']) ??
+              EmailDeliveryStatus.pending,
+      scheduledAt: DateTime.parse(json['scheduledAt'] as String),
+      sentAt: json['sentAt'] == null
+          ? null
+          : DateTime.parse(json['sentAt'] as String),
+      deliveredAt: json['deliveredAt'] == null
+          ? null
+          : DateTime.parse(json['deliveredAt'] as String),
+      openedAt: json['openedAt'] == null
+          ? null
+          : DateTime.parse(json['openedAt'] as String),
+      clickedAt: json['clickedAt'] == null
+          ? null
+          : DateTime.parse(json['clickedAt'] as String),
+      failureReason: json['failureReason'] as String?,
+      externalMessageId: json['externalMessageId'] as String?,
+      deliveryMetadata: json['deliveryMetadata'] as Map<String, dynamic>?,
+    );
+
+Map<String, dynamic> _$EmailDeliveryToJson(EmailDelivery instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'deliveryId': instance.deliveryId,
+      'templateId': instance.templateId,
+      'recipientEmail': instance.recipientEmail,
+      'recipientName': instance.recipientName,
+      'userId': instance.userId,
+      'renderedSubject': instance.renderedSubject,
+      'renderedHtmlContent': instance.renderedHtmlContent,
+      'renderedTextContent': instance.renderedTextContent,
+      'variables': instance.variables,
+      'status': _$EmailDeliveryStatusEnumMap[instance.status]!,
+      'scheduledAt': instance.scheduledAt.toIso8601String(),
+      'sentAt': instance.sentAt?.toIso8601String(),
+      'deliveredAt': instance.deliveredAt?.toIso8601String(),
+      'openedAt': instance.openedAt?.toIso8601String(),
+      'clickedAt': instance.clickedAt?.toIso8601String(),
+      'failureReason': instance.failureReason,
+      'externalMessageId': instance.externalMessageId,
+      'deliveryMetadata': instance.deliveryMetadata,
+    };
+
+const _$EmailDeliveryStatusEnumMap = {
+  EmailDeliveryStatus.pending: 'pending',
+  EmailDeliveryStatus.sending: 'sending',
+  EmailDeliveryStatus.sent: 'sent',
+  EmailDeliveryStatus.delivered: 'delivered',
+  EmailDeliveryStatus.opened: 'opened',
+  EmailDeliveryStatus.clicked: 'clicked',
+  EmailDeliveryStatus.bounced: 'bounced',
+  EmailDeliveryStatus.failed: 'failed',
+  EmailDeliveryStatus.spam: 'spam',
+  EmailDeliveryStatus.unsubscribed: 'unsubscribed',
+};
