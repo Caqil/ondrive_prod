@@ -110,6 +110,7 @@ const _$RideTypeEnumMap = {
   RideType.pet: 'pet',
   RideType.eco: 'eco',
   RideType.electric: 'electric',
+  RideType.city: 'city',
 };
 
 const _$VehicleTypeEnumMap = {
@@ -121,6 +122,4 @@ const _$VehicleTypeEnumMap = {
   VehicleType.van: 'van',
   VehicleType.motorcycle: 'motorcycle',
   VehicleType.bicycle: 'bicycle',
-  VehicleType.wheelchair: 'wheelchair',
-  VehicleType.electric: 'electric',
 };

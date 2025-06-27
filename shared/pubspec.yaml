@@ -7,8 +7,8 @@ environment:
 
 dependencies:
   # Core Serverpod dependencies
-  serverpod: ^2.1.0
-  serverpod_serialization: ^2.1.0
+  serverpod: ^2.9.0
+  serverpod_serialization: ^2.9.0
 
   # JSON serialization
   json_annotation: ^4.8.1

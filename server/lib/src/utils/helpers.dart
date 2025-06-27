@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:serverpod/serverpod.dart';
+import 'package:ride_hailing_shared/shared.dart';
 
 class LocationHelper {
   // Calculate distance between two points using Haversine formula

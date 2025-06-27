@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:ride_hailing_shared/src/protocol/rides/ride_type.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 

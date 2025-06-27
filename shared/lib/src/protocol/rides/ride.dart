@@ -1,3 +1,4 @@
+import 'package:ride_hailing_shared/src/protocol/rides/ride_type.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'location_point.dart';
@@ -89,15 +90,6 @@ class RidePreferences extends SerializableEntity {
   factory RidePreferences.fromJson(Map<String, dynamic> json) =>
       _$RidePreferencesFromJson(json);
   Map<String, dynamic> toJson() => _$RidePreferencesToJson(this);
-}
-
-enum RideType {
-  city,
-  intercity,
-  courier,
-  pool,
-  luxury,
-  eco,
 }
 
 enum RideStatus {

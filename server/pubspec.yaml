@@ -8,8 +8,8 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  serverpod: ^2.1.0
-  serverpod_auth_server: ^2.1.0
+  serverpod: ^2.9.0
+  serverpod_auth_server: ^2.9.0
   mongo_dart: ^0.10.3
   flutter_stripe: ^11.5.0
   mailer: ^6.0.1

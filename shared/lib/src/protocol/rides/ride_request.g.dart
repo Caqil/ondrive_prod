@@ -52,12 +52,20 @@ Map<String, dynamic> _$RideRequestToJson(RideRequest instance) =>
     };
 
 const _$RideTypeEnumMap = {
-  RideType.city: 'city',
+  RideType.economy: 'economy',
+  RideType.standard: 'standard',
+  RideType.premium: 'premium',
+  RideType.luxury: 'luxury',
+  RideType.suv: 'suv',
+  RideType.van: 'van',
+  RideType.pool: 'pool',
   RideType.intercity: 'intercity',
   RideType.courier: 'courier',
-  RideType.pool: 'pool',
-  RideType.luxury: 'luxury',
+  RideType.wheelchair: 'wheelchair',
+  RideType.pet: 'pet',
   RideType.eco: 'eco',
+  RideType.electric: 'electric',
+  RideType.city: 'city',
 };
 
 const _$PaymentMethodTypeEnumMap = {

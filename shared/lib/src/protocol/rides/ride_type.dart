@@ -1,7 +1,54 @@
+import 'package:ride_hailing_shared/src/protocol/drivers/vehicle.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ride_type.g.dart';
+
+/// RideType enum - Master definition used throughout the app
+enum RideType {
+  @JsonValue('economy')
+  economy,
+
+  @JsonValue('standard')
+  standard,
+
+  @JsonValue('premium')
+  premium,
+
+  @JsonValue('luxury')
+  luxury,
+
+  @JsonValue('suv')
+  suv,
+
+  @JsonValue('van')
+  van,
+
+  @JsonValue('pool')
+  pool,
+
+  @JsonValue('intercity')
+  intercity,
+
+  @JsonValue('courier')
+  courier,
+
+  @JsonValue('wheelchair')
+  wheelchair,
+
+  @JsonValue('pet')
+  pet,
+
+  @JsonValue('eco')
+  eco,
+
+  @JsonValue('electric')
+  electric,
+
+  // Legacy support for existing data
+  @JsonValue('city')
+  city,
+}
 
 @JsonSerializable()
 class RideTypeDefinition extends SerializableEntity {
@@ -19,10 +66,10 @@ class RideTypeDefinition extends SerializableEntity {
   double baseFareMultiplier;
   double distanceMultiplier;
   double timeMultiplier;
-  double minimumFare; // in cents
-  double maximumFare; // in cents
+  double minimumFare;
+  double maximumFare;
 
-  // Service configuration
+  // Vehicle requirements
   int maxPassengers;
   int maxLuggage;
   bool allowsPets;
@@ -33,23 +80,22 @@ class RideTypeDefinition extends SerializableEntity {
   bool isLuxury;
   bool isEco;
 
-  // Vehicle requirements
   List<VehicleType> allowedVehicleTypes;
   int? minVehicleYear;
   List<String>? requiredFeatures;
 
-  // Availability
+  // Availability configuration
   List<String> availableRegions;
-  Map<String, bool>? timeAvailability; // Day/hour availability
+  Map<String, bool>? timeAvailability;
   bool isAlwaysAvailable;
 
-  // Business rules
-  int maxDistance; // in km
-  int maxDuration; // in minutes
+  // Service constraints
+  int maxDistance; // km
+  int maxDuration; // minutes
   bool requiresPreBooking;
   int? advanceBookingHours;
   bool allowsCancellation;
-  int? cancellationGracePeriod; // in minutes
+  int cancellationGracePeriod; // minutes
 
   RideTypeDefinition({
     this.id,
@@ -62,8 +108,8 @@ class RideTypeDefinition extends SerializableEntity {
     this.baseFareMultiplier = 1.0,
     this.distanceMultiplier = 1.0,
     this.timeMultiplier = 1.0,
-    this.minimumFare = 500, // $5.00
-    this.maximumFare = 50000, // $500.00
+    this.minimumFare = 500, // 5.00 in cents
+    this.maximumFare = 50000, // 500.00 in cents
     this.maxPassengers = 4,
     this.maxLuggage = 2,
     this.allowsPets = false,
@@ -79,38 +125,29 @@ class RideTypeDefinition extends SerializableEntity {
     this.availableRegions = const [],
     this.timeAvailability,
     this.isAlwaysAvailable = true,
-    this.maxDistance = 100, // 100km
-    this.maxDuration = 300, // 5 hours
+    this.maxDistance = 100,
+    this.maxDuration = 300,
     this.requiresPreBooking = false,
     this.advanceBookingHours,
     this.allowsCancellation = true,
     this.cancellationGracePeriod = 5,
   });
 
-  // Check if ride type is available in region
-  bool isAvailableInRegion(String region) {
-    return availableRegions.isEmpty || availableRegions.contains(region);
-  }
+  // Helper methods
+  bool isAvailableAt(DateTime dateTime) {
+    if (isAlwaysAvailable || timeAvailability == null) return true;
 
-  // Check if ride type is available at current time
-  bool isAvailableNow() {
-    if (isAlwaysAvailable) return true;
-    if (timeAvailability == null) return true;
-
-    final now = DateTime.now();
-    final dayKey = _getDayKey(now.weekday);
-    final hourKey = 'hour_${now.hour}';
+    final dayKey = _getDayKey(dateTime.weekday);
+    final hourKey = 'hour_${dateTime.hour}';
 
     return timeAvailability![dayKey] == true &&
         timeAvailability![hourKey] == true;
   }
 
-  // Check if distance/duration is within limits
   bool isWithinLimits(double distanceKm, int durationMinutes) {
     return distanceKm <= maxDistance && durationMinutes <= maxDuration;
   }
 
-  // Get fare multiplier for this ride type
   double getTotalMultiplier() {
     return baseFareMultiplier * distanceMultiplier * timeMultiplier;
   }
@@ -132,33 +169,4 @@ class RideTypeDefinition extends SerializableEntity {
   factory RideTypeDefinition.fromJson(Map<String, dynamic> json) =>
       _$RideTypeDefinitionFromJson(json);
   Map<String, dynamic> toJson() => _$RideTypeDefinitionToJson(this);
-}
-
-enum RideType {
-  economy,
-  standard,
-  premium,
-  luxury,
-  suv,
-  van,
-  pool,
-  intercity,
-  courier,
-  wheelchair,
-  pet,
-  eco,
-  electric,
-}
-
-enum VehicleType {
-  economy,
-  standard,
-  premium,
-  luxury,
-  suv,
-  van,
-  motorcycle,
-  bicycle,
-  wheelchair,
-  electric,
 }
