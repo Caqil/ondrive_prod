@@ -61,6 +61,7 @@ class ApiResponse<T> extends SerializableEntity {
     Map<String, dynamic>? metadata,
     List<ValidationError>? validationErrors,
     String? requestId,
+    required errorCode,
   }) {
     return ApiResponse<T>(
       success: false,

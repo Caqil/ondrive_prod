@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'ride_type.g.dart';
 
-/// RideType enum - Master definition used throughout the app
 enum RideType {
   @JsonValue('economy')
   economy,
